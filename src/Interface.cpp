@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <ostream>
 
 using namespace std;
 
@@ -12,7 +13,7 @@ Interface::Interface()
 
 
 void Interface::iniciar() {
-    std::string comando;
+    string comando;
     while (true) {
         mainWindow << "Escreva um comando ou 'sair' para terminar: ";
         mainWindow >> comando;  // Recebendo entrada do usuário
@@ -26,9 +27,9 @@ void Interface::iniciar() {
 }
 
 
-void Interface::processarComando(const std::string& comando) {
-    std::istringstream stream(comando);
-    std::string acao;
+void Interface::processarComando(const string& comando) {
+    istringstream stream(comando);
+    string acao;
     stream >> acao;
 
     if (acao == "prox") {
@@ -38,14 +39,14 @@ void Interface::processarComando(const std::string& comando) {
         if (stream >> n) {
             avancarTempo(n);
         } else {
-            mainWindow << "Erro: o comando 'avanca' requer um numero inteiro como argumento.\n";
+            mainWindow << "Erro: o comando 'avanca' requer um numero inteiro como argumento.";
         }
     } else if (acao == "hnova") {
         int linhas, colunas;
         if (stream >> linhas >> colunas) {
             criarHabitacao(linhas, colunas);
         } else {
-            mainWindow << "Erro: o comando 'hnova' requer dois números inteiros como argumentos.\n";
+            mainWindow << "Erro: o comando 'hnova' requer dois números inteiros como argumentos.";
         }
     } else if (acao == "hrem") {
         removerHabitacao();
@@ -81,7 +82,7 @@ void Interface::processarComando(const std::string& comando) {
         }
     } else if (acao == "pmod") {
         int idZona;
-        std::string nome;
+        string nome;
         double valor;
         if (stream >> idZona >> nome >> valor) {
             //modificarPropriedade(idZona, nome, valor);
@@ -91,7 +92,7 @@ void Interface::processarComando(const std::string& comando) {
     } else if (acao == "cnovo") {
         int idZona;
         char tipo;
-        std::string especificacao;
+        string especificacao;
         if (stream >> idZona >> tipo >> especificacao) {
            // adicionarComponente(idZona, tipo, especificacao);
         } else {
@@ -107,7 +108,7 @@ void Interface::processarComando(const std::string& comando) {
         }
     }
       else if (acao == "exec") {
-        std::string nomeArquivo;
+        string nomeArquivo;
         if (stream >> nomeArquivo) {
             executarArquivoComandos(nomeArquivo);
         } else {
@@ -155,14 +156,14 @@ void Interface::listarZonas() {
 
 
 void Interface::executarArquivoComandos(const std::string& nomeArquivo) {
-    std::ifstream arquivo(nomeArquivo);
+    ifstream arquivo(nomeArquivo);
     if (!arquivo) {
         mainWindow << "Erro ao abrir o arquivo: " << nomeArquivo << "\n";
         mainWindow << "Verifique se o caminho está correto e se você tem permissão de leitura.\n";
         return;
     }
 
-    std::string linha;
+    string linha;
     while (std::getline(arquivo, linha)) {
         if (!linha.empty()) {
             processarComando(linha);

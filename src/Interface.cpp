@@ -200,9 +200,23 @@ void Interface::processarComando(const string& comando) {
             mainWindow << "Erro: o comando 'cnovo' requer id da zona , nome e valor como parametros\n";
         }
     }
+    else if (acao == "crem") {
+        int idzona;
+        char spa;
+        int id;
+        string s = "modifica o valor da propriedade";
+        string extra;
 
 
-
+        if (stream >> idzona >> spa >> id) {
+            if (spa != 'p' || spa != 'a'|| spa != 's' ){
+                mainWindow << "Erro Sintaxe\n";
+            }
+        }
+        else {
+            mainWindow << "Entra no comando\n";
+        }
+    }
 
     else {
         mainWindow << "Erro: Comando invalido.\n";

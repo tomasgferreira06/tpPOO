@@ -49,6 +49,161 @@ void Interface::processarComando(const string& comando) {
             mainWindow << "Erro: o comando 'exec' requer o nome de um arquivo como argumento.\n";
         }
     }
+    else if (acao == "hnova") {
+        int linhas;
+        int colunas;
+        string s = "hnova com linhas , colunas";
+        string extra;
+
+        if (stream >> linhas >> colunas) {
+            if(stream >> extra){
+                mainWindow << "Parâmetro a mais\n";
+            }
+            else
+            mainWindow << "Funcao hnova chamada com sucesso\n";
+        }
+        else {
+            mainWindow << "Erro: o comando 'hnova' requer numero de linhas e colunas.\n";
+        }
+    }
+    else if (acao == "znova") {
+        int linhas;
+        int colunas;
+        string s = "hnova com linhas , colunas";
+        string extra;
+
+        if (stream >> linhas >> colunas) {
+            if(stream >> extra){
+                mainWindow << "Parâmetro a mais\n";
+            }
+            else
+                mainWindow << "Funcao znova chamada com sucesso\n";
+        }
+        else {
+            mainWindow << "Erro: o comando 'znova' requer numero de linhas e colunas.\n";
+        }
+    }
+    else if (acao == "hrem") {
+        string extra;
+        string s = "Remover uma zona inteira";
+
+        if (stream >> extra){
+            mainWindow << "Parametro a mais\n";
+        }
+        else
+            //Chamar a função hrem
+            mainWindow << "Funcao hrem chamada com sucesso\n";
+
+    }
+    else if (acao == "zrem") {
+        int idzona;
+        string s = "Eliminar zona com o id";
+        string extra;
+        if (stream >> idzona) {
+            if(stream >> extra){
+                mainWindow << "Parametro a mais\n";
+            }
+            else
+                mainWindow << "Funcao zrem chamada com sucesso\n";
+        }
+        else {
+            mainWindow << "Erro: o comando 'zrem' requer id da zona passado como parametro\n";
+        }
+    }
+    else if (acao == "zlista") {
+        string extra;
+        string s = "Listar todas as zonas de habitacao";
+
+        if (stream >> extra){
+            mainWindow << "Parametro a mais\n";
+        }
+        else
+            //Chamar a função hrem
+            mainWindow << "Funcao zlista chamada com sucesso\n";
+
+    }
+
+    //Comandos para gerir zonas para baixo, outros para cima
+
+    else if (acao == "zcomp") {
+        int idzona;
+        string s = "listar os componentes da zona com o id indicado";
+        string extra;
+        if (stream >> idzona) {
+            if(stream >> extra){
+                mainWindow << "Parametro a mais\n";
+            }
+            else
+                mainWindow << "Funcao zcomp chamada com sucesso\n";
+        }
+        else {
+            mainWindow << "Erro: o comando 'zcomp' requer id da zona passado como parametro\n";
+        }
+    }
+    else if (acao == "zprops") {
+        int idzona;
+        string s = "listar as propriedades  da zona com o id indicado";
+        string extra;
+        if (stream >> idzona) {
+            if(stream >> extra){
+                mainWindow << "Parametro a mais\n";
+            }
+            else
+                mainWindow << "Funcao zprops chamada com sucesso\n";
+        }
+        else {
+            mainWindow << "Erro: o comando 'zprops' requer id da zona passado como parametro\n";
+        }
+    }
+    else if (acao == "pmod") {
+        int idzona;
+        int nome;
+        int valor;
+
+        string s = "modifica o valor da propriedade";
+        string extra;
+
+        if (stream >> idzona >> nome >> valor) {
+            if(stream >> extra){
+                mainWindow << "Parâmetro a mais\n";
+            }
+            else
+                mainWindow << "Funcao pmod chamada com sucesso\n";
+        }
+        else {
+            mainWindow << "Erro: o comando 'pmod' requer id da zona , nome e valor como parametros\n";
+        }
+    }
+    else if (acao == "cnovo") {
+        int idzona;
+        char spa;
+        string tipoComando;
+        string s = "modifica o valor da propriedade";
+        string extra;
+
+
+        if (stream >> idzona >> spa >> tipoComando) {
+          if (spa == 'p' ){
+                if ( tipoComando != "liga"  || tipoComando != "desliga"){
+                    mainWindow << "Erro de sintaxe\n";
+                }
+                else mainWindow << "Ligou ou desligou\n";
+          }
+            if (spa == 's' ){
+                //aceita string
+            }
+            if (spa == 'a' ){
+                //aceita string
+            }
+        }
+        else {
+            mainWindow << "Erro: o comando 'cnovo' requer id da zona , nome e valor como parametros\n";
+        }
+    }
+
+
+
+
     else {
         mainWindow << "Erro: Comando invalido.\n";
     }
@@ -75,10 +230,6 @@ void Interface::executarArquivoComandos(const std::string& nomeArquivo) {
         }
     }
 }
-
 //Interface::~Interface() {
-  //  term::Terminal::instance().~Terminal();
+//  term::Terminal::instance().~Terminal();
 //}
-
-
-

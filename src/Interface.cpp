@@ -126,6 +126,8 @@ void Interface::processarComando(const string& comando) {
                 com_efetuadosWindow << "Erro: o comando 'zlista, nao requer parametros adicionais";
             }else{
                 mainWindow.clear();
+                com_efetuadosWindow << "Comando válido";
+
 
             }
         }
@@ -454,11 +456,35 @@ void Interface::processarComando(const string& comando) {
                 com_efetuadosWindow << "Erro: o comando 'prepoe' requer um nome único para o estado salvo.\n";
             }
         }
+    else if (acao == "prem") {
+        string nome;
 
-
-
-
-
+        if (stream >> nome) {
+            string extra;
+            if (stream >> extra) {
+                // Parâmetros a mais
+                mainWindow.clear();
+                com_efetuadosWindow << "Erro: o comando 'prem' requer apenas um nome unico.";
+            } else {
+                if (nome.find(' ') != string::npos) {
+                    com_efetuadosWindow << "Erro: o nome deve ser uma unica palavra sem espacos.";
+                } else {
+                    // Comando válido
+                    com_efetuadosWindow << "Apaga uma cópia do processador de regras armazenado em memória.";
+                }
+            }
+        }
+    }
+    else if(acao == "plista"){
+        string extra;
+        if(stream >> extra){
+            mainWindow.clear();
+            com_efetuadosWindow << "Erro: o comando 'plista', nao requer parametros adicionais";
+        }else{
+            mainWindow.clear();
+            com_efetuadosWindow << "Comando válido:\n";
+        }
+    }
     else if (acao == "exec") {
                     string nomeArquivo;
                     if (stream >> nomeArquivo) {
@@ -467,9 +493,36 @@ void Interface::processarComando(const string& comando) {
                         mainWindow << "Erro: o comando 'exec' requer o nome de um arquivo como argumento.\n";
                     }
             }
+
+
+    else if(acao == "clear"){
+        string extra;
+        if(stream >> extra){
+            //Parâmetros a mais
+            mainWindow.clear();
+            com_efetuadosWindow << "Erro: o comando 'clear', nao requer parametros adicionais";
+        }else{
+            com_efetuadosWindow.clear();
+            mainWindow.clear();
+            com_efetuadosWindow << "Comandos efetuados:\n";
+        }
+    }
+    else if(acao == "exit"){
+        string extra;
+        if(stream >> extra){
+            //Parâmetros a mais
+            mainWindow.clear();
+            com_efetuadosWindow << "Erro: o comando 'exit', nao requer parametros adicionais";
+        }else{
+            mainWindow.clear();
+            com_efetuadosWindow << "Comando validado com sucesso\n";
+        }
+    }
     else {
         mainWindow.clear();
         com_efetuadosWindow << "Erro: Comando invalido.\n";
+        com_efetuadosWindow << "\n";
+
     }
 
 }

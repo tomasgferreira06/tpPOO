@@ -105,8 +105,8 @@ namespace term {
 
         int getchar();
         void clear();
-        int getNumCols();
-        int getNumRows();
+        static int getNumCols();
+        static int getNumRows();
 
     private:
         Terminal();

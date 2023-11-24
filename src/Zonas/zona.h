@@ -1,35 +1,30 @@
-#ifndef TPPOO_ZONA_H
-#define TPPOO_ZONA_H
+#ifndef ZONA_H
+#define ZONA_H
 
 #include <vector>
-#include <memory>
+#include <memory>  // Add this for std::shared_ptr
 
-
-#include "../Sensores/sensor.h"
-#include "../Aparelhos/aparelho.h"
-#include <vector>
+// Forward declarations
+class Aparelho;
+class Sensor;
+class Processador;
 
 class Zona {
+public:
+    Zona(int id, int largura, int comprimento);
+
+    int getId() const;
+    int getLargura() const;
+    int getComprimento() const;
+
+    void addComponente(const std::shared_ptr<Aparelho> &componente);
+    void removerComponente(int componenteId);
 
 private:
     int id;
     int largura;
     int comprimento;
-    std::vector<std::shared_ptr<Aparelho>> componentes;  // Array de componentes
-
-
-public:
-    Zona(int id, int largura, int comprimento);
-
-    // Getters and setters
-    int getId() const;
-    int getLargura() const;
-    int getComprimento() const;
-    void addComponente(const std::shared_ptr<Aparelho>& componente);
-    void removerComponente(int componenteId);
-
-    // Additional methods and attributes will be added later.
+    std::vector<std::shared_ptr<Aparelho>> componentes;
 };
 
-#endif //TPPOO_ZONA_H
-
+#endif // ZONA_H

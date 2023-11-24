@@ -1,12 +1,39 @@
-#include "processador.h"
+#include "Processador.h"
 
-Processador::Processador() {}
+#include <iostream>
 
-void Processador::addRegra(const std::shared_ptr<Regra>& regra) {
+using namespace std;
+
+Processador::Processador(const string& comando) : comando(comando) {}
+
+Processador::~Processador() {}
+
+void Processador::adicionarRegra(const Regra& regra) {
     regras.push_back(regra);
 }
 
-void Processador::processarRegras() {
-    // Logic to process each rule
-    // This will depend on how rules are defined and how they interact with sensors and devices
+void Processador::removerRegra(int indice) {
+    if (indice >= 0 && indice < regras.size()) {
+        regras.erase(regras.begin() + indice);
+    }
+}
+
+void Processador::listarRegras() const {
+    cout << "Regras do Processador:" << endl;
+    for (size_t i = 0; i < regras.size(); ++i) {
+        cout << "[" << i << "] ";
+        // Adapte conforme necessário para imprimir informações sobre a regra
+        // (por exemplo, sensorId, tipoComparacao, valorComparacao)
+    }
+}
+
+string Processador::acionarComando(double valorSensor) const {
+    for (const Regra& regra : regras) {
+        if (!regra.avaliar(valorSensor)) {
+            // Se qualquer regra não for satisfeita, retorna comando vazio
+            return "";
+        }
+    }
+    // Se todas as regras são satisfeitas, retorna o comando associado ao processador
+    return comando;
 }

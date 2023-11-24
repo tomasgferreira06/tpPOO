@@ -2,25 +2,26 @@
 #define TPPOO_PROCESSADOR_H
 
 #include <vector>
-#include <memory>
-
 #include "../Regras/regra.h"
+#include <string>
+
+using namespace std;
+
 
 class Processador {
-
-
 private:
-
-    std::vector<std::shared_ptr<Regra>> regras;  // List of rules
-
-
+    vector<Regra> regras;
+    string comando;
 
 public:
-    Processador();
-    void addRegra(const std::shared_ptr<Regra>& regra);
-    void processarRegras();  // Process all rules
-    // Additional methods and attributes will be added later.
+    Processador(const string& comando);
+    ~Processador();
+
+    void adicionarRegra(const Regra& regra);
+    void removerRegra(int indice);
+    void listarRegras() const;
+
+    string acionarComando(double valorSensor) const;
 };
 
-#endif //TPPOO_PROCESSADOR_H
-
+#endif // TPPOO_PROCESSADOR_H

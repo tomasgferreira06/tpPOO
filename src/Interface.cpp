@@ -9,9 +9,11 @@ using namespace std;
 
 Interface::Interface()
         : mainWindow(term::Terminal::instance().create_window(0, 0, term::Terminal::getNumCols(), term::Terminal::getNumRows() - 37, true)),
-          com_efetuadosWindow(term::Terminal::instance().create_window(127, 3, 29, term::Terminal::getNumRows()-3, true)) {
+          com_efetuadosWindow(term::Terminal::instance().create_window(127, 3, 29, term::Terminal::getNumRows()-3, true)),
+          janela_habitacaoWindow(term::Terminal::instance().create_window(0, 3, 127, term::Terminal::getNumRows()-3, true)){
 
     mainWindow << "Escreva comando ou 'sair' para terminar: ";
+    janela_habitacaoWindow << "Habitacao";
 
     com_efetuadosWindow << "Comandos efetuados:";
 }
@@ -124,8 +126,7 @@ void Interface::processarComando(const string& comando) {
                 } else {
                     //comando válido
                     mainWindow.clear();
-                    Habitacao a;
-                    a.criarHabitacao(numLinhas, numColunas);
+
                     com_efetuadosWindow << "Habitacao criada com " << numLinhas << " linhas e " << numColunas << " colunas."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
@@ -137,9 +138,10 @@ void Interface::processarComando(const string& comando) {
             string extra;
             if (stream >> extra) {
                 //Argumentos a mais
+                mainWindow.clear();
                 com_efetuadosWindow << "Erro: o comando 'hrem' nao requer parametros adicionais"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             } else {
-
+                mainWindow.clear();
                 com_efetuadosWindow << "Habitacao removida."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "znova") {
@@ -150,6 +152,10 @@ void Interface::processarComando(const string& comando) {
                     // parâmetros a mais
                     mainWindow.clear();
                     com_efetuadosWindow << "Erro: o comando 'znova' requer apenas numero de linhas e colunas."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                }else if (nLinhasZona < 2 ||nLinhasZona > 4 || nColunasZona < 2 || nColunasZona > 4) {
+                    // fora dos limites permitidos
+                    mainWindow.clear();
+                    com_efetuadosWindow << "Erro: o comando 'znova' requer que linhas e colunas estejam entre 2 e 4."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     //comando válido
                     mainWindow.clear();
@@ -177,7 +183,7 @@ void Interface::processarComando(const string& comando) {
             } else {
                 // Falta ID ou não é um inteiro
                 mainWindow.clear();
-                com_efetuadosWindow << "Erro: o comando 'zrem' requer um ID numérico(inteiro) da zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                com_efetuadosWindow << "Erro: o comando 'zrem' requer um ID numerico(inteiro) da zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "zlista") {
             string extra;
@@ -187,7 +193,7 @@ void Interface::processarComando(const string& comando) {
                 com_efetuadosWindow << "Erro: o comando 'zlista, nao requer parametros adicionais"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             } else {
                 mainWindow.clear();
-                com_efetuadosWindow << "Comando válido"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                com_efetuadosWindow << "Comando valido, ainda nao implementado"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
 
 
             }
@@ -199,13 +205,13 @@ void Interface::processarComando(const string& comando) {
                     mainWindow.clear();
                     com_efetuadosWindow << "Erro: o comando 'zcomp' requer apenas o ID da zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
-
+                    mainWindow.clear();
                     com_efetuadosWindow << "Listagem de componentes para a zona " << idZona << " ainda nao foi implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
                 // Falta ID ou não é um inteiro
                 mainWindow.clear();
-                com_efetuadosWindow << "Erro: o comando 'zcomp' requer um ID numérico(inteiro) da zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                com_efetuadosWindow << "Erro: o comando 'zcomp' requer um ID numerico(inteiro) da zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "zprops") {
             int idZona;
@@ -235,6 +241,7 @@ void Interface::processarComando(const string& comando) {
                             << "Erro: o comando 'pmod' requer apenas o ID da zona, nome e valor da propriedade."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     //Comando válido
+                    mainWindow.clear();
                     com_efetuadosWindow << "Modificação de uma propriedade ainda não foi implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
@@ -259,8 +266,10 @@ void Interface::processarComando(const string& comando) {
 
                     if (tipoComponente == 's' || tipoComponente == 'p' || tipoComponente == 'a') {
                         //Comando válido
+                        mainWindow.clear();
                         com_efetuadosWindow << "Adição de um novo componente ainda nao foi implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
+                        mainWindow.clear();
                         com_efetuadosWindow << "Erro: Tipo de componente inválido (deve ser 's', 'p' ou 'a')."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
                 }
@@ -285,8 +294,10 @@ void Interface::processarComando(const string& comando) {
                 } else {
                     if (tipoComponente == 's' || tipoComponente == 'p' || tipoComponente == 'a') {
                         //Comando válido
+                        mainWindow.clear();
                         com_efetuadosWindow << "Remocao de componente ainda não implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
+                        mainWindow.clear();
                         com_efetuadosWindow << "Erro: Tipo de componente invalido (deve ser 's', 'p' ou 'a')."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
                 }
@@ -309,30 +320,35 @@ void Interface::processarComando(const string& comando) {
                 // Analisar qual é a regra
                 if (regra == "igual_a" || regra == "menor_que" || regra == "maior_que") {
                     if (!(stream >> param1)) {
+                        mainWindow.clear();
                         com_efetuadosWindow << "Erro: o comando 'rnova' para a regra '" << regra << "' requer um parametro numérico."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         return;
                     }
                 } else if (regra == "entre" || regra == "fora") {
                     precisaSegundoParam = true;
                     if (!(stream >> param1 >> param2)) {
+                        mainWindow.clear();
                         com_efetuadosWindow << "Erro: o comando 'rnova' para a regra '" << regra<< "' requer dois parametros numericos."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         return;
                     }
                     temSegundoParam = true;
                 } else {
+                    mainWindow.clear();
                     com_efetuadosWindow << "Erro: Tipo de regra '" << regra << "' nao reconhecido."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     return;
                 }
 
                 string extra;
                 if (stream >> extra) {
+                    mainWindow.clear();
                     com_efetuadosWindow << "Erro: o comando 'rnova' possui parametros extras nao reconhecidos."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     return;
                 }
-
+                mainWindow.clear();
                 //Comando válido
                 com_efetuadosWindow << "Criação de nova regra ainda não implementada.";
             } else {
+                mainWindow.clear();
                 com_efetuadosWindow
                         << "Erro: o comando 'rnova' nao possui os parametros corretos ou estao em formato invalido."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
@@ -608,22 +624,22 @@ void Interface::avancarTempo(int n) {
 }
 
 
-
-void Interface::executarArquivoComandos(const std::string& nomeArquivo) {
-    std::ifstream arquivo(nomeArquivo);
-    if (!arquivo) {
-        mainWindow << "Erro ao abrir o arquivo: " << nomeArquivo << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
-        mainWindow << "Verifique se o caminho está correto e se você tem permissão de leitura."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+void Interface::executarArquivoComandos(const std::string& nomeFicheiro) {
+    std::ifstream ficheiro(nomeFicheiro);
+    if (!ficheiro) {
+        com_efetuadosWindow << "Erro ao abrir o arquivo: " << nomeFicheiro << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+        com_efetuadosWindow << "Verifique se o caminho está correto e se você tem permissão de leitura."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
         return;
     }
 
     std::string linha;
-    while (std::getline(arquivo, linha)) {
+    while (std::getline(ficheiro, linha)) {
         if (!linha.empty()) {
             processarComando(linha);
         }
     }
 }
+
 
 
 

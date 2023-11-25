@@ -15,6 +15,7 @@ public:
 private:
     term::Window mainWindow;
     term::Window com_efetuadosWindow;
+    term::Window janela_habitacaoWindow;
     void processarComando(const std::string& comando);
     void avancarTempo(int n);
     void executarArquivoComandos(const std::string& nomeArquivo);

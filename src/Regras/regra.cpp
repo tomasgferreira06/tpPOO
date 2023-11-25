@@ -15,13 +15,10 @@ bool Regra::avaliar(double valorSensor) const {
     } else if (tipoComparacao == "maior_que") {
         return valorSensor > valorComparacao;
     } else if (tipoComparacao == "entre") {
-        // Adapte conforme necessário para a lógica da comparação "entre"
         return (valorSensor >= valorComparacao) && (valorSensor <= valorComparacao);
     } else if (tipoComparacao == "fora") {
-        // Adapte conforme necessário para a lógica da comparação "fora"
         return (valorSensor < valorComparacao) || (valorSensor > valorComparacao);
     } else {
-        // Lida com outros tipos de comparação, se necessário
         return false;
     }
 }

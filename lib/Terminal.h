@@ -66,6 +66,11 @@ namespace term {
         Window& operator<<(const int& i);
         Window& operator<<(const double& d);
         Window& operator<<(const char& c);
+        int get_current_row() const {
+            int x, y;
+            getyx(window, y, x);
+            return y;
+        }
 
         Window& operator>>(char& c);
         Window& operator>>(std::string& str);

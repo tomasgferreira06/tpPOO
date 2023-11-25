@@ -26,7 +26,7 @@ void Interface::iniciar() {
         }
 
         processarComando(comando);
-        mainWindow << "Escreva comando ou 'sair' para terminar: ";
+        mainWindow << "Escreva comando ou 'sair' para terminar (help ou help2 para lista de comandos): " << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
     }
 }
 
@@ -40,8 +40,7 @@ void Interface::processarComando(const string& comando) {
         string extra;
         if(stream >> extra){
             mainWindow.clear();
-            com_efetuadosWindow << term::move_to(0, 18);
-            com_efetuadosWindow << "Erro: o comando 'prox' nao quer nenhum parametro.";
+            com_efetuadosWindow << "Erro: o comando 'prox' nao quer nenhum parametro."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
         }else{
             mainWindow.clear();
             avancarTempo(1);
@@ -53,9 +52,62 @@ void Interface::processarComando(const string& comando) {
             avancarTempo(n);
         } else {
             mainWindow.clear();
-            com_efetuadosWindow << "Erro: o comando 'avanca' requer um numero inteiro como argumento.\n";
+            com_efetuadosWindow << "Erro: o comando 'avanca' requer um numero inteiro como argumento."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
         }
-    } else {
+    }
+    else if (acao == "help") {
+        string extra;
+        if (stream >> extra) {
+            mainWindow.clear();
+            com_efetuadosWindow << "Erro: o comando 'help' não requer argumentos para mostrar os comandos"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+        } else {
+            mainWindow.clear();
+            com_efetuadosWindow <<"-prox" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-avanca <inteiro>" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-hnova <num linhas> <num colunas>" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-hrem" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-znova <linha> <coluna>" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-zrem <Id da zona >" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-zlista>" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-zcomp <ID zona>" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-zprops <ID zona>" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-pmod <ID zona> <nome> <valor>" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-cnovo <idZona> <s ou p ou a> <tipo de comando>" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-crem <idZona> <s ou p ou a> <ID>" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-rnova <idZona> <ID procedimento de regras> <regra> <ID sensor> [parametros]" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-pmuda <idZona> <ID procedimento de regras> <novo comando>" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-rlista <idZona> <ID procedimento de regras>" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-rrem <idZona> <ID procedimento de regras> <ID da regra>" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-asoc <idZona> <ID procedimento de regras> <ID aparelho>" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-ades <idZona> <ID procedimento de regras> <ID aparelho>" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+        }
+
+    }
+    else if (acao == "help2") {
+        string extra;
+        if (stream >> extra) {
+            mainWindow.clear();
+            com_efetuadosWindow << "Erro: o comando 'help' não requer argumentos para mostrar os comandos"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+        } else {
+            mainWindow.clear();
+            com_efetuadosWindow <<"-acom <idZona> <ID aparelho> <comando>" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-psalva <idZona> <ID procedimento de regras> <nome>" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-prepoe <nome>" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-prem <nome>" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-plista" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-exec <nome do ficheiro>" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-clear" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow <<"-sair" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+
+
+
+
+
+
+        }
+
+    }
+    else {
         if (acao == "hnova") {
             int numLinhas, numColunas;
             if (stream >> numLinhas >> numColunas) {
@@ -63,31 +115,30 @@ void Interface::processarComando(const string& comando) {
                 if (stream >> extra) {
                     // parâmetros a mais
                     mainWindow.clear();
-                    com_efetuadosWindow << "Erro: o comando 'hnova' requer apenas numero de linhas e colunas.";
+                    com_efetuadosWindow << "Erro: o comando 'hnova' requer apenas numero de linhas e colunas."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }else if (numLinhas < 2 || numLinhas > 4 || numColunas < 2 || numColunas > 4) {
                     // fora dos limites permitidos
                     mainWindow.clear();
-                    com_efetuadosWindow << "Erro: o comando 'hnova' requer que linhas e colunas estejam entre 2 e 4.\n";
+                    com_efetuadosWindow << "Erro: o comando 'hnova' requer que linhas e colunas estejam entre 2 e 4."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     //comando válido
                     mainWindow.clear();
 
-                    com_efetuadosWindow << "Habitacao criada com " << numLinhas << " linhas e " << numColunas
-                                        << " colunas.";
+                    com_efetuadosWindow << "Habitacao criada com " << numLinhas << " linhas e " << numColunas << " colunas."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
                 // parâmetros não são inteiros
                 mainWindow.clear();
-                com_efetuadosWindow << "Erro: o comando 'hnova' requer numeros inteiros para linhas e colunas";
+                com_efetuadosWindow << "Erro: o comando 'hnova' requer numeros inteiros para linhas e colunas"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "hrem") {
             string extra;
             if (stream >> extra) {
                 //Argumentos a mais
-                com_efetuadosWindow << "Erro: o comando 'hrem' nao requer parametros adicionais";
+                com_efetuadosWindow << "Erro: o comando 'hrem' nao requer parametros adicionais"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             } else {
 
-                com_efetuadosWindow << "Habitacao removida.";
+                com_efetuadosWindow << "Habitacao removida."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "znova") {
             int nLinhasZona, nColunasZona;
@@ -96,18 +147,17 @@ void Interface::processarComando(const string& comando) {
                 if (stream >> extra) {
                     // parâmetros a mais
                     mainWindow.clear();
-                    com_efetuadosWindow << "Erro: o comando 'znova' requer apenas numero de linhas e colunas.";
+                    com_efetuadosWindow << "Erro: o comando 'znova' requer apenas numero de linhas e colunas."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     //comando válido
                     mainWindow.clear();
 
-                    com_efetuadosWindow << "Zona criada com " << nLinhasZona << " linhas e " << nColunasZona
-                                        << " colunas.";
+                    com_efetuadosWindow << "Zona criada com " << nLinhasZona << " linhas e " << nColunasZona << " colunas."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
                 // parâmetros não são inteiros
                 mainWindow.clear();
-                com_efetuadosWindow << "Erro: o comando 'znova' requer numeros inteiros para linhas e colunas";
+                com_efetuadosWindow << "Erro: o comando 'znova' requer numeros inteiros para linhas e colunas"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "zrem") {
             int idZona;
@@ -116,26 +166,26 @@ void Interface::processarComando(const string& comando) {
                 if (stream >> extra) {
                     // Parâmetros a mais
                     mainWindow.clear();
-                    com_efetuadosWindow << "Erro: o comando 'zrem' requer apenas o ID da zona.";
+                    com_efetuadosWindow << "Erro: o comando 'zrem' requer apenas o ID da zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     mainWindow.clear();
 
-                    com_efetuadosWindow << "Zona " << idZona << " removida.";
+                    com_efetuadosWindow << "Zona " << idZona << " removida."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
                 // Falta ID ou não é um inteiro
                 mainWindow.clear();
-                com_efetuadosWindow << "Erro: o comando 'zrem' requer um ID numérico(inteiro) da zona.";
+                com_efetuadosWindow << "Erro: o comando 'zrem' requer um ID numérico(inteiro) da zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "zlista") {
             string extra;
             if (stream >> extra) {
                 //Parâmetros a mais
                 mainWindow.clear();
-                com_efetuadosWindow << "Erro: o comando 'zlista, nao requer parametros adicionais";
+                com_efetuadosWindow << "Erro: o comando 'zlista, nao requer parametros adicionais"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             } else {
                 mainWindow.clear();
-                com_efetuadosWindow << "Comando válido";
+                com_efetuadosWindow << "Comando válido"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
 
 
             }
@@ -145,16 +195,15 @@ void Interface::processarComando(const string& comando) {
                 string extra;
                 if (stream >> extra) {
                     mainWindow.clear();
-                    com_efetuadosWindow << "Erro: o comando 'zcomp' requer apenas o ID da zona.";
+                    com_efetuadosWindow << "Erro: o comando 'zcomp' requer apenas o ID da zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
 
-                    com_efetuadosWindow << "Listagem de componentes para a zona " << idZona
-                                        << " ainda nao foi implementada.";
+                    com_efetuadosWindow << "Listagem de componentes para a zona " << idZona << " ainda nao foi implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
                 // Falta ID ou não é um inteiro
                 mainWindow.clear();
-                com_efetuadosWindow << "Erro: o comando 'zcomp' requer um ID numérico(inteiro) da zona.";
+                com_efetuadosWindow << "Erro: o comando 'zcomp' requer um ID numérico(inteiro) da zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "zprops") {
             int idZona;
@@ -162,16 +211,15 @@ void Interface::processarComando(const string& comando) {
                 string extra;
                 if (stream >> extra) {
                     mainWindow.clear();
-                    com_efetuadosWindow << "Erro: o comando 'zprops' requer apenas o ID da zona.";
+                    com_efetuadosWindow << "Erro: o comando 'zprops' requer apenas o ID da zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
 
-                    com_efetuadosWindow << "Listagem de Propriedades para a zona " << idZona
-                                        << " ainda nao foi implementada.";
+                    com_efetuadosWindow << "Listagem de Propriedades para a zona " << idZona << " ainda nao foi implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
                 // Falta ID ou não é um inteiro
                 mainWindow.clear();
-                com_efetuadosWindow << "Erro: o comando 'zcomp' requer um ID numérico(inteiro) da zona.";
+                com_efetuadosWindow << "Erro: o comando 'zcomp' requer um ID numérico(inteiro) da zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "pmod") {
             int idZona, valorPropriedade;
@@ -182,16 +230,16 @@ void Interface::processarComando(const string& comando) {
                     // Parâmetros a mais
                     mainWindow.clear();
                     com_efetuadosWindow
-                            << "Erro: o comando 'pmod' requer apenas o ID da zona, nome e valor da propriedade.";
+                            << "Erro: o comando 'pmod' requer apenas o ID da zona, nome e valor da propriedade."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     //Comando válido
-                    com_efetuadosWindow << "Modificação de uma propriedade ainda não foi implementada.";
+                    com_efetuadosWindow << "Modificação de uma propriedade ainda não foi implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
                 // Falta parâmetros ou não estão no formato correto
                 mainWindow.clear();
                 com_efetuadosWindow
-                        << "Erro: o comando 'pmod' requer um ID numérico(inteiro) da zona, um nome de uma propriedade e um valor.";
+                        << "Erro: o comando 'pmod' requer um ID numérico(inteiro) da zona, um nome de uma propriedade e um valor."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "cnovo") {
             int idZona;
@@ -204,21 +252,21 @@ void Interface::processarComando(const string& comando) {
                     // Parâmetros a mais
                     mainWindow.clear();
                     com_efetuadosWindow
-                            << "Erro: o comando 'cnovo' requer apenas ID da zona, tipo de componente (s, p, a) e tipo/comando.";
+                            << "Erro: o comando 'cnovo' requer apenas ID da zona, tipo de componente (s, p, a) e tipo/comando."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
 
                     if (tipoComponente == 's' || tipoComponente == 'p' || tipoComponente == 'a') {
                         //Comando válido
-                        com_efetuadosWindow << "Adição de um novo componente ainda nao foi implementada.";
+                        com_efetuadosWindow << "Adição de um novo componente ainda nao foi implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
-                        com_efetuadosWindow << "Erro: Tipo de componente inválido (deve ser 's', 'p' ou 'a').";
+                        com_efetuadosWindow << "Erro: Tipo de componente inválido (deve ser 's', 'p' ou 'a')."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
                 }
             } else {
                 // Faltam parâmetros ou são inválidos
                 mainWindow.clear();
                 com_efetuadosWindow
-                        << "Erro: o comando 'cnovo' requer um ID numerico(inteiro) da zona, um tipo de componente (s, p, a) e um tipo/comando.";
+                        << "Erro: o comando 'cnovo' requer um ID numerico(inteiro) da zona, um tipo de componente (s, p, a) e um tipo/comando."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "crem") {
             int idZona;
@@ -231,20 +279,20 @@ void Interface::processarComando(const string& comando) {
                     // Parâmetros a mais
                     mainWindow.clear();
                     com_efetuadosWindow
-                            << "Erro: o comando 'crem' requer apenas o ID da zona, tipo de componente (s, p, a) e ID do componente.";
+                            << "Erro: o comando 'crem' requer apenas o ID da zona, tipo de componente (s, p, a) e ID do componente."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     if (tipoComponente == 's' || tipoComponente == 'p' || tipoComponente == 'a') {
                         //Comando válido
-                        com_efetuadosWindow << "Remocao de componente ainda não implementada.";
+                        com_efetuadosWindow << "Remocao de componente ainda não implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
-                        com_efetuadosWindow << "Erro: Tipo de componente invalido (deve ser 's', 'p' ou 'a').";
+                        com_efetuadosWindow << "Erro: Tipo de componente invalido (deve ser 's', 'p' ou 'a')."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
                 }
             } else {
                 //Faltam parâmetros ou são a mais
                 mainWindow.clear();
                 com_efetuadosWindow
-                        << "Erro: o comando 'crem' requer um ID numerico da zona, um tipo de componente (s, p, a) e um ID do componente.";
+                        << "Erro: o comando 'crem' requer um ID numerico da zona, um tipo de componente (s, p, a) e um ID do componente."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "rnova") {
             int idZona;
@@ -259,26 +307,24 @@ void Interface::processarComando(const string& comando) {
                 // Analisar qual é a regra
                 if (regra == "igual_a" || regra == "menor_que" || regra == "maior_que") {
                     if (!(stream >> param1)) {
-                        com_efetuadosWindow << "Erro: o comando 'rnova' para a regra '" << regra
-                                            << "' requer um parametro numérico.";
+                        com_efetuadosWindow << "Erro: o comando 'rnova' para a regra '" << regra << "' requer um parametro numérico."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         return;
                     }
                 } else if (regra == "entre" || regra == "fora") {
                     precisaSegundoParam = true;
                     if (!(stream >> param1 >> param2)) {
-                        com_efetuadosWindow << "Erro: o comando 'rnova' para a regra '" << regra
-                                            << "' requer dois parametros numericos.";
+                        com_efetuadosWindow << "Erro: o comando 'rnova' para a regra '" << regra<< "' requer dois parametros numericos."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         return;
                     }
                     temSegundoParam = true;
                 } else {
-                    com_efetuadosWindow << "Erro: Tipo de regra '" << regra << "' nao reconhecido.";
+                    com_efetuadosWindow << "Erro: Tipo de regra '" << regra << "' nao reconhecido."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     return;
                 }
 
                 string extra;
                 if (stream >> extra) {
-                    com_efetuadosWindow << "Erro: o comando 'rnova' possui parametros extras nao reconhecidos.";
+                    com_efetuadosWindow << "Erro: o comando 'rnova' possui parametros extras nao reconhecidos."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     return;
                 }
 
@@ -286,7 +332,7 @@ void Interface::processarComando(const string& comando) {
                 com_efetuadosWindow << "Criação de nova regra ainda não implementada.";
             } else {
                 com_efetuadosWindow
-                        << "Erro: o comando 'rnova' nao possui os parametros corretos ou estao em formato invalido.";
+                        << "Erro: o comando 'rnova' nao possui os parametros corretos ou estao em formato invalido."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "pmuda") {
             int idZona;
@@ -299,20 +345,20 @@ void Interface::processarComando(const string& comando) {
                     // Parâmetros a mais
                     mainWindow.clear();
                     com_efetuadosWindow
-                            << "Erro: o comando 'pmuda' requer apenas o ID da zona, ID do processador de regras e o novo comando.";
+                            << "Erro: o comando 'pmuda' requer apenas o ID da zona, ID do processador de regras e o novo comando."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     if (novoComando.find(' ') != string::npos) {
-                        com_efetuadosWindow << "Erro: o novo comando deve ser uma unica palavra.";
+                        com_efetuadosWindow << "Erro: o novo comando deve ser uma unica palavra."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
                         //Comando válido
-                        com_efetuadosWindow << "Mudança de comando do processador ainda nao implementada.";
+                        com_efetuadosWindow << "Mudança de comando do processador ainda nao implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
                 }
             } else {
                 // Faltam parâmetros ou estão no formato incorreto
                 mainWindow.clear();
                 com_efetuadosWindow
-                        << "Erro: o comando 'pmuda' requer um ID numerico da zona, um ID do processador de regras e um novo comando.";
+                        << "Erro: o comando 'pmuda' requer um ID numerico da zona, um ID do processador de regras e um novo comando."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "rlista") {
             int idZona;
@@ -324,16 +370,16 @@ void Interface::processarComando(const string& comando) {
                     // Parâmetros a mais
                     mainWindow.clear();
                     com_efetuadosWindow
-                            << "Erro: o comando 'rlista' requer apenas o ID da zona e o ID do processador de regras.";
+                            << "Erro: o comando 'rlista' requer apenas o ID da zona e o ID do processador de regras."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     // Comando válido
-                    com_efetuadosWindow << "Listagem de regras ainda nao implementada.";
+                    com_efetuadosWindow << "Listagem de regras ainda nao implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
                 // Parâmetros a menos ou inválidos
                 mainWindow.clear();
                 com_efetuadosWindow
-                        << "Erro: o comando 'rlista' requer um ID numerico da zona e um ID numerico do processador de regras.";
+                        << "Erro: o comando 'rlista' requer um ID numerico da zona e um ID numerico do processador de regras."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "rrem") {
             int idZona;
@@ -346,16 +392,16 @@ void Interface::processarComando(const string& comando) {
                     // Parâmetros a mais
                     mainWindow.clear();
                     com_efetuadosWindow
-                            << "Erro: o comando 'rrem' requer apenas o ID da zona, o ID do processador de regras e o ID da regra.";
+                            << "Erro: o comando 'rrem' requer apenas o ID da zona, o ID do processador de regras e o ID da regra."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     // Comando válido
-                    com_efetuadosWindow << "Remoção da regra ainda nao implementada.";
+                    com_efetuadosWindow << "Remoção da regra ainda nao implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
                 // Parâmetros em falta ou não estão no formato pretendido
                 mainWindow.clear();
                 com_efetuadosWindow
-                        << "Erro: o comando 'rrem' requer um ID numerico da zona, um ID numerico do processador de regras e um ID numerico da regra.";
+                        << "Erro: o comando 'rrem' requer um ID numerico da zona, um ID numerico do processador de regras e um ID numerico da regra."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "asoc") {
             int idZona;
@@ -368,16 +414,16 @@ void Interface::processarComando(const string& comando) {
                     // Parâmetros a mais
                     mainWindow.clear();
                     com_efetuadosWindow
-                            << "Erro: o comando 'asoc' requer apenas o ID da zona, o ID do processador de regras e o ID do aparelho.";
+                            << "Erro: o comando 'asoc' requer apenas o ID da zona, o ID do processador de regras e o ID do aparelho."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     // Comando válido
-                    com_efetuadosWindow << "Associacao entre processador de regras e aparelho ainda nao implementada.";
+                    com_efetuadosWindow << "Associacao entre processador de regras e aparelho ainda nao implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
                 // Parâmetros em falta ou não estão no formato pretendido
                 mainWindow.clear();
                 com_efetuadosWindow
-                        << "Erro: o comando 'asoc' requer um ID numerico da zona, um ID numerico do processador de regras e um ID numerico do aparelho.";
+                        << "Erro: o comando 'asoc' requer um ID numerico da zona, um ID numerico do processador de regras e um ID numerico do aparelho."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "ades") {
             int idZona;
@@ -390,17 +436,17 @@ void Interface::processarComando(const string& comando) {
                     // Parâmetros a mais
                     mainWindow.clear();
                     com_efetuadosWindow
-                            << "Erro: o comando 'ades' requer apenas o ID da zona, o ID do processador de regras e o ID do aparelho.";
+                            << "Erro: o comando 'ades' requer apenas o ID da zona, o ID do processador de regras e o ID do aparelho."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     // Comando válido
                     com_efetuadosWindow
-                            << "Remocao de associacao entre processador de regras e aparelho ainda nao implementada.";
+                            << "Remocao de associacao entre processador de regras e aparelho ainda nao implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
                 // Parâmetros em falta ou não estão no formato pretendido
                 mainWindow.clear();
                 com_efetuadosWindow
-                        << "Erro: o comando 'ades' requer um ID numerico da zona, um ID numerico do processador de regras e um ID numerico do aparelho.";
+                        << "Erro: o comando 'ades' requer um ID numerico da zona, um ID numerico do processador de regras e um ID numerico do aparelho."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "acom") {
             int idZona;
@@ -413,20 +459,20 @@ void Interface::processarComando(const string& comando) {
                     // Parâmetros a mais
                     mainWindow.clear();
                     com_efetuadosWindow
-                            << "Erro: o comando 'acom' requer apenas o ID da zona, o ID do aparelho e o comando a ser enviado.";
+                            << "Erro: o comando 'acom' requer apenas o ID da zona, o ID do aparelho e o comando a ser enviado."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     if (com.find(' ') != string::npos) {
-                        com_efetuadosWindow << "Erro: o comando para o aparelho deve ser uma unica palavra.";
+                        com_efetuadosWindow << "Erro: o comando para o aparelho deve ser uma unica palavra."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
                         // Comando válido
-                        com_efetuadosWindow << "Envio de comando para aparelho ainda nao implementado.";
+                        com_efetuadosWindow << "Envio de comando para aparelho ainda nao implementado."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
                 }
             } else {
                 // Parâmetros em falta ou não estão no formato pretendido
                 mainWindow.clear();
                 com_efetuadosWindow
-                        << "Erro: o comando 'acom' requer um ID numerico da zona, um ID numerico do aparelho e um comando.";
+                        << "Erro: o comando 'acom' requer um ID numerico da zona, um ID numerico do aparelho e um comando."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "psalva") {
             int idZona;
@@ -439,20 +485,20 @@ void Interface::processarComando(const string& comando) {
                     // Parâmetros a mais
                     mainWindow.clear();
                     com_efetuadosWindow
-                            << "Erro: o comando 'psalva' requer apenas o ID da zona, o ID do processador de regras e um nome único.";
+                            << "Erro: o comando 'psalva' requer apenas o ID da zona, o ID do processador de regras e um nome único."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     if (nome.find(' ') != string::npos) {
-                        com_efetuadosWindow << "Erro: o nome deve ser uma unica palavra sem espacos.";
+                        com_efetuadosWindow << "Erro: o nome deve ser uma unica palavra sem espacos."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
                         // Comando válido
-                        com_efetuadosWindow << "Save do estado do processador de regras ainda nao foi implementado.";
+                        com_efetuadosWindow << "Save do estado do processador de regras ainda nao foi implementado."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
                 }
             } else {
                 // Parâmetros em falta ou não estão no formato pretendido
                 mainWindow.clear();
                 com_efetuadosWindow
-                        << "Erro: o comando 'psalva' requer um ID numerico da zona, um ID numerico do processador de regras e um nome unico.";
+                        << "Erro: o comando 'psalva' requer um ID numerico da zona, um ID numerico do processador de regras e um nome unico."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "prepoe") {
             string nome;
@@ -462,106 +508,101 @@ void Interface::processarComando(const string& comando) {
                 if (stream >> extra) {
                     // Parâmetros a mais
                     mainWindow.clear();
-                    com_efetuadosWindow << "Erro: o comando 'prepoe' requer apenas um nome unico.";
+                    com_efetuadosWindow << "Erro: o comando 'prepoe' requer apenas um nome unico."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     if (nome.find(' ') != string::npos) {
-                        com_efetuadosWindow << "Erro: o nome deve ser uma unica palavra sem espacos.";
+                        com_efetuadosWindow << "Erro: o nome deve ser uma unica palavra sem espacos."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
                         // Comando válido
-                        com_efetuadosWindow << "Restauro do processador de regras ainda nao implementado.";
+                        com_efetuadosWindow << "Restauro do processador de regras ainda nao implementado."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
                 }
             } else {
                 // Parâmetros em falta ou não estão no formato pretendido
                 mainWindow.clear();
-                com_efetuadosWindow << "Erro: o comando 'prepoe' requer um nome único para o estado salvo.\n";
+                com_efetuadosWindow << "Erro: o comando 'prepoe' requer um nome único para o estado salvo."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
-        }
-    else if (acao == "prem") {
-        string nome;
+        } else {
+            if (acao == "prem") {
+                string nome;
 
-        if (stream >> nome) {
-            string extra;
-            if (stream >> extra) {
-                // Parâmetros a mais
-                mainWindow.clear();
-                com_efetuadosWindow << "Erro: o comando 'prem' requer apenas um nome unico.";
-            } else {
-                if (nome.find(' ') != string::npos) {
-                    com_efetuadosWindow << "Erro: o nome deve ser uma unica palavra sem espacos.";
-                } else {
-                    // Comando válido
-                    com_efetuadosWindow << "Apaga uma cópia do processador de regras armazenado em memória.";
+                if (stream >> nome) {
+                    string extra;
+                    if (stream >> extra) {
+                        // Parâmetros a mais
+                        mainWindow.clear();
+                        com_efetuadosWindow << "Erro: o comando 'prem' requer apenas um nome unico."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    } else {
+                        if (nome.find(' ') != string::npos) {
+                            com_efetuadosWindow << "Erro: o nome deve ser uma unica palavra sem espacos."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        } else {
+                            // Comando válido
+                            com_efetuadosWindow << "Apaga uma cópia do processador de regras armazenado em memória."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        }
+                    }
                 }
-            }
-        }
-    }
-    else if(acao == "plista"){
-        string extra;
-        if(stream >> extra){
-            mainWindow.clear();
-            com_efetuadosWindow << "Erro: o comando 'plista', nao requer parametros adicionais";
-        }else{
-            mainWindow.clear();
-            com_efetuadosWindow << "Comando válido:\n";
-        }
-    }
-    else if (acao == "exec") {
+            } else if (acao == "plista") {
+                string extra;
+                if (stream >> extra) {
+                    mainWindow.clear();
+                    com_efetuadosWindow << "Erro: o comando 'plista', nao requer parametros adicionais"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                } else {
+                    mainWindow.clear();
+                    com_efetuadosWindow << "Comando válido:"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                }
+            } else if (acao == "exec") {
+                string nomeArquivo;
+                if (stream >> nomeArquivo) {
+                    executarArquivoComandos(nomeArquivo);
+                } else {
+                    mainWindow << "Erro: o comando 'exec' requer o nome de um arquivo como argumento."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                }
+            } else if (acao == "clear") {
+                string extra;
+                if (stream >> extra) {
+                    //Parâmetros a mais
+                    mainWindow.clear();
+                    com_efetuadosWindow << "Erro: o comando 'clear', nao requer parametros adicionais"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                } else {
+                    com_efetuadosWindow.clear();
+                    mainWindow.clear();
+                    com_efetuadosWindow << "Comandos efetuados:"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                }
+            } else if (acao == "exit") {
+                string extra;
+                if (stream >> extra) {
+                    //Parâmetros a mais
+                    mainWindow.clear();
+                    com_efetuadosWindow << "Erro: o comando 'exit', nao requer parametros adicionais"
+                                        << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                } else {
+                    mainWindow.clear();
+                    com_efetuadosWindow << "Comando validado com sucesso"
+                                        << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                }
+            } else {
+                if (acao == "exec") {
                     string nomeArquivo;
                     if (stream >> nomeArquivo) {
                         executarArquivoComandos(nomeArquivo);
                     } else {
-                        mainWindow << "Erro: o comando 'exec' requer o nome de um arquivo como argumento.\n";
+                        mainWindow << "Erro: o comando 'exec' requer o nome de um arquivo como argumento."
+                                   << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
+                } else {
+                    mainWindow.clear();
+                    com_efetuadosWindow << "Erro: Comando invalido."
+                                        << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                }
             }
 
-
-    else if(acao == "clear"){
-        string extra;
-        if(stream >> extra){
-            //Parâmetros a mais
-            mainWindow.clear();
-            com_efetuadosWindow << "Erro: o comando 'clear', nao requer parametros adicionais";
-        }else{
-            com_efetuadosWindow.clear();
-            mainWindow.clear();
-            com_efetuadosWindow << "Comandos efetuados:\n";
-        }
-    }
-    else if(acao == "exit"){
-        string extra;
-        if(stream >> extra){
-            //Parâmetros a mais
-            mainWindow.clear();
-            com_efetuadosWindow << "Erro: o comando 'exit', nao requer parametros adicionais";
-        }else{
-            mainWindow.clear();
-            com_efetuadosWindow << "Comando validado com sucesso\n";
-        }
-    }
-    else {
-        mainWindow.clear();
-        com_efetuadosWindow << "Erro: Comando invalido.\n";
-        com_efetuadosWindow << "\n";
-        } else if (acao == "exec") {
-            string nomeArquivo;
-            if (stream >> nomeArquivo) {
-                executarArquivoComandos(nomeArquivo);
-            } else {
-                mainWindow << "Erro: o comando 'exec' requer o nome de um arquivo como argumento.\n";
             }
-        } else {
-            mainWindow.clear();
-            com_efetuadosWindow << "Erro: Comando invalido.\n";
         }
     }
-
-}
-
 
 void Interface::avancarTempo(int n) {
     // Implemente a lógica para avançar o tempo aqui
-    com_efetuadosWindow << "Tempo avancado em " << n << " instantes.\n";
+    com_efetuadosWindow << "Tempo avancado em " << n << " instantes."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
 }
 
 
@@ -569,8 +610,8 @@ void Interface::avancarTempo(int n) {
 void Interface::executarArquivoComandos(const std::string& nomeArquivo) {
     std::ifstream arquivo(nomeArquivo);
     if (!arquivo) {
-        mainWindow << "Erro ao abrir o arquivo: " << nomeArquivo << "\n";
-        mainWindow << "Verifique se o caminho está correto e se você tem permissão de leitura.\n";
+        mainWindow << "Erro ao abrir o arquivo: " << nomeArquivo << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+        mainWindow << "Verifique se o caminho está correto e se você tem permissão de leitura."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
         return;
     }
 

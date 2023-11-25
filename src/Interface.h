@@ -14,7 +14,7 @@ public:
     void iniciar(); // Inicia o loop de interação com o usuário
 private:
     term::Window mainWindow;
-    term::Window com_efetuadosWindow; // Declare the additional window here
+    term::Window com_efetuadosWindow;
     void processarComando(const std::string& comando);
     void avancarTempo(int n);
     void executarArquivoComandos(const std::string& nomeArquivo);

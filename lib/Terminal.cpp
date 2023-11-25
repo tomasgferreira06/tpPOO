@@ -42,19 +42,19 @@ namespace term {
 
     Window::Window(Window&& win) {
         border = win.border;
-        win.border = NULL;
+        win.border = nullptr;
         window = win.window;
-        win.window = NULL;
+        win.window = nullptr;
     }
 
     Window::~Window() {
 
-        if( border!=NULL ) {
+        if( border!=nullptr ) {
             wborder(border, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
             wrefresh(border);
             delwin(border);
         }
-        if( window!=NULL ) {
+        if( window!=nullptr ) {
             delwin(window);
         }
 

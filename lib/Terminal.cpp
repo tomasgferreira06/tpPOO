@@ -286,6 +286,4 @@ namespace term {
     int Terminal::getNumRows() {
         return LINES;
     }
-
-
 }

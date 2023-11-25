@@ -22,8 +22,6 @@ void Processador::listarRegras() const {
     cout << "Regras do Processador:" << endl;
     for (size_t i = 0; i < regras.size(); ++i) {
         cout << "[" << i << "] ";
-        // Adapte conforme necessário para imprimir informações sobre a regra
-        // (por exemplo, sensorId, tipoComparacao, valorComparacao)
     }
 }
 

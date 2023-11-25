@@ -22,12 +22,10 @@ Interface::Interface()
 void Interface::iniciar() {
     string comando;
     while (true) {;
-        mainWindow >> comando;  // Recebendo entrada do usuário
-
+        mainWindow >> comando;
         if (comando == "sair") {
             break;
         }
-
         processarComando(comando);
         mainWindow << "Escreva comando ou 'sair' para terminar (help ou help2 para lista de comandos): " << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
     }
@@ -102,13 +100,7 @@ void Interface::processarComando(const string& comando) {
             com_efetuadosWindow <<"-clear" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             com_efetuadosWindow <<"-sair" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
 
-
-
-
-
-
         }
-
     }
     else {
         if (acao == "hnova") {
@@ -159,7 +151,6 @@ void Interface::processarComando(const string& comando) {
                 } else {
                     //comando válido
                     mainWindow.clear();
-
                     com_efetuadosWindow << "Zona criada com " << nLinhasZona << " linhas e " << nColunasZona << " colunas."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
@@ -619,7 +610,6 @@ void Interface::processarComando(const string& comando) {
     }
 
 void Interface::avancarTempo(int n) {
-    // Implemente a lógica para avançar o tempo aqui
     com_efetuadosWindow << "Tempo avancado em " << n << " instantes."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
 }
 
@@ -639,14 +629,5 @@ void Interface::executarArquivoComandos(const std::string& nomeFicheiro) {
         }
     }
 }
-
-
-
-
-
-
-//Interface::~Interface() {
-  //  term::Terminal::instance().~Terminal();
-//}
 
 

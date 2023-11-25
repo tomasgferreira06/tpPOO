@@ -11,7 +11,7 @@ class Interface {
 public:
     Interface();
    // ~Interface();
-    void iniciar(); // Inicia o loop de interação com o usuário
+    void iniciar();
 private:
     term::Window mainWindow;
     term::Window com_efetuadosWindow;

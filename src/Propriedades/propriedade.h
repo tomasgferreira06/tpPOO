@@ -6,7 +6,6 @@
 class Propriedade {
 public:
     Propriedade();
-    // Additional methods and attributes will be added later.
 };
 
 #endif //TPPOO_PROPRIEDADE_H

@@ -14,7 +14,7 @@ private:
 
 public:
     Habitacao();
-    void criarHabitacao(int linhas, int colunas); // Cria uma nova habitação
+    void criarHabitacao(int linhas, int colunas);
 
 };
 

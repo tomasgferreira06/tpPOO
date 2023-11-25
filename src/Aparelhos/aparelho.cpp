@@ -3,3 +3,5 @@
 //
 
 #include "aparelho.h"
+
+Aparelho::Aparelho() {}

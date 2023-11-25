@@ -3,3 +3,5 @@
 //
 
 #include "propriedade.h"
+
+Propriedade::Propriedade() {}

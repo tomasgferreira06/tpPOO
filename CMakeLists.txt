@@ -14,12 +14,16 @@ add_executable(tpPOO src/main.cpp
         src/Processadores/processador.cpp
         src/Propriedades/propriedade.h
         src/Propriedades/propriedade.cpp
+        src/Propriedades/temperatura.h
+        src/Propriedades/temperatura.cpp
         src/Sensores/sensor.h
         src/Sensores/sensor.cpp
         src/Zonas/zona.h
         src/Zonas/zona.cpp
         src/Regras/regra.cpp
         src/Regras/regra.h
+        src/Regras/RegraIgualA.h
+        src/Regras/RegraIgualA.cpp
         lib/Terminal.cpp
         lib/Terminal.h
         )

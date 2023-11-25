@@ -1,7 +1,7 @@
 #ifndef TPPOO_PROPRIEDADE_H
 #define TPPOO_PROPRIEDADE_H
 
-#include <string>
+
 
 class Propriedade {
 public:

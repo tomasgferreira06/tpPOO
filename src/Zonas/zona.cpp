@@ -9,6 +9,7 @@ Zona::Zona(int id, int largura, int comprimento) : id(id), largura(largura), com
 int Zona::getId() const {
     return id;
 }
+//mauricio
 
 int Zona::getLargura() const {
     return largura;

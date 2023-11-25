@@ -5,9 +5,13 @@
 #include "../Zonas/zona.h"
 
 class Habitacao {
+
+private:
+    std::vector<std::vector<Zona>> grelha; // Grelha para zonas
+
 public:
     Habitacao();
-    // Additional methods and attributes will be added later.
+    void criarHabitacao(int linhas, int colunas); // Cria uma nova habitação
 };
 
 #endif //TPPOO_HABITACAO_H

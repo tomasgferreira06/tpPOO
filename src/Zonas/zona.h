@@ -7,7 +7,10 @@
 
 #include "../Sensores/sensor.h"
 #include "../Aparelhos/aparelho.h"
+#include "../Processadores/processador.h"
 #include <vector>
+
+using namespace std;
 
 class Zona {
 
@@ -15,7 +18,11 @@ private:
     int id;
     int largura;
     int comprimento;
-    std::vector<std::shared_ptr<Aparelho>> componentes;  // Array de componentes
+    vector<shared_ptr<Aparelho>> aparelhos; // Vetor de aparelhos
+    vector<shared_ptr<Sensor>> sensores;   // Vetor de sensores
+    vector<shared_ptr<Processador>> processadores; // Vetor de processadores
+
+
 
 
 public:
@@ -25,10 +32,15 @@ public:
     int getId() const;
     int getLargura() const;
     int getComprimento() const;
-    void addComponente(const std::shared_ptr<Aparelho>& componente);
-    void removerComponente(int componenteId);
 
-    // Additional methods and attributes will be added later.
+    // Métodos para gerenciar componentes
+    void addAparelho(const shared_ptr<Aparelho>& aparelho);
+    void addSensor(const shared_ptr<Sensor>& sensor);
+    void addProcessador(const shared_ptr<Processador>& processador);
+
+    void removerAparelho(int idAparelho);
+    void removerSensor(int idSensor);
+    void removerProcessador(int idProcessador);
 };
 
 #endif //TPPOO_ZONA_H

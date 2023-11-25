@@ -8,18 +8,14 @@
 
 class Processador {
 
-
 private:
-
-    std::vector<std::shared_ptr<Regra>> regras;  // List of rules
-
-
+    std::vector<std::shared_ptr<Regra>> regras;  // Lista de regras
 
 public:
     Processador();
     void addRegra(const std::shared_ptr<Regra>& regra);
-    void processarRegras();  // Process all rules
-    // Additional methods and attributes will be added later.
+    void processarRegras();
+
 };
 
 #endif //TPPOO_PROCESSADOR_H

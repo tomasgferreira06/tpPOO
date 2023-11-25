@@ -75,8 +75,8 @@ namespace term {
 
     private:
         int last_color_pair=-1;
-        WINDOW *window=NULL;
-        WINDOW *border=NULL;
+        WINDOW *window= nullptr;
+        WINDOW *border= nullptr;
     };
 
     class Terminal {
@@ -105,8 +105,8 @@ namespace term {
 
         int getchar();
         void clear();
-        int getNumCols();
-        int getNumRows();
+        static int getNumCols();
+        static int getNumRows();
 
     private:
         Terminal();

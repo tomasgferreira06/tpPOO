@@ -3,9 +3,8 @@
 
 class Regra {
 public:
-    Regra();
-    virtual void aplicarRegra() = 0;  // Pure virtual function for applying the rule
-    // Additional methods and attributes will be added later
+     ~Regra() {}
+    bool aplicarRegra(); // Retorna true se a regra for verdadeira
 };
 
 #endif //TPPOO_REGRA_H

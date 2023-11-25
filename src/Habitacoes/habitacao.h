@@ -3,10 +3,12 @@
 
 #include <vector>
 #include "../Zonas/zona.h"
+#include "../../lib/Terminal.h"
 
 class Habitacao {
 
 private:
+    std::vector<std::vector<term::Window>> grelhaWindows;
     std::vector<std::vector<Zona>> grelha; // Grelha para zonas
 
 public:

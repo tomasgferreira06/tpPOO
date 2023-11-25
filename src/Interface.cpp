@@ -2,13 +2,14 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include "Habitacoes/habitacao.h"
 
 using namespace std;
 
 
 Interface::Interface()
         : mainWindow(term::Terminal::instance().create_window(0, 0, term::Terminal::getNumCols(), term::Terminal::getNumRows() - 37, true)),
-          com_efetuadosWindow(term::Terminal::instance().create_window(0, 20, 156, 20, true)) {
+          com_efetuadosWindow(term::Terminal::instance().create_window(127, 3, 29, term::Terminal::getNumRows()-3, true)) {
 
     mainWindow << "Escreva comando ou 'sair' para terminar: ";
 
@@ -123,7 +124,8 @@ void Interface::processarComando(const string& comando) {
                 } else {
                     //comando válido
                     mainWindow.clear();
-
+                    Habitacao a;
+                    a.criarHabitacao(numLinhas, numColunas);
                     com_efetuadosWindow << "Habitacao criada com " << numLinhas << " linhas e " << numColunas << " colunas."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {

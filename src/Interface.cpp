@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include "Habitacoes/habitacao.h"
+#include <vector>
 
 using namespace std;
 
@@ -10,7 +11,7 @@ using namespace std;
 Interface::Interface()
         : mainWindow(term::Terminal::instance().create_window(0, 0, term::Terminal::getNumCols(), term::Terminal::getNumRows() - 37, true)),
           com_efetuadosWindow(term::Terminal::instance().create_window(127, 3, 29, term::Terminal::getNumRows()-3, true)),
-          janela_habitacaoWindow(term::Terminal::instance().create_window(0, 3, 127, term::Terminal::getNumRows()-3, true)){
+          janela_habitacaoWindow(term::Terminal::instance().create_window(0, 3, 127, term::Terminal::getNumRows()-3, true)),janela_habitacao(){
 
     mainWindow << "Escreva comando ou 'sair' para terminar: ";
     janela_habitacaoWindow << "Habitacao";
@@ -20,8 +21,8 @@ Interface::Interface()
 
 
 void Interface::iniciar() {
-    string comando;
-    while (true) {;
+    std::string comando;
+    while (true) {
         mainWindow >> comando;
         if (comando == "sair") {
             break;
@@ -36,6 +37,7 @@ void Interface::processarComando(const string& comando) {
     std::istringstream stream(comando);
     std::string acao;
     stream >> acao;
+    int totalWindows = janela_habitacao.size();
 
     if (acao == "prox") {
         string extra;
@@ -106,25 +108,22 @@ void Interface::processarComando(const string& comando) {
         if (acao == "hnova") {
             int numLinhas, numColunas;
             if (stream >> numLinhas >> numColunas) {
-                string extra;
+                std::string extra;
                 if (stream >> extra) {
-                    // parâmetros a mais
+                    // Parâmetros a mais
                     mainWindow.clear();
-                    com_efetuadosWindow << "Erro: o comando 'hnova' requer apenas numero de linhas e colunas."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
-                }else if (numLinhas < 2 || numLinhas > 4 || numColunas < 2 || numColunas > 4) {
-                    // fora dos limites permitidos
+                    com_efetuadosWindow << "Erro: o comando 'hnova' requer apenas numero de linhas e colunas." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                } else if (numLinhas < 2 || numLinhas > 4 || numColunas < 2 || numColunas > 4) {
+                    // Fora dos limites permitidos
                     mainWindow.clear();
-                    com_efetuadosWindow << "Erro: o comando 'hnova' requer que linhas e colunas estejam entre 2 e 4."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    com_efetuadosWindow << "Erro: o comando 'hnova' requer que linhas e colunas estejam entre 2 e 4." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
-                    //comando válido
+                    // Comando válido
                     mainWindow.clear();
-
-                    com_efetuadosWindow << "Habitacao criada com " << numLinhas << " linhas e " << numColunas << " colunas."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    com_efetuadosWindow << "Habitacao criada com " << numLinhas << " linhas e " << numColunas << " colunas." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    term::Window habitacaoWindow = term::Terminal::instance().create_window(5, 5, numColunas, numLinhas, true);
+                    janela_habitacao.emplace_back(std::move(habitacaoWindow));
                 }
-            } else {
-                // parâmetros não são inteiros
-                mainWindow.clear();
-                com_efetuadosWindow << "Erro: o comando 'hnova' requer numeros inteiros para linhas e colunas"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "hrem") {
             string extra;

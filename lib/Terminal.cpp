@@ -268,6 +268,7 @@ namespace term {
 
     Window Terminal::create_window(int x, int y, int w, int h, bool with_border) {
         return Window(x, y, w, h, with_border);
+        initscr();
     }
 
     int Terminal::getchar() {

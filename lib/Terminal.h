@@ -116,6 +116,7 @@ namespace term {
     private:
         Terminal();
 
+
         int last_color_pair=-1;
     };
 

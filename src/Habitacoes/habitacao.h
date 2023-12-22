@@ -15,8 +15,6 @@ private:
 public:
     Habitacao();
     void criarHabitacao(int linhas, int colunas);
-
 };
-
 #endif //TPPOO_HABITACAO_H
 

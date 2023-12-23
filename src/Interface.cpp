@@ -19,7 +19,6 @@ Interface::Interface()
     com_efetuadosWindow << "Comandos efetuados:";
 }
 
-
 bool Interface::isFlagHabitacao() const {
     return flagHabitacao;
 }
@@ -31,7 +30,6 @@ void Interface::setFlagHabitacao(bool flagHabitacao) {
 
 void Interface::iniciar() {
     string comando;
-
     while (true) {;
         mainWindow >> comando;
         if (comando == "sair") {
@@ -214,7 +212,6 @@ void Interface::processarComando(const string& comando) {
                     com_efetuadosWindow << "Erro: o comando 'zrem' requer um ID de zona válido." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }}
             } else {
-                // Falta ID ou não é um inteiro
                 mainWindow.clear();
                 com_efetuadosWindow << "Erro: o comando 'zrem' requer um ID numerico(inteiro) da zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
@@ -226,8 +223,8 @@ void Interface::processarComando(const string& comando) {
                 com_efetuadosWindow << "Erro: o comando 'zlista, nao requer parametros adicionais"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             } else {
                 mainWindow.clear();
+                minhaHabitacao.listarZonas();
                 com_efetuadosWindow << "Comando valido, ainda nao implementado"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
-
 
             }
         } else if (acao == "zcomp") {

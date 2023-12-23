@@ -88,3 +88,51 @@ bool Habitacao::removerZona(int idZona) {
     }
     return false; // Não encontrou uma zona com o ID especificado
 }
+
+void Habitacao::listarZonas(){
+    for (const auto& linha : grelhaZonas) {
+        for (const auto& zona : linha) {
+            if (zona->getId() != -1) { // Verifique se a zona não está vazia
+                term::Window* windowAssociada = zona->getJanela();
+                int idZona = zona->getId();
+                //int numSensores = zona->getNumSensores();
+                //int numProcessadores = zona->getNumProcessadores();
+                //int numAparelhos = zona->getNumAparelhos();
+
+                // Exibir informações sobre a zona
+                *windowAssociada << "ID da Zona: " << idZona << term::move_to(0, 1);
+               // *windowAssociada << "Sensores: " << numSensores << term::move_to(0, 2);
+                //*windowAssociada << "Processadores: " << numProcessadores << term::move_to(0, 3);
+                //*windowAssociada << "Aparelhos: " << numAparelhos << term::move_to(0, 4);
+            }
+        }
+    }
+}
+
+/*void Habitacao::listarComponentesZona(int idZona){
+    for (const auto& linha : grelhaZonas) {
+        for (const auto& zona : linha) {
+            if (zona->getId() == idZona) {
+                term::Window* windowAssociada = zona->getJanela();
+                *windowAssociada << "Componentes na Zona ID: " << idZona << term::move_to(0, 1);
+                int componenteCount = 0;
+
+                for (const auto& sensor : zona->getSensores()) {
+                    *windowAssociada << "s " << sensor->getId() << " " << sensor->getNome() << " Leitura: " << sensor->getLeitura() << term::move_to(0, 2 + componenteCount);
+                    componenteCount++;
+                }
+
+                for (const auto& aparelho : zona->getAparelhos()) {
+                    *windowAssociada << "a " << aparelho->getId() << " " << aparelho->getNome() << " Último Comando: " << aparelho->getUltimoComando() << term::move_to(0, 2 + componenteCount);
+                    componenteCount++;
+                }
+
+                for (const auto& processador : zona->getProcessadores()) {
+                    *windowAssociada << "p " << processador->getId() << " " << processador->getNome() << " Número de Regras: " << processador->getNumeroRegras() << term::move_to(0, 2 + componenteCount);
+                    componenteCount++;
+                }
+            }
+        }
+    }
+}
+*/

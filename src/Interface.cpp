@@ -179,10 +179,16 @@ void Interface::processarComando(const string& comando) {
                     mainWindow.clear();
                     com_efetuadosWindow << "Erro: o comando 'znova' requer que linhas e colunas estejam entre 2 e 4."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
-                    //comando válido
-                    minhaHabitacao.criarZona(LinhaZona - 1 , ColunaZona - 1 );
-                    mainWindow.clear();
-                    com_efetuadosWindow << "Zona criada na " << LinhaZona << " linha e na " << ColunaZona << " coluna."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    mainWindow.clear();//comando válido
+                    bool sucesso = minhaHabitacao.criarZona(LinhaZona -1, ColunaZona-1 );
+                    if (sucesso)
+                        com_efetuadosWindow << "Zona criada na " << LinhaZona << " linha e na " << ColunaZona
+                                            << " coluna."
+                                            << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    else {
+                        com_efetuadosWindow << "Falha na criacao da zona "
+                                            << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    }
                 }
             } else {
                 // parâmetros não são inteiros
@@ -198,10 +204,15 @@ void Interface::processarComando(const string& comando) {
                     mainWindow.clear();
                     com_efetuadosWindow << "Erro: o comando 'zrem' requer apenas o ID da zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
+                    //comando válido
                     mainWindow.clear();
-
+                bool sucesso1 = minhaHabitacao.removerZona(idZona);
+                if(sucesso1){
                     com_efetuadosWindow << "Zona " << idZona << " removida."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
+                else {
+                    com_efetuadosWindow << "Erro: o comando 'zrem' requer um ID de zona válido." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                }}
             } else {
                 // Falta ID ou não é um inteiro
                 mainWindow.clear();

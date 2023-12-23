@@ -15,19 +15,28 @@
 class Zona {
 
 private:
+    int id;
+    term::Window* window;
     std::vector<Sensor*> sensores;
     std::vector<Aparelho*> aparelhos;
     std::vector<Processador*> processadores;
-    std::vector<Propriedade*> propriedades;
-
+    std::vector<Propriedade*> propriedades;// Adicionando um ponteiro para Window
 public:
-    Zona();
+
+    Zona(int id, term::Window* win)
+            : id(id), window(win) {
+    }
+
+
     ~Zona();
+    int getId() const;
     void adicionarSensor(Sensor *sensor);
     void adicionarAparelho(Aparelho* aparelho);
     void adicionarProcessador(Processador* processador);
     void adicionarPropriedade(Propriedade* propriedade);
-
+    term::Window* getJanela() const {
+        return window;
+    }
 
 
     void limparZona();

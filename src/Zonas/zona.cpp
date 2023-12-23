@@ -1,11 +1,8 @@
-
 #include "zona.h"
 #include "../Aparelhos/aparelho.h"
 
 using namespace std;
 
-
-Zona::Zona() {}
 
 Zona::~Zona() {
     limparZona();
@@ -50,5 +47,6 @@ void Zona::limparZona() {
     propriedades.clear();
 }
 
-
-
+int Zona::getId() const {
+    return id;
+}

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "../Regras/regra.h"
+#include "../Aparelhos/aparelho.h"
 #include <string>
 
 using namespace std;
@@ -10,18 +11,13 @@ using namespace std;
 
 class Processador {
 private:
-    vector<Regra> regras;
-    string comando;
+    vector<Regra *> regras;
+    Aparelho * aparelhoAssociado;
 
 public:
-    Processador(const string& comando);
-    ~Processador();
-
-    void adicionarRegra(const Regra& regra);
-    void removerRegra(int indice);
-    void listarRegras() const;
-
-    string acionarComando(double valorSensor) const;
+    Processador(Aparelho* aparelho);
+    void adicionarRegra(Regra * regra);
+    void processar(double valorSensor);
 };
 
 #endif // TPPOO_PROCESSADOR_H

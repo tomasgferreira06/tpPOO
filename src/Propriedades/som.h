@@ -1,22 +1,22 @@
 
-#ifndef TPPOO_TEMPERATURA_H
-#define TPPOO_TEMPERATURA_H
+
+#ifndef TPPOO_SOM_H
+#define TPPOO_SOM_H
 
 
 #include "propriedade.h"
 
-class Temperatura : public Propriedade {
+class Som : public Propriedade{
+
 private:
     double valor;
 
 public:
-    Temperatura(double valor);
+
+    Som(double valor);
     double getValor() const override;
     void setValor(double novoValor) override;
     bool isValorValido(double novoValor) const override;
-
-
 };
 
-
-#endif //TPPOO_TEMPERATURA_H
+#endif //TPPOO_SOM_H

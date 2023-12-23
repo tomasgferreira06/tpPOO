@@ -1,16 +1,16 @@
-
-#ifndef TPPOO_TEMPERATURA_H
-#define TPPOO_TEMPERATURA_H
-
+#ifndef TPPOO_LUZ_H
+#define TPPOO_LUZ_H
 
 #include "propriedade.h"
 
-class Temperatura : public Propriedade {
+
+class Luz : public Propriedade{
+
 private:
     double valor;
 
 public:
-    Temperatura(double valor);
+    Luz(double valor);
     double getValor() const override;
     void setValor(double novoValor) override;
     bool isValorValido(double novoValor) const override;
@@ -18,5 +18,4 @@ public:
 
 };
 
-
-#endif //TPPOO_TEMPERATURA_H
+#endif //TPPOO_LUZ_H

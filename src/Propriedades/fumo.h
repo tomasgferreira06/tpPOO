@@ -1,22 +1,24 @@
+//
+// Created by 35191 on 23/12/2023.
+//
 
-#ifndef TPPOO_TEMPERATURA_H
-#define TPPOO_TEMPERATURA_H
+#ifndef TPPOO_FUMO_H
+#define TPPOO_FUMO_H
 
 
 #include "propriedade.h"
 
-class Temperatura : public Propriedade {
+class Fumo : public Propriedade{
+
 private:
     double valor;
 
 public:
-    Temperatura(double valor);
+    Fumo(double valor);
     double getValor() const override;
     void setValor(double novoValor) override;
     bool isValorValido(double novoValor) const override;
 
-
 };
 
-
-#endif //TPPOO_TEMPERATURA_H
+#endif //TPPOO_FUMO_H

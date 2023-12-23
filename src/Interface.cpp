@@ -3,7 +3,6 @@
 #include <fstream>
 #include <sstream>
 #include "Habitacoes/habitacao.h"
-#include <vector>
 
 using namespace std;
 
@@ -11,18 +10,29 @@ using namespace std;
 Interface::Interface()
         : mainWindow(term::Terminal::instance().create_window(0, 0, term::Terminal::getNumCols(), term::Terminal::getNumRows() - 37, true)),
           com_efetuadosWindow(term::Terminal::instance().create_window(127, 3, 29, term::Terminal::getNumRows()-3, true)),
-          janela_habitacaoWindow(term::Terminal::instance().create_window(0, 3, 127, term::Terminal::getNumRows()-3, true)),janela_habitacao(){
+          flagHabitacao(false)
+          {
 
     mainWindow << "Escreva comando ou 'sair' para terminar: ";
-    janela_habitacaoWindow << "Habitacao";
+
 
     com_efetuadosWindow << "Comandos efetuados:";
 }
 
 
+bool Interface::isFlagHabitacao() const {
+    return flagHabitacao;
+}
+
+void Interface::setFlagHabitacao(bool flagHabitacao) {
+    Interface::flagHabitacao = flagHabitacao;
+}
+
+
 void Interface::iniciar() {
-    std::string comando;
-    while (true) {
+    string comando;
+
+    while (true) {;
         mainWindow >> comando;
         if (comando == "sair") {
             break;
@@ -37,10 +47,18 @@ void Interface::processarComando(const string& comando) {
     std::istringstream stream(comando);
     std::string acao;
     stream >> acao;
-    int totalWindows = janela_habitacao.size();
+
+
+    if (!isFlagHabitacao() && acao != "hnova") {
+        mainWindow.clear();
+        com_efetuadosWindow << "Erro: O primeiro comando a ser executado deve ser: hnova <num linhas> <num colunas>."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+        return;
+    }
+
 
     if (acao == "prox") {
         string extra;
+
         if(stream >> extra){
             mainWindow.clear();
             com_efetuadosWindow << "Erro: o comando 'prox' nao quer nenhum parametro."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
@@ -48,16 +66,23 @@ void Interface::processarComando(const string& comando) {
             mainWindow.clear();
             avancarTempo(1);
         }
-    } else if (acao == "avanca") {
+    }else if (acao == "avanca") {
         int n;
+        string extra;
         if (stream >> n) {
-            mainWindow.clear();
-            avancarTempo(n);
+            if (stream >> extra) {
+                mainWindow.clear();
+                com_efetuadosWindow << "Erro: o comando 'avanca' requer apenas um argumento." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            } else {
+                mainWindow.clear();
+                avancarTempo(n);
+            }
         } else {
             mainWindow.clear();
-            com_efetuadosWindow << "Erro: o comando 'avanca' requer um numero inteiro como argumento."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow << "Erro: o comando 'avanca' requer um numero inteiro como argumento." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
         }
     }
+
     else if (acao == "help") {
         string extra;
         if (stream >> extra) {
@@ -108,22 +133,26 @@ void Interface::processarComando(const string& comando) {
         if (acao == "hnova") {
             int numLinhas, numColunas;
             if (stream >> numLinhas >> numColunas) {
-                std::string extra;
+                string extra;
                 if (stream >> extra) {
-                    // Parâmetros a mais
+                    // parâmetros a mais
                     mainWindow.clear();
-                    com_efetuadosWindow << "Erro: o comando 'hnova' requer apenas numero de linhas e colunas." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
-                } else if (numLinhas < 2 || numLinhas > 4 || numColunas < 2 || numColunas > 4) {
-                    // Fora dos limites permitidos
+                    com_efetuadosWindow << "Erro: o comando 'hnova' requer apenas numero de linhas e colunas."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                }else if (numLinhas < 2 || numLinhas > 4 || numColunas < 2 || numColunas > 4) {
+                    // fora dos limites permitidos
                     mainWindow.clear();
-                    com_efetuadosWindow << "Erro: o comando 'hnova' requer que linhas e colunas estejam entre 2 e 4." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    com_efetuadosWindow << "Erro: o comando 'hnova' requer que linhas e colunas estejam entre 2 e 4."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
-                    // Comando válido
+                    //comando válido
                     mainWindow.clear();
-                    com_efetuadosWindow << "Habitacao criada com " << numLinhas << " linhas e " << numColunas << " colunas." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
-                    term::Window habitacaoWindow = term::Terminal::instance().create_window(5, 5, numColunas, numLinhas, true);
-                    janela_habitacao.emplace_back(std::move(habitacaoWindow));
+                    setFlagHabitacao(true);
+                    minhaHabitacao.criarHabitacao(numLinhas, numColunas);
+                    com_efetuadosWindow << "Habitacao criada com " << numLinhas << " linhas e " << numColunas << " colunas."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
+            } else {
+                // parâmetros não são inteiros
+                mainWindow.clear();
+                com_efetuadosWindow << "Erro: o comando 'hnova' requer numeros inteiros para linhas e colunas"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "hrem") {
             string extra;
@@ -132,25 +161,28 @@ void Interface::processarComando(const string& comando) {
                 mainWindow.clear();
                 com_efetuadosWindow << "Erro: o comando 'hrem' nao requer parametros adicionais"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             } else {
+                minhaHabitacao.removerHabitacao();
                 mainWindow.clear();
                 com_efetuadosWindow << "Habitacao removida."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                setFlagHabitacao(false);
             }
         } else if (acao == "znova") {
-            int nLinhasZona, nColunasZona;
-            if (stream >> nLinhasZona >> nColunasZona) {
+            int LinhaZona, ColunaZona;
+            if (stream >> LinhaZona >> ColunaZona) {
                 string extra;
                 if (stream >> extra) {
                     // parâmetros a mais
                     mainWindow.clear();
                     com_efetuadosWindow << "Erro: o comando 'znova' requer apenas numero de linhas e colunas."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
-                }else if (nLinhasZona < 2 ||nLinhasZona > 4 || nColunasZona < 2 || nColunasZona > 4) {
+                }else if (LinhaZona < 1 ||LinhaZona > 4 || ColunaZona < 1 || ColunaZona > 4) {
                     // fora dos limites permitidos
                     mainWindow.clear();
                     com_efetuadosWindow << "Erro: o comando 'znova' requer que linhas e colunas estejam entre 2 e 4."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     //comando válido
+                    minhaHabitacao.criarZona(LinhaZona - 1 , ColunaZona - 1 );
                     mainWindow.clear();
-                    com_efetuadosWindow << "Zona criada com " << nLinhasZona << " linhas e " << nColunasZona << " colunas."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    com_efetuadosWindow << "Zona criada na " << LinhaZona << " linha e na " << ColunaZona << " coluna."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
                 // parâmetros não são inteiros
@@ -211,7 +243,7 @@ void Interface::processarComando(const string& comando) {
                     mainWindow.clear();
                     com_efetuadosWindow << "Erro: o comando 'zprops' requer apenas o ID da zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
-
+                    mainWindow.clear();
                     com_efetuadosWindow << "Listagem de Propriedades para a zona " << idZona << " ainda nao foi implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
@@ -232,13 +264,13 @@ void Interface::processarComando(const string& comando) {
                 } else {
                     //Comando válido
                     mainWindow.clear();
-                    com_efetuadosWindow << "Modificação de uma propriedade ainda não foi implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    com_efetuadosWindow << "Modificacao de uma propriedade ainda nao foi implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
                 // Falta parâmetros ou não estão no formato correto
                 mainWindow.clear();
                 com_efetuadosWindow
-                        << "Erro: o comando 'pmod' requer um ID numérico(inteiro) da zona, um nome de uma propriedade e um valor."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        << "Erro: o comando 'pmod' requer um ID numerico(inteiro) da zona, um nome de uma propriedade e um valor."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "cnovo") {
             int idZona;
@@ -257,10 +289,10 @@ void Interface::processarComando(const string& comando) {
                     if (tipoComponente == 's' || tipoComponente == 'p' || tipoComponente == 'a') {
                         //Comando válido
                         mainWindow.clear();
-                        com_efetuadosWindow << "Adição de um novo componente ainda nao foi implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        com_efetuadosWindow << "Adicao de um novo componente ainda nao foi implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
                         mainWindow.clear();
-                        com_efetuadosWindow << "Erro: Tipo de componente inválido (deve ser 's', 'p' ou 'a')."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        com_efetuadosWindow << "Erro: Tipo de componente invalido (deve ser 's', 'p' ou 'a')."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
                 }
             } else {
@@ -381,6 +413,7 @@ void Interface::processarComando(const string& comando) {
                             << "Erro: o comando 'rlista' requer apenas o ID da zona e o ID do processador de regras."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     // Comando válido
+                    mainWindow.clear();
                     com_efetuadosWindow << "Listagem de regras ainda nao implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
@@ -561,7 +594,7 @@ void Interface::processarComando(const string& comando) {
             } else if (acao == "exec") {
                 string nomeArquivo;
                 if (stream >> nomeArquivo) {
-                    executarArquivoComandos(nomeArquivo);
+                    executarFicheiroComandos(nomeArquivo);
                 } else {
                     mainWindow << "Erro: o comando 'exec' requer o nome de um arquivo como argumento."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
@@ -590,9 +623,9 @@ void Interface::processarComando(const string& comando) {
                 }
             } else {
                 if (acao == "exec") {
-                    string nomeArquivo;
-                    if (stream >> nomeArquivo) {
-                        executarArquivoComandos(nomeArquivo);
+                    string nomeFicheiro;
+                    if (stream >> nomeFicheiro) {
+                        executarFicheiroComandos(nomeFicheiro);
                     } else {
                         mainWindow << "Erro: o comando 'exec' requer o nome de um arquivo como argumento."
                                    << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
@@ -613,7 +646,7 @@ void Interface::avancarTempo(int n) {
 }
 
 
-void Interface::executarArquivoComandos(const std::string& nomeFicheiro) {
+void Interface::executarFicheiroComandos(const std::string& nomeFicheiro) {
     std::ifstream ficheiro(nomeFicheiro);
     if (!ficheiro) {
         com_efetuadosWindow << "Erro ao abrir o arquivo: " << nomeFicheiro << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
@@ -628,5 +661,8 @@ void Interface::executarArquivoComandos(const std::string& nomeFicheiro) {
         }
     }
 }
+
+
+
 
 

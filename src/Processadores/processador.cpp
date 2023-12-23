@@ -4,34 +4,19 @@
 
 using namespace std;
 
-Processador::Processador(const string& comando) : comando(comando) {}
 
-Processador::~Processador() {}
+Processador::Processador(Aparelho *aparelho) : aparelhoAssociado(aparelho){}
 
-void Processador::adicionarRegra(const Regra& regra) {
+void Processador::adicionarRegra(Regra *regra) {
     regras.push_back(regra);
 }
 
-void Processador::removerRegra(int indice) {
-    if (indice >= 0 && indice < regras.size()) {
-        regras.erase(regras.begin() + indice);
-    }
-}
+void Processador::processar(double valorSensor) {
 
-void Processador::listarRegras() const {
-    cout << "Regras do Processador:" << endl;
-    for (size_t i = 0; i < regras.size(); ++i) {
-        cout << "[" << i << "] ";
-    }
-}
-
-string Processador::acionarComando(double valorSensor) const {
-    for (const Regra& regra : regras) {
-        if (!regra.avaliar(valorSensor)) {
-            // Se qualquer regra não for satisfeita, retorna comando vazio
-            return "";
+    for(const auto &regra : regras){
+        if( regra->avaliar(valorSensor) ){
+            //Acionar o aparelho
         }
     }
-    // Se todas as regras são satisfeitas, retorna o comando associado ao processador
-    return comando;
 }
+

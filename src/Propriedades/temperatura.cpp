@@ -1,21 +1,18 @@
-//
-// Created by 35191 on 25/11/2023.
-//
-
 #include "temperatura.h"
 #include "propriedade.h"
 
-Temperatura::Temperatura() : valorTemp(0.0) {}
 
-void Temperatura::setValor(double valor) {
-
-    if (valor >= -273.15) {
-        valorTemp = valor;
-    } else {
-        valorTemp = -273.15;
-    }
-}
+Temperatura::Temperatura(double valor) : valor(valor) {}
 
 double Temperatura::getValor() const {
-    return valorTemp;
+    return valor;
+}
+
+void Temperatura::setValor(double novoValor) {
+    if(isValorValido(novoValor))
+        valor=novoValor;
+}
+
+bool Temperatura::isValorValido(double novoValor) const {
+    return novoValor >= -273; // temperatura mínima
 }

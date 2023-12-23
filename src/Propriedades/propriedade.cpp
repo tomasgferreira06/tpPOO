@@ -4,4 +4,7 @@
 
 #include "propriedade.h"
 
-Propriedade::Propriedade() {}
+
+Propriedade::~Propriedade() {
+
+}

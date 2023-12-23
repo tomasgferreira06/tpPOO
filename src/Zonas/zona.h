@@ -2,29 +2,39 @@
 #define ZONA_H
 
 #include <vector>
-#include <memory>  // Add this for std::shared_ptr
+#include "../../lib/Terminal.h"
+#include <vector>
+#include "../Sensores/sensor.h"
+#include "../Aparelhos/aparelho.h"
+#include "../Processadores/processador.h"
+#include "../Propriedades/propriedade.h"
 
-// Forward declarations
-class Aparelho;
-class Sensor;
-class Processador;
+
+
 
 class Zona {
-public:
-    Zona(int id, int largura, int comprimento);
-
-    int getId() const;
-    int getLargura() const;
-    int getComprimento() const;
-
-    void addComponente(const std::shared_ptr<Aparelho> &componente);
-    void removerComponente(int componenteId);
 
 private:
-    int id;
-    int largura;
-    int comprimento;
-    std::vector<std::shared_ptr<Aparelho>> componentes;
+    std::vector<Sensor*> sensores;
+    std::vector<Aparelho*> aparelhos;
+    std::vector<Processador*> processadores;
+    std::vector<Propriedade*> propriedades;
+
+public:
+    Zona();
+    ~Zona();
+    void adicionarSensor(Sensor *sensor);
+    void adicionarAparelho(Aparelho* aparelho);
+    void adicionarProcessador(Processador* processador);
+    void adicionarPropriedade(Propriedade* propriedade);
+
+
+
+    void limparZona();
+
+
+
+
 };
 
 #endif // ZONA_H

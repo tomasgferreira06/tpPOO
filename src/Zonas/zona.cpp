@@ -4,26 +4,51 @@
 
 using namespace std;
 
-Zona::Zona(int id, int largura, int comprimento) : id(id), largura(largura), comprimento(comprimento) {}
 
-int Zona::getId() const {
-    return id;
-}
-//mauricio
+Zona::Zona() {}
 
-int Zona::getLargura() const {
-    return largura;
+Zona::~Zona() {
+    limparZona();
 }
 
-int Zona::getComprimento() const {
-    return comprimento;
+void Zona::adicionarSensor(Sensor *sensor) {
+
 }
 
-void Zona::addComponente(const std::shared_ptr<Aparelho> &componente) {
-    componentes.push_back(componente);
+void Zona::adicionarAparelho(Aparelho *aparelho) {
+
 }
 
-void Zona::removerComponente(int componenteId) {
-    // Logic to remove a component based on its ID
-    // This will depend on how you identify each Aparelho
+void Zona::adicionarProcessador(Processador *processador) {
+
 }
+
+void Zona::adicionarPropriedade(Propriedade *propriedade) {
+
+}
+
+void Zona::limparZona() {
+
+    for (Sensor* sensor : sensores) {
+        delete sensor;
+    }
+    sensores.clear();
+
+    for (Aparelho* aparelho : aparelhos) {
+        delete aparelho;
+    }
+    aparelhos.clear();
+
+    for (Processador* processador : processadores) {
+        delete processador;
+    }
+    processadores.clear();
+
+    for (Propriedade* propriedade : propriedades) {
+        delete propriedade;
+    }
+    propriedades.clear();
+}
+
+
+

@@ -8,6 +8,8 @@ add_executable(tpPOO src/main.cpp
         src/Interface.h
         src/Aparelhos/aparelho.h
         src/Aparelhos/aparelho.cpp
+        src/Aparelhos/aquecedor.h
+        src/Aparelhos/aquecedor.cpp
         src/Habitacoes/habitacao.h
         src/Habitacoes/habitacao.cpp
         src/Processadores/processador.h

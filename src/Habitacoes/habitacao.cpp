@@ -45,10 +45,12 @@ void Habitacao::criarHabitacao(int linhas, int colunas) {
 }
 
 void Habitacao::removerHabitacao() {
-    // Deletar todas as zonas alocadas na grelha
+
     for (auto& linha : grelhaZonas) {
         for (auto& zona : linha) {
+            term::Window* windowAssociada = zona->getJanela();
             delete zona;
+            delete windowAssociada;
         }
         linha.clear();
     }

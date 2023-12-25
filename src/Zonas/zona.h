@@ -16,7 +16,6 @@ class Zona {
 
 private:
     int id;
-    //int nextSensorId; // Contador para o próximo ID de sensor
     int temperatura;
     int ruido;
     term::Window* window;
@@ -27,8 +26,8 @@ private:
 
 public:
 
-    Zona(int id, term::Window* win, int nextSensorId)
-            : id(id), window(win), nextSensorId(1) {
+    Zona(int id, term::Window* win)
+            : id(id), window(win) {
     }
 
 
@@ -58,13 +57,8 @@ public:
     void setRuido(int novoRuido);
     void setTemperatura(int novaTemperatura);
 
-    const vector<Sensor *> &getSensores() const;
 
-    const vector<Aparelho *> &getAparelhos() const;
 
-    const vector<Processador *> &getProcessadores() const;
-
-    const vector<Propriedade *> &getPropriedades() const;
 
 
 };

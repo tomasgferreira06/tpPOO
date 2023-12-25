@@ -13,6 +13,9 @@ public:
     Interface();
    // ~Interface();
     void iniciar();
+
+
+
     void setFlagHabitacao(bool flagHabitacao);
 
 private:

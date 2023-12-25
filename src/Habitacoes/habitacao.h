@@ -25,7 +25,6 @@ public:
     void listarComponentesZona(int idZona);
     bool removerZona(int idZona);
     bool criarZona(int linha, int coluna);
-    Zona* buscarZonaPeloId(int idZona) const;
     void removerHabitacao();
 
 };

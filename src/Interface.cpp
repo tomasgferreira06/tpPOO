@@ -40,6 +40,7 @@ void Interface::iniciar() {
     }
 }
 
+
 void Interface::processarComando(const string& comando) {
     std::istringstream stream(comando);
     std::string acao;

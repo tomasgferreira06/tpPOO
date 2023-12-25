@@ -4,7 +4,7 @@
 
 #include "sensorTemperatura.h"
 
-SensorTemperatura::SensorTemperatura(int id,Temperatura &temp) : Sensor(id), propriedade(temp) {}
+SensorTemperatura::SensorTemperatura(Temperatura &temp) : propriedade(temp) {}
 
 char SensorTemperatura::getLetraVisualizacao() const {
     return 't';

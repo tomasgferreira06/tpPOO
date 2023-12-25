@@ -5,10 +5,13 @@
 #include "../Propriedades/propriedade.h"
 
 class Sensor {
+private:
+    int idSensor;
+    static int nextIdSensor;
 public:
-    virtual ~Sensor() = 0;
-    virtual char getLetraVisualizacao() const = 0;
-    virtual double lerValor() const = 0;
+    Sensor();
+
+    int getIdSensor() const;
 };
 
 #endif //TPPOO_SENSOR_H

@@ -223,7 +223,7 @@ void Interface::processarComando(const string& comando) {
                 com_efetuadosWindow << "Erro: o comando 'zlista, nao requer parametros adicionais"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             } else {
                 mainWindow.clear();
-                minhaHabitacao.listarZonas();
+                minhaHabitacao.listarZonas(com_efetuadosWindow);
                 com_efetuadosWindow << "Comando valido, ainda nao implementado"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
 
             }
@@ -296,6 +296,9 @@ void Interface::processarComando(const string& comando) {
 
                     if (tipoComponente == 's' || tipoComponente == 'p' || tipoComponente == 'a') {
                         //Comando válido
+                        if(tipoComponente == 's'){
+                            minhaHabitacao.adicionarSensor(idZona,tipoOuComando);
+                        }
                         mainWindow.clear();
                         com_efetuadosWindow << "Adicao de um novo componente ainda nao foi implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {

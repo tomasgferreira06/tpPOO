@@ -38,7 +38,7 @@ public:
 
 
 
-    void adicionarSensor(Sensor *sensor);
+    void adicionarSensor(string tipo);
     void adicionarAparelho(Aparelho* aparelho);
     void adicionarProcessador(Processador* processador);
     void adicionarPropriedade(Propriedade* propriedade);
@@ -57,8 +57,7 @@ public:
     void setRuido(int novoRuido);
     void setTemperatura(int novaTemperatura);
 
-
-
+    int getSensoresNum() const;
 
 
 };

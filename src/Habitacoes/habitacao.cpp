@@ -91,25 +91,48 @@ bool Habitacao::removerZona(int idZona) {
     return false; // Não encontrou uma zona com o ID especificado
 }
 
-void Habitacao::listarZonas(){
+void Habitacao::listarZonas(term::Window& com_efetuadosWindow){
     for (const auto& linha : grelhaZonas) {
         for (const auto& zona : linha) {
             if (zona->getId() != -1) { // Verifique se a zona não está vazia
                 term::Window* windowAssociada = zona->getJanela();
                 int idZona = zona->getId();
-                //int numSensores = zona->getNumSensores();
+                int numSensores = zona->getSensoresNum();
                 //int numProcessadores = zona->getNumProcessadores();
                 //int numAparelhos = zona->getNumAparelhos();
 
                 // Exibir informações sobre a zona
-                *windowAssociada << "ID da Zona: " << idZona << term::move_to(0, 1);
-               // *windowAssociada << "Sensores: " << numSensores << term::move_to(0, 2);
+                com_efetuadosWindow << "ID da Zona: " << idZona ;
+                com_efetuadosWindow << "Sensores: " << numSensores;
                 //*windowAssociada << "Processadores: " << numProcessadores << term::move_to(0, 3);
                 //*windowAssociada << "Aparelhos: " << numAparelhos << term::move_to(0, 4);
             }
         }
     }
 }
+
+void Habitacao::adicionarSensor(int idZona, const string &tipoSensor) {
+    // Encontrar a zona com o ID especificado
+    Zona* zona = encontrarZonaPorId(idZona);
+
+    if (zona) {
+        // Chame a função adicionarSensor da classe Zona
+        zona->adicionarSensor(tipoSensor);
+    }
+
+}
+
+Zona* Habitacao::encontrarZonaPorId(int idZona) {
+    for (auto& linha : grelhaZonas) {
+        for (auto& zona : linha) {
+            if (zona && zona->getId() == idZona) {
+                return zona;
+            }
+        }
+    }
+    return nullptr; // Retorna nullptr se a zona com o ID indicado não for encontrada
+}
+
 
 /*void Habitacao::listarComponentesZona(int idZona){
     for (const auto& linha : grelhaZonas) {

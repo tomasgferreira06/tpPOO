@@ -1,5 +1,6 @@
 #include "zona.h"
 #include "../Aparelhos/aparelho.h"
+#include "../Sensores/sensorTemperatura.h"
 
 using namespace std;
 
@@ -8,9 +9,7 @@ Zona::~Zona() {
     limparZona();
 }
 
-void Zona::adicionarSensor(Sensor *sensor) {
 
-}
 
 void Zona::adicionarAparelho(Aparelho *aparelho) {
     aparelhos.push_back(aparelho);
@@ -101,6 +100,16 @@ void Zona::setRuido(int novoRuido) {
     }else{
         ruido = novoRuido;
     }
+}
+
+void Zona::adicionarSensor(string tipo) {
+
+    sensores.push_back(new SensorTemperatura());
+
+}
+
+int Zona::getSensoresNum() const {
+    return sensores.size();
 }
 
 

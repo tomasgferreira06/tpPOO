@@ -11,12 +11,12 @@
 class SensorTemperatura : public Sensor{
 
 private:
-    Temperatura & propriedade;
+    float temperatura;
 
 public:
-    SensorTemperatura(Temperatura& temp);
-    char getLetraVisualizacao() const override;
-    double lerValor() const override;
+    SensorTemperatura();
+    double getTemperatura() const;
+    void setTemperatura(float temperatura);
 
 
 };

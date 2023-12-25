@@ -4,12 +4,13 @@
 
 #include "sensorTemperatura.h"
 
-SensorTemperatura::SensorTemperatura(Temperatura &temp) : propriedade(temp) {}
-
-char SensorTemperatura::getLetraVisualizacao() const {
-    return 't';
+SensorTemperatura::SensorTemperatura() : Sensor(), temperatura(0.0){
 }
 
-double SensorTemperatura::lerValor() const {
-    return propriedade.getValor();
+double SensorTemperatura::getTemperatura() const {
+    return temperatura;
+}
+
+void SensorTemperatura::setTemperatura(float temperatura) {
+    SensorTemperatura::temperatura = temperatura;
 }

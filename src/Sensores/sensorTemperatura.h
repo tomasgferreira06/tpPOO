@@ -14,7 +14,7 @@ private:
     Temperatura & propriedade;
 
 public:
-    SensorTemperatura(Temperatura& temp);
+    SensorTemperatura(int id, Temperatura& temp);
     char getLetraVisualizacao() const override;
     double lerValor() const override;
 

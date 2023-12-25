@@ -9,7 +9,9 @@ Zona::~Zona() {
 }
 
 void Zona::adicionarSensor(Sensor *sensor) {
-
+    string sensorID = "s" + to_string(id) + "-" + to_string(nextSensorId++);
+    sensor->setId(sensorID);
+    sensores.push_back(sensor);
 }
 
 void Zona::adicionarAparelho(Aparelho *aparelho) {
@@ -101,6 +103,22 @@ void Zona::setRuido(int novoRuido) {
     }else{
         ruido = novoRuido;
     }
+}
+
+const vector<Sensor *> &Zona::getSensores() const {
+    return sensores;
+}
+
+const vector<Aparelho *> &Zona::getAparelhos() const {
+    return aparelhos;
+}
+
+const vector<Processador *> &Zona::getProcessadores() const {
+    return processadores;
+}
+
+const vector<Propriedade *> &Zona::getPropriedades() const {
+    return propriedades;
 }
 
 

@@ -283,7 +283,7 @@ void Interface::processarComando(const string& comando) {
         } else if (acao == "cnovo") {
             int idZona;
             char tipoComponente;
-            std::string tipoOuComando;
+            char tipoOuComando;
 
             if (stream >> idZona >> tipoComponente >> tipoOuComando) {
                 string extra;
@@ -300,7 +300,7 @@ void Interface::processarComando(const string& comando) {
                             minhaHabitacao.adicionarSensor(idZona,tipoOuComando);
                         }
                         mainWindow.clear();
-                        com_efetuadosWindow << "Adicao de um novo componente ainda nao foi implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        com_efetuadosWindow << "Adicionado um novo componente."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
                         mainWindow.clear();
                         com_efetuadosWindow << "Erro: Tipo de componente invalido (deve ser 's', 'p' ou 'a')."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);

@@ -111,7 +111,7 @@ void Habitacao::listarZonas(term::Window& com_efetuadosWindow){
     }
 }
 
-void Habitacao::adicionarSensor(int idZona, const string &tipoSensor) {
+void Habitacao::adicionarSensor(int idZona, char tipoSensor) {
     // Encontrar a zona com o ID especificado
     Zona* zona = encontrarZonaPorId(idZona);
 

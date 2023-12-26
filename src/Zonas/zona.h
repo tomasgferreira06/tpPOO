@@ -38,7 +38,7 @@ public:
 
 
 
-    void adicionarSensor(string tipo);
+    void adicionarSensor(char tipo);
     void adicionarAparelho(Aparelho* aparelho);
     void adicionarProcessador(Processador* processador);
     void adicionarPropriedade(Propriedade* propriedade);

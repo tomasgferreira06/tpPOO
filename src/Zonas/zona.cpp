@@ -1,6 +1,12 @@
 #include "zona.h"
 #include "../Aparelhos/aparelho.h"
 #include "../Sensores/sensorTemperatura.h"
+#include "../Sensores/sensorMovimento.h"
+#include "../Sensores/sensorLuminosidade.h"
+#include "../Sensores/sensorRadiacao.h"
+#include "../Sensores/sensorHumidade.h"
+#include "../Sensores/sensorSom.h"
+#include "../Sensores/sensorFumo.h"
 
 using namespace std;
 
@@ -102,10 +108,32 @@ void Zona::setRuido(int novoRuido) {
     }
 }
 
-void Zona::adicionarSensor(string tipo) {
-
-    sensores.push_back(new SensorTemperatura());
-
+void Zona::adicionarSensor(char tipo) {
+    switch (tipo) {
+        case 't':
+            sensores.push_back(new SensorTemperatura());
+            break;
+        case 'v':
+            sensores.push_back(new SensorMovimento());
+            break;
+        case 'm':
+            sensores.push_back(new SensorLuminosidade());
+            break;
+        case 'd':
+            sensores.push_back(new SensorRadiacao());
+            break;
+        case 'h':
+            sensores.push_back(new SensorHumidade());
+            break;
+        case 'o':
+            sensores.push_back(new SensorSom());
+            break;
+        case 'f':
+            sensores.push_back(new SensorFumo());
+            break;
+        default:
+            break;
+    }
 }
 
 int Zona::getSensoresNum() const {

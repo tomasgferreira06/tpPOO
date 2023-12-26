@@ -22,6 +22,18 @@ add_executable(tpPOO src/main.cpp
         src/Sensores/sensor.cpp
         src/Sensores/sensorTemperatura.h
         src/Sensores/sensorTemperatura.cpp
+        src/Sensores/sensorMovimento.h
+        src/Sensores/sensorMovimento.cpp
+        src/Sensores/sensorLuminosidade.h
+        src/Sensores/sensorLuminosidade.cpp
+        src/Sensores/sensorRadiacao.h
+        src/Sensores/sensorRadiacao.cpp
+        src/Sensores/sensorHumidade.h
+        src/Sensores/sensorHumidade.cpp
+        src/Sensores/sensorSom.h
+        src/Sensores/sensorSom.cpp
+        src/Sensores/sensorFumo.h
+        src/Sensores/sensorFumo.cpp
         src/Zonas/zona.h
         src/Zonas/zona.cpp
         src/Regras/regra.cpp

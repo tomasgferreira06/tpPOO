@@ -22,7 +22,7 @@ public:
     ~Habitacao();
     void criarHabitacao(int linhas, int colunas);
     void listarZonas(term::Window& com_efetuadosWindow);
-    void adicionarSensor(int idZona, const std::string& tipoSensor);
+    void adicionarSensor(int idZona, char tipoSensor);
     Zona* encontrarZonaPorId(int idZona);
     void listarComponentesZona(int idZona);
     bool removerZona(int idZona);

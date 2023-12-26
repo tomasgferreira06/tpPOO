@@ -4,7 +4,12 @@
 
 #include "aparelho.h"
 
-Aparelho::Aparelho(char id) : id(id),ligado(false) {}
+int Aparelho::nextIdAparelho = 0;
+
+Aparelho::Aparelho() : idAparelho(nextIdAparelho),ligado(false) {
+    nextIdAparelho++;
+
+}
 
 bool Aparelho::estaLigado() const {
     return ligado;
@@ -14,6 +19,8 @@ void Aparelho::setLigado(bool estado) {
     ligado = estado;
 }
 
-char Aparelho::getId() const {
-    return id;
+int Aparelho::getIdAparelho() const {
+    return idAparelho;
 }
+
+

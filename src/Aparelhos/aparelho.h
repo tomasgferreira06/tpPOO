@@ -6,16 +6,17 @@
 class Aparelho {
 private:
    bool ligado;
-   char id;
+   int idAparelho;
+   static int nextIdAparelho;
 public:
-    Aparelho(char id);
+    Aparelho();
     virtual void liga() = 0;
     virtual void desliga() = 0;
-    virtual ~Aparelho() {}
+
 
     bool estaLigado() const;
     void setLigado(bool estado);
-    char getId() const;
+    int getIdAparelho() const;
 
 };
 #endif //TPPOO_APARELHO_H

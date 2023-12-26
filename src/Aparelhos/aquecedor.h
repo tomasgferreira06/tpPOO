@@ -10,7 +10,7 @@
 
 class Aquecedor : public Aparelho {
 public:
-    Aquecedor(char id) : Aparelho(id) {}
+    Aquecedor();
     void liga() override;
     void desliga() override;
 };

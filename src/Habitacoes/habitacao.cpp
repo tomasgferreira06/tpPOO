@@ -98,14 +98,14 @@ void Habitacao::listarZonas(term::Window& com_efetuadosWindow){
                 term::Window* windowAssociada = zona->getJanela();
                 int idZona = zona->getId();
                 int numSensores = zona->getSensoresNum();
-                //int numProcessadores = zona->getNumProcessadores();
-                //int numAparelhos = zona->getNumAparelhos();
+               // int numProcessadores = zona->getProcessadoresNum();
+                int numAparelhos = zona->getAparelhosNum();
 
                 // Exibir informações sobre a zona
                 com_efetuadosWindow << "ID da Zona: " << idZona ;
                 com_efetuadosWindow << "Sensores: " << numSensores;
                 //*windowAssociada << "Processadores: " << numProcessadores << term::move_to(0, 3);
-                //*windowAssociada << "Aparelhos: " << numAparelhos << term::move_to(0, 4);
+                com_efetuadosWindow << "Aparelhos: " << numAparelhos;
             }
         }
     }
@@ -167,4 +167,22 @@ void Habitacao::listarComponentesZona(int idZona, term::Window& com_efetuadosWin
             }
         }
     }
+}
+
+void Habitacao::adicionarAparelho(int idZona, char tipoAparelho) {
+    // Encontrar a zona com o ID especificado
+    Zona* zona = encontrarZonaPorId(idZona);
+
+    if (zona) {
+
+        zona->adicionarAparelho(tipoAparelho);
+    }
+}
+
+bool Habitacao::removerAparelho(int idZona, int idAparelho) {
+    Zona *zona = encontrarZonaPorId(idZona);
+    if(zona){
+        return zona->removerAparelho(idAparelho);
+    }
+    return false;
 }

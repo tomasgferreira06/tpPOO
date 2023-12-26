@@ -9,6 +9,7 @@
 #include "../Sensores/sensorHumidade.h"
 #include "../Sensores/sensorSom.h"
 #include "../Sensores/sensorFumo.h"
+#include "../Aparelhos/aquecedor.h"
 
 using namespace std;
 
@@ -63,15 +64,15 @@ int Zona::getId() const {
     return id;
 }
 
-void Zona::acionaAparelho(char id, bool ligar) {
+/*void Zona::acionaAparelho(char id, bool ligar) {
     for (auto* aparelho : aparelhos) {
-        if (aparelho->getId() == id) {
+        if (aparelho->getIdAparelho() == id) {
             if (ligar) aparelho->liga();
             else aparelho->desliga();
             break; // Supondo que só há um aparelho com cada id
         }
     }
-}
+} */
 
 void Zona::aumentarTemperatura(int graus) {
     setTemperatura( getTemperatura() +  graus);
@@ -154,6 +155,44 @@ bool Zona::removerSensor(int idSensor) {
 
 const vector<Sensor *> &Zona::getSensores() const {
     return sensores;
+}
+
+void Zona::adicionarAparelho(char tipo) {
+    switch (tipo) {
+        case 'a':
+            aparelhos.push_back(new Aquecedor());
+            break;
+        case 's':
+
+            break;
+        case 'r':
+
+            break;
+        case 'l':
+
+            break;
+        default:
+
+            break;
+    }
+}
+
+int Zona::getAparelhosNum() const {
+    return aparelhos.size();
+}
+
+const vector<Aparelho *> &Zona::getAparelhos() const {
+    return aparelhos;
+}
+
+bool Zona::removerAparelho(int idAparelho) {
+    for (auto it = aparelhos.begin(); it != aparelhos.end(); ++it) {
+        if ((*it)->getIdAparelho() == idAparelho) {
+            aparelhos.erase(it);
+            return true;
+        }
+    }
+    return false;
 }
 
 /*std::string listarSensores() const {

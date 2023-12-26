@@ -39,7 +39,9 @@ public:
 
 
     void adicionarSensor(char tipo);
+    void adicionarAparelho(char tipo);
     bool removerSensor(int idSensor);
+    bool removerAparelho(int idAparelho);
     void adicionarAparelho(Aparelho* aparelho);
     void adicionarProcessador(Processador* processador);
     void adicionarPropriedade(Propriedade* propriedade);
@@ -61,8 +63,10 @@ public:
     void setTemperatura(int novaTemperatura);
 
     int getSensoresNum() const;
+    int getAparelhosNum() const;
 
     const vector<Sensor *> &getSensores() const;
+    const vector<Aparelho *> &getAparelhos() const;
 
 
 };

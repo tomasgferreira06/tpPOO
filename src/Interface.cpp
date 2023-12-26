@@ -224,8 +224,6 @@ void Interface::processarComando(const string& comando) {
             } else {
                 mainWindow.clear();
                 minhaHabitacao.listarZonas(com_efetuadosWindow);
-                com_efetuadosWindow << "Comando valido, ainda nao implementado"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
-
             }
         } else if (acao == "zcomp") {
             int idZona;
@@ -295,10 +293,17 @@ void Interface::processarComando(const string& comando) {
                 } else {
 
                     if (tipoComponente == 's' || tipoComponente == 'p' || tipoComponente == 'a') {
-                        //Comando válido
-                        if(tipoComponente == 's'){
-                            minhaHabitacao.adicionarSensor(idZona,tipoOuComando);
+                        switch (tipoComponente) {
+                            case 's':
+                                minhaHabitacao.adicionarSensor(idZona,tipoOuComando);
+                                break;
+                            case 'a':
+                                minhaHabitacao.adicionarAparelho(idZona, tipoOuComando);
+                                break;
+                            default:
+                              break;
                         }
+
                         mainWindow.clear();
                         com_efetuadosWindow << "Adicionado um novo componente."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
@@ -335,8 +340,18 @@ void Interface::processarComando(const string& comando) {
                                     com_efetuadosWindow << "Sensor não encontrado."
                                                         << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                                 }
+                                break;
+                            case 'a':
+                                if(minhaHabitacao.removerAparelho(idZona, idComponente)){
+                                    com_efetuadosWindow << "Sensor removido com sucesso."
+                                                        << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                                }else{
+                                    com_efetuadosWindow << "Sensor não encontrado."
+                                                        << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                                }
+
                             default:
-                                mainWindow.clear();
+                                break;
                         }
                         mainWindow.clear();
                     } else {

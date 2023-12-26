@@ -7,18 +7,17 @@
 
 
 
+
+Aquecedor::Aquecedor() : Aparelho() {}
+
 void Aquecedor::liga() {
     if(!estaLigado()){
-        //Liga o aquecedor
         setLigado(true);
-        //Implementar outras operações para quando o aquecedor é ligado
     }
 }
 
 void Aquecedor::desliga() {
-    if (estaLigado()) {
-        // Desliga o aquecedor
+    if(estaLigado()){
         setLigado(false);
-        //Implementar outras operações para quando o aquecedor é desligado
     }
 }

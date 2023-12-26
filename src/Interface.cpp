@@ -280,7 +280,30 @@ void Interface::processarComando(const string& comando) {
                             << "Erro: o comando 'pmod' requer apenas o ID da zona, nome e valor da propriedade."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     //Comando válido
-                    
+                    Zona* zona = minhaHabitacao.encontrarZonaPorId(idZona);
+                    if (zona) {
+                        Propriedade* propriedade = zona->getPropriedade(nomePropriedade);
+                        if (propriedade) {
+                            if (valorPropriedade >= propriedade->getMin() && (propriedade->getMax() == std::numeric_limits<int>::max() || valorPropriedade <= propriedade->getMax())) {
+                                propriedade->setValor(valorPropriedade);
+                                com_efetuadosWindow
+                                        << "Propriedade " << nomePropriedade << " modificada com sucesso para o valor " << valorPropriedade << "."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                            } else {
+                                // Value is not acceptable
+                                com_efetuadosWindow
+                                        << "Erro: Valor " << valorPropriedade << " nao e aceitavel para a propriedade " << nomePropriedade << "."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                            }
+                        } else {
+                            // Property does not exist
+                            com_efetuadosWindow
+                                    << "Erro: Propriedade " << nomePropriedade << " nao existe na zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        }
+                    } else {
+                        // Zona does not exist
+                        com_efetuadosWindow
+                                << "Erro: Zona com ID " << idZona << " nao encontrada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    }
+
                     mainWindow.clear();
                 }
             } else {

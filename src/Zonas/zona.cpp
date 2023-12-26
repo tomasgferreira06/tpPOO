@@ -1,3 +1,5 @@
+#include <sstream>
+#include <iostream>
 #include "zona.h"
 #include "../Aparelhos/aparelho.h"
 #include "../Sensores/sensorTemperatura.h"
@@ -139,5 +141,26 @@ void Zona::adicionarSensor(char tipo) {
 int Zona::getSensoresNum() const {
     return sensores.size();
 }
+
+bool Zona::removerSensor(int idSensor) {
+    for (auto it = sensores.begin(); it != sensores.end(); ++it) {
+        if ((*it)->getIdSensor() == idSensor) {
+            sensores.erase(it);
+            return true;
+        }
+    }
+    return false;
+}
+
+const vector<Sensor *> &Zona::getSensores() const {
+    return sensores;
+}
+
+/*std::string listarSensores() const {
+    std::ostringstream ss;
+    for (const auto& sensor : sensores) {
+        ss << sensor->getInfo() << std::endl;
+    return ss.str();
+} */
 
 

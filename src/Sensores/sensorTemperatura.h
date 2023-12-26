@@ -17,6 +17,7 @@ public:
     SensorTemperatura();
     double getTemperatura() const;
     void setTemperatura(float temperatura);
+    std::string getInfo() const override;
 
 
 };

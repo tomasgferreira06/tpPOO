@@ -17,6 +17,7 @@ public:
     SensorRadiacao();
     double getRadiacao() const;
     void setRadiacao(float radiacao);
+    std::string getInfo() const override;
 
 
 };

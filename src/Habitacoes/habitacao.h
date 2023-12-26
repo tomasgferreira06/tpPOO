@@ -23,8 +23,9 @@ public:
     void criarHabitacao(int linhas, int colunas);
     void listarZonas(term::Window& com_efetuadosWindow);
     void adicionarSensor(int idZona, char tipoSensor);
+    bool removerSensor(int idZona, int idSensor);
     Zona* encontrarZonaPorId(int idZona);
-    void listarComponentesZona(int idZona);
+    void listarComponentesZona(int idZona, term::Window& com_efetuadosWindow);
     bool removerZona(int idZona);
     bool criarZona(int linha, int coluna);
     void removerHabitacao();

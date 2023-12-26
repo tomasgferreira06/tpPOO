@@ -133,21 +133,29 @@ Zona* Habitacao::encontrarZonaPorId(int idZona) {
     return nullptr; // Retorna nullptr se a zona com o ID indicado não for encontrada
 }
 
+bool Habitacao::removerSensor(int idZona, int idSensor) {
+    Zona *zona = encontrarZonaPorId(idZona);
+    if(zona){
+        return zona->removerSensor(idSensor);
+    }
+    return false;
+}
 
-/*void Habitacao::listarComponentesZona(int idZona){
+
+void Habitacao::listarComponentesZona(int idZona, term::Window& com_efetuadosWindow){
     for (const auto& linha : grelhaZonas) {
         for (const auto& zona : linha) {
             if (zona->getId() == idZona) {
                 term::Window* windowAssociada = zona->getJanela();
-                *windowAssociada << "Componentes na Zona ID: " << idZona << term::move_to(0, 1);
+                com_efetuadosWindow << "Componentes na Zona ID: " << idZona;
                 int componenteCount = 0;
 
                 for (const auto& sensor : zona->getSensores()) {
-                    *windowAssociada << "s " << sensor->getId() << " " << sensor->getNome() << " Leitura: " << sensor->getLeitura() << term::move_to(0, 2 + componenteCount);
+                    com_efetuadosWindow << sensor->getIdSensor() << sensor->getInfo();
                     componenteCount++;
                 }
 
-                for (const auto& aparelho : zona->getAparelhos()) {
+             /*   for (const auto& aparelho : zona->getAparelhos()) {
                     *windowAssociada << "a " << aparelho->getId() << " " << aparelho->getNome() << " Último Comando: " << aparelho->getUltimoComando() << term::move_to(0, 2 + componenteCount);
                     componenteCount++;
                 }
@@ -155,9 +163,8 @@ Zona* Habitacao::encontrarZonaPorId(int idZona) {
                 for (const auto& processador : zona->getProcessadores()) {
                     *windowAssociada << "p " << processador->getId() << " " << processador->getNome() << " Número de Regras: " << processador->getNumeroRegras() << term::move_to(0, 2 + componenteCount);
                     componenteCount++;
-                }
+                } */
             }
         }
     }
 }
-*/

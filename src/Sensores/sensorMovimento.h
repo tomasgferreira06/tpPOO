@@ -17,6 +17,7 @@ public:
     SensorMovimento();
     double getVibracao() const;
     void setVibracao(float vibracao);
+    std::string getInfo() const override;
 
 
 };

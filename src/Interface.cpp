@@ -235,8 +235,8 @@ void Interface::processarComando(const string& comando) {
                     mainWindow.clear();
                     com_efetuadosWindow << "Erro: o comando 'zcomp' requer apenas o ID da zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
+                    minhaHabitacao.listarComponentesZona(idZona,com_efetuadosWindow);
                     mainWindow.clear();
-                    com_efetuadosWindow << "Listagem de componentes para a zona " << idZona << " ainda nao foi implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
                 // Falta ID ou não é um inteiro
@@ -326,9 +326,19 @@ void Interface::processarComando(const string& comando) {
                             << "Erro: o comando 'crem' requer apenas o ID da zona, tipo de componente (s, p, a) e ID do componente."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     if (tipoComponente == 's' || tipoComponente == 'p' || tipoComponente == 'a') {
-                        //Comando válido
+                        switch(tipoComponente){
+                            case 's':
+                                    if(minhaHabitacao.removerSensor(idZona, idComponente)){
+                                    com_efetuadosWindow << "Sensor removido com sucesso."
+                                                        << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                                }else{
+                                    com_efetuadosWindow << "Sensor não encontrado."
+                                                        << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                                }
+                            default:
+                                mainWindow.clear();
+                        }
                         mainWindow.clear();
-                        com_efetuadosWindow << "Remocao de componente ainda não implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
                         mainWindow.clear();
                         com_efetuadosWindow << "Erro: Tipo de componente invalido (deve ser 's', 'p' ou 'a')."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);

@@ -20,6 +20,7 @@ public:
     SensorFumo();
     double getFumo() const;
     void setFumo(float fumo);
+    std::string getInfo() const override;
 
 
 };

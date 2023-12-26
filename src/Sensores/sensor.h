@@ -1,17 +1,18 @@
-#ifndef TPPOO_SENSOR_H
-#define TPPOO_SENSOR_H
+    #ifndef TPPOO_SENSOR_H
+    #define TPPOO_SENSOR_H
 
-#include <string>
-#include "../Propriedades/propriedade.h"
+    #include <string>
+    #include "../Propriedades/propriedade.h"
 
-class Sensor {
-private:
-    int idSensor;
-    static int nextIdSensor;
-public:
-    Sensor();
+    class Sensor {
+    private:
+        int idSensor;
+        static int nextIdSensor;
+    public:
+        Sensor();
 
-    int getIdSensor() const;
-};
+        int getIdSensor() const;
+        virtual std::string getInfo() const = 0;
+    };
 
-#endif //TPPOO_SENSOR_H
+    #endif //TPPOO_SENSOR_H

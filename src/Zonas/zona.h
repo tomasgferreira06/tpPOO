@@ -39,6 +39,7 @@ public:
 
 
     void adicionarSensor(char tipo);
+    bool removerSensor(int idSensor);
     void adicionarAparelho(Aparelho* aparelho);
     void adicionarProcessador(Processador* processador);
     void adicionarPropriedade(Propriedade* propriedade);
@@ -46,6 +47,8 @@ public:
     term::Window* getJanela() const {
         return window;
     }
+
+    string listarSensores() const;
 
 
     void limparZona();
@@ -58,6 +61,8 @@ public:
     void setTemperatura(int novaTemperatura);
 
     int getSensoresNum() const;
+
+    const vector<Sensor *> &getSensores() const;
 
 
 };

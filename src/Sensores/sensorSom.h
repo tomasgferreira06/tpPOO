@@ -18,6 +18,7 @@ public:
     SensorSom();
     double getSom() const;
     void setSom(float som);
+    std::string getInfo() const override;
 
 
 };

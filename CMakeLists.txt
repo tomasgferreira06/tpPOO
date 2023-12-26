@@ -18,6 +18,18 @@ add_executable(tpPOO src/main.cpp
         src/Propriedades/propriedade.cpp
         src/Propriedades/temperatura.h
         src/Propriedades/temperatura.cpp
+        src/Propriedades/luz.h
+        src/Propriedades/luz.cpp
+        src/Propriedades/Radiacao.h
+        src/Propriedades/Radiacao.cpp
+        src/Propriedades/Vibracao.h
+        src/Propriedades/Vibracao.cpp
+        src/Propriedades/Humidade.h
+        src/Propriedades/Humidade.cpp
+        src/Propriedades/Fumo.h
+        src/Propriedades/Fumo.cpp
+        src/Propriedades/som.h
+        src/Propriedades/som.cpp
         src/Sensores/sensor.h
         src/Sensores/sensor.cpp
         src/Sensores/sensorTemperatura.h

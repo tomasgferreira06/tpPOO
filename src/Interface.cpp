@@ -9,7 +9,7 @@ using namespace std;
 
 Interface::Interface()
         : mainWindow(term::Terminal::instance().create_window(0, 0, term::Terminal::getNumCols(), term::Terminal::getNumRows() - 37, true)),
-          com_efetuadosWindow(term::Terminal::instance().create_window(127, 3, 29, term::Terminal::getNumRows()-3, true)),
+          com_efetuadosWindow(term::Terminal::instance().create_window(120, 3, 36, term::Terminal::getNumRows()-3, true)),
           flagHabitacao(false)
           {
 
@@ -249,8 +249,19 @@ void Interface::processarComando(const string& comando) {
                     mainWindow.clear();
                     com_efetuadosWindow << "Erro: o comando 'zprops' requer apenas o ID da zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
+                    Zona* zona = minhaHabitacao.encontrarZonaPorId(idZona);
+                    if (zona) {
+                        // Itera e exibe as propriedades
+                        for (const auto& par : zona->getPropriedades()) {
+                            com_efetuadosWindow << par.first << ": " << par.second->getValor()<< " " << par.second->getUnidade() << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        }
+                    } else {
+                        // Zona com o ID fornecido não foi encontrada
+                        com_efetuadosWindow << "Erro: Zona com ID " << idZona << " nao encontrada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    }
+
                     mainWindow.clear();
-                    com_efetuadosWindow << "Listagem de Propriedades para a zona " << idZona << " ainda nao foi implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+
                 }
             } else {
                 // Falta ID ou não é um inteiro
@@ -269,8 +280,8 @@ void Interface::processarComando(const string& comando) {
                             << "Erro: o comando 'pmod' requer apenas o ID da zona, nome e valor da propriedade."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     //Comando válido
+                    
                     mainWindow.clear();
-                    com_efetuadosWindow << "Modificacao de uma propriedade ainda nao foi implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
                 // Falta parâmetros ou não estão no formato correto

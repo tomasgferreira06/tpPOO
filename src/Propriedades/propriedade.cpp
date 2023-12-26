@@ -4,7 +4,10 @@
 
 #include "propriedade.h"
 
+Propriedade::Propriedade(string nome, string unidade, int min, int max)
+        : nome(nome), unidade(unidade), min(min), max(max), valor(0) {
 
+}
 
 
 const string &Propriedade::getNome() const {

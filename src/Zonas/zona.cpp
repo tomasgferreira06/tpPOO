@@ -10,8 +10,40 @@
 #include "../Sensores/sensorSom.h"
 #include "../Sensores/sensorFumo.h"
 #include "../Aparelhos/aquecedor.h"
+#include "../Propriedades/luz.h"
+#include "../Propriedades/Radiacao.h"
+#include "../Propriedades/Vibracao.h"
+#include "../Propriedades/Humidade.h"
+#include "../Propriedades/Fumo.h"
+#include "../Propriedades/som.h"
 
 using namespace std;
+
+
+Zona::Zona(int id, term::Window* win)
+        : id(id), window(win) {
+
+    Propriedade* temp = new Temperatura();
+    propriedades[temp->getNome()] = temp;
+
+    Propriedade* luz = new Luz();
+    propriedades[luz->getNome()] = luz;
+
+    Propriedade* rad = new Radiacao();
+    propriedades[rad->getNome()] = rad;
+
+    Propriedade* vib = new Vibracao();
+    propriedades[vib->getNome()] = vib;
+
+    Propriedade* hum = new Humidade();
+    propriedades[hum->getNome()] = hum;
+
+    Propriedade* fum = new Fumo();
+    propriedades[fum->getNome()] = fum;
+
+    Propriedade* som = new Som();
+    propriedades[som->getNome()] = som;
+}
 
 
 Zona::~Zona() {
@@ -28,8 +60,8 @@ void Zona::adicionarProcessador(Processador *processador) {
 
 }
 
-void Zona::adicionarPropriedade(Propriedade *propriedade) {
-
+void Zona::adicionarPropriedade(Propriedade* propriedade) {
+    propriedades[propriedade->getNome()] = propriedade;
 }
 
 
@@ -54,8 +86,8 @@ void Zona::limparZona() {
     }
     processadores.clear();
 
-    for (Propriedade* propriedade : propriedades) {
-        delete propriedade;
+    for (auto& entry : propriedades) {
+        delete entry.second;
     }
     propriedades.clear();
 }
@@ -193,6 +225,18 @@ bool Zona::removerAparelho(int idAparelho) {
         }
     }
     return false;
+}
+
+Propriedade *Zona::getPropriedade(const string &nome) {
+    auto it = propriedades.find(nome);
+    if (it != propriedades.end()) {
+        return it->second;
+    }
+    return nullptr; // Return null if property not found
+}
+
+const map<std::string, Propriedade *> &Zona::getPropriedades() const {
+    return propriedades;
 }
 
 /*std::string listarSensores() const {

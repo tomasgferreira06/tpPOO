@@ -4,6 +4,7 @@
 #include <vector>
 #include "../../lib/Terminal.h"
 #include <vector>
+#include <map>
 #include "../Sensores/sensor.h"
 #include "../Aparelhos/aparelho.h"
 #include "../Processadores/processador.h"
@@ -22,13 +23,12 @@ private:
     std::vector<Sensor*> sensores;
     std::vector<Aparelho*> aparelhos;
     std::vector<Processador*> processadores;
-    std::vector<Propriedade*> propriedades;
+    //std::vector<Propriedade*> propriedades;
+    std::map<std::string, Propriedade*> propriedades;  // Map to store property name and pointer
 
 public:
 
-    Zona(int id, term::Window* win)
-            : id(id), window(win) {
-    }
+    Zona(int id, term::Window* win);
 
 
     ~Zona();
@@ -45,6 +45,7 @@ public:
     void adicionarAparelho(Aparelho* aparelho);
     void adicionarProcessador(Processador* processador);
     void adicionarPropriedade(Propriedade* propriedade);
+    Propriedade* getPropriedade(const std::string& nome);
     void acionaAparelho(char id, bool ligar);
     term::Window* getJanela() const {
         return window;
@@ -67,6 +68,8 @@ public:
 
     const vector<Sensor *> &getSensores() const;
     const vector<Aparelho *> &getAparelhos() const;
+
+    const map<std::string, Propriedade *> &getPropriedades() const;
 
 
 };

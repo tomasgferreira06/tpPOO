@@ -4,4 +4,4 @@
 using namespace std;
 
 
-Temperatura::Temperatura() : Propriedade("Temperatura", "Graus Célsius", -273){}
+Temperatura::Temperatura() : Propriedade("Temperatura", "Graus Celsius", -273){}

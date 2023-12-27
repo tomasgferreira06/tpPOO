@@ -2,13 +2,22 @@
 #define TPPOO_REGRA_H
 
 #include <string>
+#include "../Sensores/sensor.h"
+
 using namespace std;
 
 class Regra {
-
+private:
+    int id;
+    static int nextID;
+    Sensor *sensorAssociado;
 public:
-    virtual ~Regra();
-    virtual bool avaliar(double valor) const = 0;
+    Regra(Sensor *sensor);
+    //virtual ~Regra();
+    virtual bool avaliar() const = 0;
+    int getId() const;
+
+    Sensor *getSensorAssociado() const;
 };
 
 #endif // TPPOO_REGRA_H

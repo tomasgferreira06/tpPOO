@@ -18,6 +18,7 @@ public:
     double getTemperatura() const;
     void setTemperatura(float temperatura);
     std::string getInfo() const override;
+    double getValor() const override; // função virtual para a medição do sensorTemperatura
 
 
 };

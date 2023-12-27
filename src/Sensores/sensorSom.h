@@ -19,6 +19,7 @@ public:
     double getSom() const;
     void setSom(float som);
     std::string getInfo() const override;
+    double getValor() const override;
 
 
 };

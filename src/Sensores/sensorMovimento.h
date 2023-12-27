@@ -18,6 +18,7 @@ public:
     double getVibracao() const;
     void setVibracao(float vibracao);
     std::string getInfo() const override;
+    double getValor() const override;
 
 
 };

@@ -11,13 +11,29 @@ using namespace std;
 
 class Processador {
 private:
+    int idProcessador;
+    static int nextIdProcessador;
+    char comando;
     vector<Regra *> regras;
-    Aparelho * aparelhoAssociado;
+    vector<Aparelho*> aparelhosAssociados;
 
 public:
-    Processador(Aparelho* aparelho);
-    void adicionarRegra(Regra * regra);
-    void processar(double valorSensor);
+    Processador(char _comando);
+    ~Processador();
+
+    void adicionarRegra(Regra* novaRegra);
+    void removerRegra(int idRegra);
+    void listarRegras() const;
+    bool verificarRegras() const;
+    void executarComando();
+
+    void mudarComando(const char& novoComando);
+    void associarAparelho(Aparelho* aparelho);
+    void desassociarAparelho(int idAparelho);
+
+    int getIdProcessador() const;
+    char getComando() const;
+
 };
 
 #endif // TPPOO_PROCESSADOR_H

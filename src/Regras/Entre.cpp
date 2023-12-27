@@ -4,8 +4,29 @@
 
 #include "Entre.h"
 
-Entre::Entre(double inferior, double superior) : valorInferior(inferior), valorSuperior(superior){}
 
-bool Entre::avaliar(double valor) const {
-    return valor >= valorInferior && valor <= valorSuperior;
+
+RegraEntre::RegraEntre(Sensor *sensor, double min, double max) : Regra(sensor), valorMin(min), valorMax(max){}
+
+bool RegraEntre::avaliar() const {
+    double valorSensor = getSensorAssociado()->getValor();
+    return valorSensor > getValorMin() && valorSensor < getValorMax();
 }
+
+double RegraEntre::getValorMin() const {
+    return valorMin;
+}
+
+void RegraEntre::setValorMin(double valorMin) {
+    RegraEntre::valorMin = valorMin;
+}
+
+double RegraEntre::getValorMax() const {
+    return valorMax;
+}
+
+void RegraEntre::setValorMax(double valorMax) {
+    RegraEntre::valorMax = valorMax;
+}
+
+

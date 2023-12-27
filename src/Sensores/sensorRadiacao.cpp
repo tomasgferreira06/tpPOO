@@ -20,3 +20,7 @@ std::string SensorRadiacao::getInfo() const {
     ss << 's' << getIdSensor() << "Radiacao" << getRadiacao();
     return ss.str();
 }
+
+double SensorRadiacao::getValor() const {
+    return getRadiacao();
+}

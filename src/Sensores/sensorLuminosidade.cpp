@@ -22,3 +22,7 @@ std::string SensorLuminosidade::getInfo() const {
     ss << 's' << getIdSensor() << "Luz" << getLuz();
     return ss.str();
 }
+
+double SensorLuminosidade::getValor() const {
+   return getLuz();
+}

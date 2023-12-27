@@ -25,3 +25,7 @@ std::string SensorSom::getInfo() const {
 
 
 }
+
+double SensorSom::getValor() const {
+    return getSom();
+}

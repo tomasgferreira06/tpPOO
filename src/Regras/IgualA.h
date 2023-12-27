@@ -8,14 +8,18 @@
 
 #include "regra.h"
 
-class IgualA : public Regra{
+class RegraIgualA : public Regra {
 private:
     double valorComparacao;
 
 public:
-    IgualA(double valor);
-    bool avaliar(double valor) const override;
+    RegraIgualA(Sensor *sensor, double valor);
 
+    bool avaliar() const override;
+
+    void setValorComparacao(double valorComparacao);
+
+    double getValorComparacao() const;
 };
 
 #endif //TPPOO_IGUALA_H

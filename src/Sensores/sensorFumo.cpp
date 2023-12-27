@@ -20,3 +20,7 @@ std::string SensorFumo::getInfo() const {
     ss << 's' << getIdSensor() << "Fumo" << getFumo();
     return ss.str();
 }
+
+double SensorFumo::getValor() const {
+    return getFumo();
+}

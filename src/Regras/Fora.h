@@ -7,15 +7,23 @@
 
 #include "regra.h"
 
-class Fora : public Regra{
+class RegraFora : public Regra {
 private:
-    double valorInferior;
-    double valorSuperior;
+    double valorMin;
+    double valorMax;
 
 public:
-    Fora(double inferior, double superior);
-    bool avaliar(double valor) const override;
+    RegraFora(Sensor *sensor, double min,double max);
 
+    bool avaliar() const override;
+
+    double getValorMin() const;
+
+    void setValorMin(double valorMin);
+
+    double getValorMax() const;
+
+    void setValorMax(double valorMax);
 };
 
 #endif //TPPOO_FORA_H

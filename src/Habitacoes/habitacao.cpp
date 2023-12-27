@@ -98,13 +98,14 @@ void Habitacao::listarZonas(term::Window& com_efetuadosWindow){
                 term::Window* windowAssociada = zona->getJanela();
                 int idZona = zona->getId();
                 int numSensores = zona->getSensoresNum();
-               // int numProcessadores = zona->getProcessadoresNum();
+                int numProcessadores = zona->getProcessadoresNum();
                 int numAparelhos = zona->getAparelhosNum();
+
 
                 // Exibir informações sobre a zona
                 com_efetuadosWindow << "ID da Zona: " << idZona ;
                 com_efetuadosWindow << "Sensores: " << numSensores;
-                //*windowAssociada << "Processadores: " << numProcessadores << term::move_to(0, 3);
+                com_efetuadosWindow << "Processadores: " << numProcessadores;
                 com_efetuadosWindow << "Aparelhos: " << numAparelhos;
             }
         }
@@ -121,6 +122,27 @@ void Habitacao::adicionarSensor(int idZona, char tipoSensor) {
     }
 
 }
+
+
+void Habitacao::adicionarAparelho(int idZona, char tipoAparelho) {
+    // Encontrar a zona com o ID especificado
+    Zona* zona = encontrarZonaPorId(idZona);
+
+    if (zona) {
+
+        zona->adicionarAparelho(tipoAparelho);
+    }
+}
+
+void Habitacao::adicionarProcessador(int idZona, char comando) {
+    Zona* zona = encontrarZonaPorId(idZona);
+    if(zona){
+        Processador* novoProcessador = new Processador(comando);
+        zona->adicionarProcessador(novoProcessador);
+    }
+}
+
+
 
 Zona* Habitacao::encontrarZonaPorId(int idZona) {
     for (auto& linha : grelhaZonas) {
@@ -169,15 +191,6 @@ void Habitacao::listarComponentesZona(int idZona, term::Window& com_efetuadosWin
     }
 }
 
-void Habitacao::adicionarAparelho(int idZona, char tipoAparelho) {
-    // Encontrar a zona com o ID especificado
-    Zona* zona = encontrarZonaPorId(idZona);
-
-    if (zona) {
-
-        zona->adicionarAparelho(tipoAparelho);
-    }
-}
 
 bool Habitacao::removerAparelho(int idZona, int idAparelho) {
     Zona *zona = encontrarZonaPorId(idZona);
@@ -186,3 +199,5 @@ bool Habitacao::removerAparelho(int idZona, int idAparelho) {
     }
     return false;
 }
+
+

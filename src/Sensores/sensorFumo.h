@@ -21,6 +21,7 @@ public:
     double getFumo() const;
     void setFumo(float fumo);
     std::string getInfo() const override;
+    double getValor() const override;
 
 
 };

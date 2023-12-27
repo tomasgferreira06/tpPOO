@@ -18,6 +18,7 @@ public:
     double getLuz() const;
     void setLuz(float luz);
     std::string getInfo() const override;
+    double getValor() const override;
 
 
 };

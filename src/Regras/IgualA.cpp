@@ -1,13 +1,17 @@
-//
-// Created by 35191 on 23/12/2023.
-//
+
 
 #include "IgualA.h"
 
-IgualA::IgualA(double valor) : valorComparacao(valor) {}
+RegraIgualA::RegraIgualA(Sensor *sensor, double valor) : Regra(sensor),valorComparacao(valor){}
 
-bool IgualA::avaliar(double valor) const {
-    return valor == valorComparacao;
+bool RegraIgualA::avaliar() const {
+    return getSensorAssociado()->getValor() == getValorComparacao();
 }
 
+void RegraIgualA::setValorComparacao(double valorComparacao) {
+    RegraIgualA::valorComparacao = valorComparacao;
+}
 
+double RegraIgualA::getValorComparacao() const {
+    return valorComparacao;
+}

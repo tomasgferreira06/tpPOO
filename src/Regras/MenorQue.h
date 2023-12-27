@@ -7,14 +7,15 @@
 
 #include "regra.h"
 
-class MenorQue : public Regra{
-
+class RegraMenorQue : public Regra{
 private:
     double valorComparacao;
 
 public:
-    MenorQue(double valor);
-    bool avaliar(double valor) const override;
+    RegraMenorQue(Sensor *sensor, double valor);
+    bool avaliar() const override;
+    void setValorComparacao(double valorComparacao);
+    double getValorComparacao() const;
 };
 
 #endif //TPPOO_MENORQUE_H

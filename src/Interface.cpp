@@ -334,6 +334,9 @@ void Interface::processarComando(const string& comando) {
                             case 'a':
                                 minhaHabitacao.adicionarAparelho(idZona, tipoOuComando);
                                 break;
+                            case 'p':
+                                minhaHabitacao.adicionarProcessador(idZona, tipoOuComando);
+                                break;
                             default:
                               break;
                         }

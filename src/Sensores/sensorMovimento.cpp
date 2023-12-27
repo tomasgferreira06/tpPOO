@@ -20,3 +20,7 @@ std::string SensorMovimento::getInfo() const {
     ss << 's' << getIdSensor() << "Movimento" << getVibracao();
     return ss.str();
 }
+
+double SensorMovimento::getValor() const {
+    return getVibracao();
+}

@@ -14,11 +14,14 @@ class SensorHumidade : public Sensor{
 private:
     float humidade;
 
+
 public:
+
     SensorHumidade();
     double getHumidade() const;
     void setHumidade(float humidade);
     std::string getInfo() const override;
+    double getValor() const override;
 
 
 };

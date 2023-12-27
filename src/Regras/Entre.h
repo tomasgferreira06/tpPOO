@@ -7,16 +7,23 @@
 
 #include "regra.h"
 
-class Entre : public Regra{
-
+class RegraEntre : public Regra {
 private:
-    double valorInferior;
-    double valorSuperior;
+    double valorMin;
+    double valorMax;
 
 public:
-    Entre(double inferior, double superior);
-    bool avaliar(double valor) const override;
+    RegraEntre(Sensor *sensor, double min,double max);
 
+    bool avaliar() const override;
+
+    double getValorMin() const;
+
+    void setValorMin(double valorMin);
+
+    double getValorMax() const;
+
+    void setValorMax(double valorMax);
 };
 
 #endif //TPPOO_ENTRE_H

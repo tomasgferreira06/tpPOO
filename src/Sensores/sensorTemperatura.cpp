@@ -21,3 +21,7 @@ std::string SensorTemperatura::getInfo() const {
     ss << 's' << getIdSensor() << "Temperatura" << getTemperatura();
     return ss.str();
 }
+
+double SensorTemperatura::getValor() const {
+    return getTemperatura();
+}

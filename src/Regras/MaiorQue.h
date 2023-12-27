@@ -7,16 +7,18 @@
 
 #include "regra.h"
 
-class MaiorQue : public Regra{
-
+class RegraMaiorQue : public Regra {
 private:
-    double valorCompararacao;
+    double valorComparacao;
 
 public:
-    MaiorQue(double valor);
-    bool avaliar(double valor) const override;
+    RegraMaiorQue(Sensor *sensor, double valor);
 
+    bool avaliar() const override;
 
+    void setValorComparacao(double valorComparacao);
+
+    double getValorComparacao() const;
 };
 
 #endif //TPPOO_MAIORQUE_H

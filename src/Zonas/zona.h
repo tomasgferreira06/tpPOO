@@ -23,7 +23,6 @@ private:
     std::vector<Sensor*> sensores;
     std::vector<Aparelho*> aparelhos;
     std::vector<Processador*> processadores;
-    //std::vector<Propriedade*> propriedades;
     std::map<std::string, Propriedade*> propriedades;  // Map to store property name and pointer
 
 public:
@@ -65,6 +64,7 @@ public:
 
     int getSensoresNum() const;
     int getAparelhosNum() const;
+    int getProcessadoresNum() const;
 
     const vector<Sensor *> &getSensores() const;
     const vector<Aparelho *> &getAparelhos() const;

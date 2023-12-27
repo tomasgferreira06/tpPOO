@@ -4,8 +4,19 @@
 
 #include "MenorQue.h"
 
-MenorQue::MenorQue(double valor) : valorComparacao(valor){}
+RegraMenorQue::RegraMenorQue(Sensor *sensor, double valor) : Regra(sensor), valorComparacao(valor){}
 
-bool MenorQue::avaliar(double valor) const {
-    return valor < valorComparacao;
+bool RegraMenorQue::avaliar() const {
+    return getSensorAssociado()->getValor() < getValorComparacao();
 }
+
+double RegraMenorQue::getValorComparacao() const {
+    return valorComparacao;
+}
+
+void RegraMenorQue::setValorComparacao(double valorComparacao) {
+    RegraMenorQue::valorComparacao = valorComparacao;
+}
+
+
+

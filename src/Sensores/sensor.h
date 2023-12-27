@@ -9,10 +9,17 @@
         int idSensor;
         static int nextIdSensor;
     public:
-        Sensor();
 
+
+        Sensor();
         int getIdSensor() const;
         virtual std::string getInfo() const = 0;
-    };
+        virtual double getValor() const = 0;
+
+
+
+
+
+};
 
     #endif //TPPOO_SENSOR_H

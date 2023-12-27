@@ -57,7 +57,7 @@ void Zona::adicionarAparelho(Aparelho *aparelho) {
 }
 
 void Zona::adicionarProcessador(Processador *processador) {
-
+    processadores.push_back(processador);
 }
 
 void Zona::adicionarPropriedade(Propriedade* propriedade) {
@@ -81,10 +81,10 @@ void Zona::limparZona() {
     }
     aparelhos.clear();
 
-    for (Processador* processador : processadores) {
+    /*for (Processador* processador : processadores) {
         delete processador;
     }
-    processadores.clear();
+    processadores.clear(); */
 
     for (auto& entry : propriedades) {
         delete entry.second;
@@ -237,6 +237,10 @@ Propriedade *Zona::getPropriedade(const string &nome) {
 
 const map<std::string, Propriedade *> &Zona::getPropriedades() const {
     return propriedades;
+}
+
+int Zona::getProcessadoresNum() const {
+    return processadores.size();
 }
 
 /*std::string listarSensores() const {

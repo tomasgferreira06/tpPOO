@@ -3,6 +3,8 @@
 #include <fstream>
 #include <sstream>
 #include "Habitacoes/habitacao.h"
+#include "Regras/IgualA.h"
+#include "Regras/MenorQue.h"
 
 using namespace std;
 
@@ -402,50 +404,66 @@ void Interface::processarComando(const string& comando) {
                 com_efetuadosWindow
                         << "Erro: o comando 'crem' requer um ID numerico da zona, um tipo de componente (s, p, a) e um ID do componente."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
-        } else if (acao == "rnova") {
-            int idZona;
-            int idProcRegras;
+        }else if (acao == "rnova") {
+            int idZona, idProcRegras, idSensor;
             string regra;
-            int idSensor;
-            double param1, param2;
-            bool precisaSegundoParam = false;
-            bool temSegundoParam = false;
+            double param1 = 0, param2 = 0;
 
             if (stream >> idZona >> idProcRegras >> regra >> idSensor) {
-                // Analisar qual é a regra
-                if (regra == "igual_a" || regra == "menor_que" || regra == "maior_que") {
-                    if (!(stream >> param1)) {
-                        mainWindow.clear();
-                        com_efetuadosWindow << "Erro: o comando 'rnova' para a regra '" << regra << "' requer um parametro numérico."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
-                        return;
-                    }
-                } else if (regra == "entre" || regra == "fora") {
-                    precisaSegundoParam = true;
-                    if (!(stream >> param1 >> param2)) {
-                        mainWindow.clear();
-                        com_efetuadosWindow << "Erro: o comando 'rnova' para a regra '" << regra<< "' requer dois parametros numericos."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
-                        return;
-                    }
-                    temSegundoParam = true;
-                } else {
-                    mainWindow.clear();
-                    com_efetuadosWindow << "Erro: Tipo de regra '" << regra << "' nao reconhecido."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                Zona* zona = minhaHabitacao.encontrarZonaPorId(idZona);
+                if (!zona) {
+                    com_efetuadosWindow << "Erro: Zona não encontrada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     return;
                 }
 
-                string extra;
-                if (stream >> extra) {
-                    mainWindow.clear();
-                    com_efetuadosWindow << "Erro: o comando 'rnova' possui parametros extras nao reconhecidos."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                Processador* processador = zona->encontrarProcessadorPorId(idProcRegras);
+                Sensor* sensor = zona->encontrarSensorPorId(idSensor);
+                if (!processador || !sensor) {
+                    com_efetuadosWindow << "Erro: Processador ou sensor não encontrado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     return;
                 }
-                mainWindow.clear();
-                //Comando válido
-                com_efetuadosWindow << "Criação de nova regra ainda não implementada.";
+
+                Regra* novaRegra = nullptr;
+                bool erroParam = false;
+
+                if (regra == "igual_a" || regra == "menor_que" || regra == "maior_que") {
+                    if (!(stream >> param1)) {
+                        erroParam = true;
+                    }
+                    if (regra == "igual_a") {
+                        novaRegra = new RegraIgualA(sensor, param1);
+                    }else if (regra == "menor_que"){
+                        novaRegra = new RegraMenorQue(sensor, param1);
+                    }
+                    // Implemente aqui para "menor_que" e "maior_que"
+                } else if (regra == "entre" || regra == "fora") {
+                    if (!(stream >> param1 >> param2)) {
+                        erroParam = true;
+                    }
+                    // Implemente aqui para "entre" e "fora"
+                } else {
+                    mainWindow.clear();
+                    com_efetuadosWindow << "Erro: Tipo de regra '" << regra << "' não reconhecido." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    return;
+                }
+
+                if (erroParam) {
+                    mainWindow.clear();
+                    com_efetuadosWindow << "Erro: Parâmetros incorretos para a regra." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    return;
+                }
+
+                if (novaRegra) {
+                    processador->adicionarRegra(novaRegra);
+                    mainWindow.clear();
+                    com_efetuadosWindow << "Regra adicionada com ID: " << novaRegra->getId() << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                } else {
+                    mainWindow.clear();
+                    com_efetuadosWindow << "Erro ao criar a regra." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                }
             } else {
                 mainWindow.clear();
-                com_efetuadosWindow
-                        << "Erro: o comando 'rnova' nao possui os parametros corretos ou estao em formato invalido."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                com_efetuadosWindow << "Erro: Formato do comando 'rnova' incorreto." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "pmuda") {
             int idZona;
@@ -486,8 +504,21 @@ void Interface::processarComando(const string& comando) {
                             << "Erro: o comando 'rlista' requer apenas o ID da zona e o ID do processador de regras."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     // Comando válido
+                    Zona* zona = minhaHabitacao.encontrarZonaPorId(idZona);
+                    Processador* processador = nullptr;
+                    if (zona) {
+                        processador = zona->encontrarProcessadorPorId(idProcRegras);
+                    }
+                    if (processador) {
+                        const auto& regras = processador->getRegras();
+                        for (const Regra* regra : regras) {
+                            const Sensor* sensor = regra->getSensorAssociado();
+                            com_efetuadosWindow << "Regra ID: " << regra->getId() << ", Nome: " << regra->getNomeRegra() << ", Sensor ID: " << sensor->getIdSensor() << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        }
+                    } else {
+                        com_efetuadosWindow << "Erro: Processador de regras não encontrado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    }
                     mainWindow.clear();
-                    com_efetuadosWindow << "Listagem de regras ainda nao implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
                 // Parâmetros a menos ou inválidos
@@ -509,7 +540,7 @@ void Interface::processarComando(const string& comando) {
                             << "Erro: o comando 'rrem' requer apenas o ID da zona, o ID do processador de regras e o ID da regra."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     // Comando válido
-                    com_efetuadosWindow << "Remoção da regra ainda nao implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+
                 }
             } else {
                 // Parâmetros em falta ou não estão no formato pretendido

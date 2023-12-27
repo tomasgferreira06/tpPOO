@@ -171,24 +171,23 @@ void Habitacao::listarComponentesZona(int idZona, term::Window& com_efetuadosWin
                 term::Window* windowAssociada = zona->getJanela();
                 com_efetuadosWindow << "Componentes na Zona ID: " << idZona;
                 int componenteCount = 0;
-
                 for (const auto& sensor : zona->getSensores()) {
-                    com_efetuadosWindow << sensor->getIdSensor() << sensor->getInfo();
+                    com_efetuadosWindow << sensor->getInfo();
                     componenteCount++;
                 }
 
-             /*   for (const auto& aparelho : zona->getAparelhos()) {
-                    *windowAssociada << "a " << aparelho->getId() << " " << aparelho->getNome() << " Último Comando: " << aparelho->getUltimoComando() << term::move_to(0, 2 + componenteCount);
-                    componenteCount++;
-                }
+           /*    for (const auto& aparelho : zona->getAparelhos()) {
+                   com_efetuadosWindow << "a " << aparelho->getIdAparelho() << " " << aparelho->getNome();
+                   componenteCount++;
+               } */
 
                 for (const auto& processador : zona->getProcessadores()) {
-                    *windowAssociada << "p " << processador->getId() << " " << processador->getNome() << " Número de Regras: " << processador->getNumeroRegras() << term::move_to(0, 2 + componenteCount);
+                   com_efetuadosWindow << " p" << processador->getIdProcessador() <<" Numero de Regras: " << processador->getRegrasNum();
                     componenteCount++;
-                } */
-            }
+                }
         }
     }
+}
 }
 
 

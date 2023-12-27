@@ -20,3 +20,7 @@ double RegraMaiorQue::getValorComparacao() const {
     return valorComparacao;
 }
 
+std::string RegraMaiorQue::getNomeRegra() const {
+    return "maior_que";
+}
+

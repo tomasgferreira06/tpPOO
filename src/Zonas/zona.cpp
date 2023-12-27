@@ -52,9 +52,6 @@ Zona::~Zona() {
 
 
 
-void Zona::adicionarAparelho(Aparelho *aparelho) {
-    aparelhos.push_back(aparelho);
-}
 
 void Zona::adicionarProcessador(Processador *processador) {
     processadores.push_back(processador);
@@ -241,6 +238,28 @@ const map<std::string, Propriedade *> &Zona::getPropriedades() const {
 
 int Zona::getProcessadoresNum() const {
     return processadores.size();
+}
+
+Processador *Zona::encontrarProcessadorPorId(int idProcRegras) {
+    for (Processador* processador : processadores) {
+        if (processador->getIdProcessador() == idProcRegras) {
+            return processador;
+        }
+    }
+    return nullptr; // Retorna nullptr se o processador não for encontrado
+}
+
+Sensor *Zona::encontrarSensorPorId(int idSensor) {
+    for (Sensor* sensor : sensores) {
+        if (sensor->getIdSensor() == idSensor) {
+            return sensor;
+        }
+    }
+    return nullptr; // Retorna nullptr se o sensor não for encontrado
+}
+
+const vector<Processador *> &Zona::getProcessadores() const {
+    return processadores;
 }
 
 /*std::string listarSensores() const {

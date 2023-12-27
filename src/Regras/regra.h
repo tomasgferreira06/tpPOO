@@ -16,8 +16,9 @@ public:
     //virtual ~Regra();
     virtual bool avaliar() const = 0;
     int getId() const;
-
     Sensor *getSensorAssociado() const;
+
+    virtual std::string getNomeRegra() const = 0;
 };
 
 #endif // TPPOO_REGRA_H

@@ -15,3 +15,7 @@ void RegraIgualA::setValorComparacao(double valorComparacao) {
 double RegraIgualA::getValorComparacao() const {
     return valorComparacao;
 }
+
+std::string RegraIgualA::getNomeRegra() const {
+    return "igual_a";
+}

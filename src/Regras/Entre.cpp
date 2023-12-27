@@ -29,4 +29,8 @@ void RegraEntre::setValorMax(double valorMax) {
     RegraEntre::valorMax = valorMax;
 }
 
+std::string RegraEntre::getNomeRegra() const {
+    return "entre";
+}
+
 

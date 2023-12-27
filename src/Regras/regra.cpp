@@ -2,10 +2,12 @@
 using namespace std;
 
 
-int Regra::nextID= -1;
+int Regra::nextID = 0;
 
 
-Regra::Regra(Sensor* sensor) : sensorAssociado(sensor), id(nextID++) {}
+Regra::Regra(Sensor* sensor) : sensorAssociado(sensor), id(nextID) {
+    nextID++;
+}
 
 
 int Regra::getId() const {

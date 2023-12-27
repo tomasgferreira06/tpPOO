@@ -2,6 +2,7 @@
 // Created by 35191 on 24/12/2023.
 //
 
+#include <sstream>
 #include "aquecedor.h"
 #include "aparelho.h"
 
@@ -20,4 +21,17 @@ void Aquecedor::desliga() {
     if(estaLigado()){
         setLigado(false);
     }
+}
+/*std::string Aquecedor::getNome() const{
+    std::ostringstream ss;
+    ss << "Aquecedor" << ultimoComando;
+    return ss.str();
+}*/
+
+void Aquecedor::efeitoLigado(Zona &zona) {
+
+}
+
+void Aquecedor::efeitoDesligado(Zona &zona) {
+
 }

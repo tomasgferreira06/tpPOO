@@ -16,6 +16,7 @@ public:
     bool avaliar() const override;
     void setValorComparacao(double valorComparacao);
     double getValorComparacao() const;
+    std::string getNomeRegra() const override;
 };
 
 #endif //TPPOO_MENORQUE_H

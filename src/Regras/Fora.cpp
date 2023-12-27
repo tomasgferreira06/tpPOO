@@ -29,5 +29,9 @@ void RegraFora::setValorMax(double valorMax) {
     RegraFora::valorMax = valorMax;
 }
 
+std::string RegraFora::getNomeRegra() const {
+    return "fora";
+}
+
 
 

@@ -17,6 +17,7 @@ private:
     vector<Regra *> regras;
     vector<Aparelho*> aparelhosAssociados;
 
+
 public:
     Processador(char _comando);
     ~Processador();
@@ -34,6 +35,8 @@ public:
     int getIdProcessador() const;
     char getComando() const;
 
+    int getRegrasNum() const;
+    const vector<Regra *> &getRegras() const;
 };
 
 #endif // TPPOO_PROCESSADOR_H

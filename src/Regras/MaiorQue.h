@@ -19,6 +19,7 @@ public:
     void setValorComparacao(double valorComparacao);
 
     double getValorComparacao() const;
+    std::string getNomeRegra() const override;
 };
 
 #endif //TPPOO_MAIORQUE_H

@@ -24,6 +24,7 @@ public:
     double getValorMax() const;
 
     void setValorMax(double valorMax);
+    std::string getNomeRegra() const override;
 };
 
 #endif //TPPOO_FORA_H

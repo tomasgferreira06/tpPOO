@@ -25,6 +25,10 @@ private:
     std::vector<Processador*> processadores;
     std::map<std::string, Propriedade*> propriedades;  // Map to store property name and pointer
 
+
+
+
+
 public:
 
     Zona(int id, term::Window* win);
@@ -35,13 +39,13 @@ public:
 
     void aumentarTemperatura(int graus);
 
-
+    Processador* encontrarProcessadorPorId(int idProcRegras);
+    Sensor* encontrarSensorPorId(int idSensor);
 
     void adicionarSensor(char tipo);
     void adicionarAparelho(char tipo);
     bool removerSensor(int idSensor);
     bool removerAparelho(int idAparelho);
-    void adicionarAparelho(Aparelho* aparelho);
     void adicionarProcessador(Processador* processador);
     void adicionarPropriedade(Propriedade* propriedade);
     Propriedade* getPropriedade(const std::string& nome);
@@ -70,6 +74,7 @@ public:
     const vector<Aparelho *> &getAparelhos() const;
 
     const map<std::string, Propriedade *> &getPropriedades() const;
+    const vector<Processador *> &getProcessadores() const;
 
 
 };

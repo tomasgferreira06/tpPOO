@@ -3,10 +3,12 @@
 
 using namespace std;
 
-int Processador::nextIdProcessador = -1;
+int Processador::nextIdProcessador = 0;
 
 
-Processador::Processador(char _comando) : idProcessador(nextIdProcessador), comando(_comando){}
+Processador::Processador(char _comando) : idProcessador(nextIdProcessador), comando(_comando){
+    nextIdProcessador++;
+}
 
 void Processador::adicionarRegra(Regra *novaRegra) {
     regras.push_back(novaRegra);
@@ -33,5 +35,16 @@ char Processador::getComando() const {
 void Processador::associarAparelho(Aparelho *aparelho) {
     aparelhosAssociados.push_back(aparelho);
 }
+
+const vector<Regra *> &Processador::getRegras() const {
+    return regras;
+}
+
+int Processador::getRegrasNum() const {
+    return regras.size();
+}
+
+
+
 
 

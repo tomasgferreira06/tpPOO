@@ -11,6 +11,7 @@ using namespace std;
 
 class Processador {
 private:
+    Zona* zona;
     int idProcessador;
     static int nextIdProcessador;
     string comando;
@@ -19,7 +20,7 @@ private:
 
 
 public:
-    Processador(string _comando);
+    Processador(Zona *zona,string _comando);
     ~Processador();
     void adicionarRegra(Regra* novaRegra);
     void removerRegra(int idRegra);

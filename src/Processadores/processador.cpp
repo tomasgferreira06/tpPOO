@@ -4,8 +4,9 @@ using namespace std;
 
 int Processador::nextIdProcessador = 0;
 
-Processador::Processador(string _comando) : idProcessador(nextIdProcessador), comando(_comando){
+Processador::Processador(Zona *zona ,string _comando) :zona(zona), idProcessador(nextIdProcessador), comando(_comando){
     nextIdProcessador++;
+
 }
 
 void Processador::adicionarRegra(Regra *novaRegra) {

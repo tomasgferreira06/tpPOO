@@ -137,7 +137,7 @@ void Habitacao::adicionarAparelho(int idZona, char tipoAparelho) {
 void Habitacao::adicionarProcessador(int idZona, string comando) {
     Zona* zona = encontrarZonaPorId(idZona);
     if(zona){
-        Processador* novoProcessador = new Processador(comando);
+        Processador* novoProcessador = new Processador(zona,comando);
         zona->adicionarProcessador(novoProcessador);
     }
 }

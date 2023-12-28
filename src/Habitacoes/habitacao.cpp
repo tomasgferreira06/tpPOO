@@ -176,10 +176,10 @@ void Habitacao::listarComponentesZona(int idZona, term::Window& com_efetuadosWin
                     componenteCount++;
                 }
 
-           /*    for (const auto& aparelho : zona->getAparelhos()) {
-                   com_efetuadosWindow << "a " << aparelho->getIdAparelho() << " " << aparelho->getNome();
+               for (const auto& aparelho : zona->getAparelhos()) {
+                   com_efetuadosWindow << " a" << aparelho->getIdAparelho() << " " << aparelho->getNome();
                    componenteCount++;
-               } */
+               }
 
                 for (const auto& processador : zona->getProcessadores()) {
                    com_efetuadosWindow << " p" << processador->getIdProcessador() <<" Numero de Regras: " << processador->getRegrasNum();

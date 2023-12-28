@@ -62,6 +62,12 @@ add_executable(tpPOO src/main.cpp
         src/Regras/Fora.cpp
         lib/Terminal.cpp
         lib/Terminal.h
-        )
+        src/Aparelhos/aspersor.cpp
+        src/Aparelhos/aspersor.h
+        src/Aparelhos/refrigerador.cpp
+        src/Aparelhos/refrigerador.h
+        src/Aparelhos/lampada.cpp
+        src/Aparelhos/lampada.h
+)
 target_link_libraries(${PROJECT_NAME} PUBLIC
         ${PROJECT_SOURCE_DIR}/lib/pdcurses.a)

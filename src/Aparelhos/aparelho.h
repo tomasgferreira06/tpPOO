@@ -16,11 +16,14 @@ public:
     virtual void desliga() = 0;
 
 
-
     bool estaLigado() const;
     void setLigado(bool estado);
     int getIdAparelho() const;
-    //virtual std::string getNome() const = 0;
+    virtual std::string getNome() const = 0;
+
+    const std::string &getUltimoComando() const;
+
+    void setUltimoComando(const std::string &ultimoComando);
 };
 
 #endif //TPPOO_APARELHO_H

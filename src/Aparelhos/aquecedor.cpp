@@ -22,8 +22,8 @@ void Aquecedor::desliga() {
         setLigado(false);
     }
 }
-/*std::string Aquecedor::getNome() const{
+std::string Aquecedor::getNome() const{
     std::ostringstream ss;
-    ss << "Aquecedor" << ultimoComando;
+    ss << "Aquecedor" << getUltimoComando();
     return ss.str();
-}*/
+}

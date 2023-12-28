@@ -1,16 +1,15 @@
 
-#ifndef TPPOO_AQUECEDOR_H
-#define TPPOO_AQUECEDOR_H
+#ifndef TPPOO_LAMPADA_H
+#define TPPOO_LAMPADA_H
 
 
 #include "aparelho.h"
 
-class Aquecedor : public Aparelho {
+class Lampada : public Aparelho {
 public:
-    Aquecedor();
+    Lampada();
     void liga() override;
     void desliga() override;
     std::string getNome() const override;
 };
-
-#endif //TPPOO_AQUECEDOR_H
+#endif //TPPOO_LAMPADA_H

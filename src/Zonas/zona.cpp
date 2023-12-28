@@ -16,6 +16,9 @@
 #include "../Propriedades/Humidade.h"
 #include "../Propriedades/Fumo.h"
 #include "../Propriedades/som.h"
+#include "../Aparelhos/aspersor.h"
+#include "../Aparelhos/refrigerador.h"
+#include "../Aparelhos/lampada.h"
 
 using namespace std;
 
@@ -192,13 +195,13 @@ void Zona::adicionarAparelho(char tipo) {
             aparelhos.push_back(new Aquecedor());
             break;
         case 's':
-
+            aparelhos.push_back(new Aspersor());
             break;
         case 'r':
-
+            aparelhos.push_back(new Refrigerador());
             break;
         case 'l':
-
+            aparelhos.push_back(new Lampada());
             break;
         default:
 

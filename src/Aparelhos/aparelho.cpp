@@ -24,5 +24,13 @@ int Aparelho::getIdAparelho() const {
     return idAparelho;
 }
 
+const std::string &Aparelho::getUltimoComando() const {
+    return ultimoComando;
+}
+
+void Aparelho::setUltimoComando(const std::string &ultimoComando) {
+    Aparelho::ultimoComando = ultimoComando;
+}
+
 
 

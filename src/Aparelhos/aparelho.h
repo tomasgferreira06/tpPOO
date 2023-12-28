@@ -24,6 +24,7 @@ public:
     virtual std::string getNome() const = 0;
 
     const std::string &getUltimoComando() const;
+    Zona *getZonaAssociada() const;
 
     void setUltimoComando(const std::string &ultimoComando);
 };

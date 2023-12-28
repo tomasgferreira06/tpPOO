@@ -8,7 +8,7 @@ Aparelho::Aparelho(Zona* zona) : zonaAssociada(zona), idAparelho(nextIdAparelho)
 }
 
 bool Aparelho::estaLigado() const {
-    return ligado;
+    return ligado;  // retorna true se o aparelho está ligado, retorna false se o aparelho está desligado
 }
 void Aparelho::receberComando(const std::string& comando) {
     if (comando == "liga") {
@@ -35,6 +35,10 @@ const std::string &Aparelho::getUltimoComando() const {
 
 void Aparelho::setUltimoComando(const std::string &ultimoComando) {
     Aparelho::ultimoComando = ultimoComando;
+}
+
+Zona *Aparelho::getZonaAssociada() const {
+    return zonaAssociada;
 }
 
 

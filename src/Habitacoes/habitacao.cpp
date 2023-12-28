@@ -210,18 +210,13 @@ void Habitacao::avancarInstante() {
     for (auto& linha : grelhaZonas) {
         for (auto& zona : linha) {
             if (zona) {
-                // Avaliar as regras em cada processador
-                for (auto& processador : zona->getProcessadores()) {
-                  processador->avaliarRegras();
-                }
                 // Atualizar os estados dos aparelhos
                 for (auto& aparelho : zona->getAparelhos()) {
-                    //aparelho->executar();
+                    aparelho->executar();
                 }
             }
         }
     }
-
 }
 
 int Habitacao::getInstanteAtual() const {

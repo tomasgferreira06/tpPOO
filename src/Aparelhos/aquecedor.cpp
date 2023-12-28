@@ -5,35 +5,54 @@
 #include <sstream>
 #include "aquecedor.h"
 #include "aparelho.h"
+#include "../Propriedades/propriedade.h"
 
 
-
-
-Aquecedor::Aquecedor(Zona *pZona) : Aparelho(pZona), contador(0) {}
+Aquecedor::Aquecedor(Zona *pZona) : Aparelho(pZona), contador(0), adicionouRuido(false) {}
 
 void Aquecedor::liga() {
-    if(!estaLigado()){
+    if(!estaLigado()){ // se não está ligado, liga.
         setLigado(true);
+        adicionouRuido = false; // resetar a flag
     }
 }
 
 void Aquecedor::desliga() {
-    if(estaLigado()){
+    if(estaLigado()){ // se está ligado, desliga.
         setLigado(false);
     }
 }
 
 void Aquecedor::executar() {
-    if (estaLigado()) {
-        // A lógica de adicionar calor a cada 3 instantes até um máximo de 50 graus
-        // e adicionar 5 dB de ruído uma única vez vai aqui
-        // Você precisará de acesso à zona ou às propriedades para modificar a temperatura
+    Zona* zona = getZonaAssociada();
+    if (estaLigado() && zona) {
+        if (!adicionouRuido) {
+            Propriedade *propSom = zona->getPropriedade("Som");
+            if(propSom){
+                propSom->setValor(propSom->getValor() + 5);
+            }
+            adicionouRuido = true;
+        }
+
         contador++;
         if (contador % 3 == 0) {
-            // Aumentar a temperatura da zona
+            Propriedade* propTemp = zona->getPropriedade("Temperatura");
+            if (propTemp && propTemp->getValor() < 50){
+                propTemp->setValor(propTemp->getValor() + 1); // Aumenta 1ºC
+            }
         }
+    }else if(!estaLigado() && adicionouRuido){
+        // Remover ruído
+        Propriedade* propSom = zona->getPropriedade("Som");
+        if (propSom) {
+            propSom->setValor(max(0, propSom->getValor() - 5)); // Remove 5 dB, garantindo que não fique negativo
+        }
+        adicionouRuido = false;
     }
 }
+
+
+
 std::string Aquecedor::getNome() const{
     std::ostringstream ss;
     ss << "Aquecedor" << getUltimoComando();

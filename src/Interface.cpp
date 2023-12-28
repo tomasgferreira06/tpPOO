@@ -338,7 +338,7 @@ void Interface::processarComando(const string& comando) {
                     com_efetuadosWindow << "Erro: o comando 'cnovo' requer apenas ID da zona, tipo de componente (s, p, a) e tipo/comando." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     if (tipoComponente == 's' || tipoComponente == 'p' || tipoComponente == 'a') {
-                        if ((tipoComponente == 's' || tipoComponente == 'p') && tipoOuComandoStr.length() == 1) {
+                        if ((tipoComponente == 's' || tipoComponente == 'a') && tipoOuComandoStr.length() == 1) {
                             char tipoOuComandoChar = tipoOuComandoStr[0];
                             // Agora você tem um char para 's' e 'p'
                             switch (tipoComponente) {

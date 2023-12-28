@@ -177,7 +177,6 @@ void Zona::adicionarAparelho(Zona* zona,char tipo) {
             aparelhos.push_back(new Lampada(zona));
             break;
         default:
-
             break;
     }
 }

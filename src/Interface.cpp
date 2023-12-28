@@ -304,7 +304,7 @@ void Interface::processarComando(const string& comando) {
                             } else {
                                 // Value is not acceptable
                                 com_efetuadosWindow
-                                        << "Erro: Valor " << valorPropriedade << " nao e aceitavel para a propriedade " << nomePropriedade << "."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                                        << "Erro: Valo1r " << valorPropriedade << " nao e aceitavel para a propriedade " << nomePropriedade << "."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                             }
                         } else {
                             // Property does not exist

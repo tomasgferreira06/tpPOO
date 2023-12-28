@@ -12,15 +12,18 @@ void Processador::adicionarRegra(Regra *novaRegra) {
     regras.push_back(novaRegra);
 }
 
-void Processador::listarRegras() const {
-   // std::cout << "Lista de regras do processador de regras (ID: " << getIdProcessador() << "):";
-    for (const auto& regra : regras) {
-        //std::cout << "ID da regra: " << regra->getId() << std::endl;
-       // std::cout << "Tipo de regra: " << regra->getNome() << std::endl;
-       // std::cout << "Sensor associado: " << regra->getSensorAssociado()->getNome() << " (ID: " << regra->getSensorAssociado()->getId() << ")" << std::endl;
-       // std::cout << "----" << std::endl;
+void Processador::removerRegra(int idRegra) {
+    // Encontre a regra com o ID especificado e a remova
+    for (auto it = regras.begin(); it != regras.end(); ++it) {
+        if ((*it)->getId() == idRegra) {
+            // Encontrou a regra, remova-a
+            delete *it; // Certifique-se de liberar a memória alocada pela regra
+            regras.erase(it);
+            break; // Apenas uma regra pode ter o mesmo ID, então podemos sair do loop
+        }
     }
 }
+
 
 int Processador::getIdProcessador() const {
     return idProcessador;

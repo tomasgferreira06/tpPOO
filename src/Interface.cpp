@@ -547,11 +547,24 @@ void Interface::processarComando(const string& comando) {
                 if (stream >> extra) {
                     // Parâmetros a mais
                     mainWindow.clear();
-                    com_efetuadosWindow
-                            << "Erro: o comando 'rrem' requer apenas o ID da zona, o ID do processador de regras e o ID da regra."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    com_efetuadosWindow << "Erro: o comando 'rrem' requer apenas o ID da zona, o ID do processador de regras e o ID da regra." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     // Comando válido
-
+                    Zona* zona = minhaHabitacao.encontrarZonaPorId(idZona);
+                    if (zona) {
+                        Processador* processador = zona->encontrarProcessadorPorId(idProcRegras);
+                        if (processador) {
+                            processador->removerRegra(idRegra);
+                            mainWindow.clear();
+                            com_efetuadosWindow << "Regra removida com sucesso." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        } else {
+                            mainWindow.clear();
+                            com_efetuadosWindow << "Erro: Processador de regras com o ID especificado não encontrado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        }
+                    } else {
+                        mainWindow.clear();
+                        com_efetuadosWindow << "Erro: Zona com o ID especificado não encontrada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    }
                 }
             } else {
                 // Parâmetros em falta ou não estão no formato pretendido

@@ -21,7 +21,6 @@ private:
 public:
     Processador(char _comando);
     ~Processador();
-
     void adicionarRegra(Regra* novaRegra);
     void removerRegra(int idRegra);
     void listarRegras() const;

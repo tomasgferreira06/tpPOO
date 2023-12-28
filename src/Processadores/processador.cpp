@@ -42,6 +42,10 @@ int Processador::getRegrasNum() const {
     return regras.size();
 }
 
+Processador::~Processador() {
+
+}
+
 
 
 

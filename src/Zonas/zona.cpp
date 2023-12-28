@@ -81,10 +81,10 @@ void Zona::limparZona() {
     }
     aparelhos.clear();
 
-    /*for (Processador* processador : processadores) {
+    for (Processador* processador : processadores) {
         delete processador;
     }
-    processadores.clear(); */
+    processadores.clear();
 
     for (auto& entry : propriedades) {
         delete entry.second;
@@ -185,6 +185,8 @@ bool Zona::removerSensor(int idSensor) {
     return false;
 }
 
+
+
 const vector<Sensor *> &Zona::getSensores() const {
     return sensores;
 }
@@ -221,6 +223,16 @@ bool Zona::removerAparelho(int idAparelho) {
     for (auto it = aparelhos.begin(); it != aparelhos.end(); ++it) {
         if ((*it)->getIdAparelho() == idAparelho) {
             aparelhos.erase(it);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Zona::removerProcessador(int idProcessador) {
+    for (auto it = processadores.begin(); it != processadores.end(); ++it) {
+        if ((*it)->getIdProcessador() == idProcessador) {
+           processadores.erase(it);
             return true;
         }
     }

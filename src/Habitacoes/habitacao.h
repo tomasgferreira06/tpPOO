@@ -27,6 +27,7 @@ public:
     void adicionarProcessador(int idZona, char comando);
     bool removerSensor(int idZona, int idSensor);
     bool removerAparelho(int idZona, int idAparelho);
+    bool removerProcessador(int idZona, int idProcessador);
     Zona* encontrarZonaPorId(int idZona);
     void listarComponentesZona(int idZona, term::Window& com_efetuadosWindow);
     bool removerZona(int idZona);

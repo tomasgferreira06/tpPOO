@@ -41,7 +41,7 @@ public:
 
     Processador* encontrarProcessadorPorId(int idProcRegras);
     Sensor* encontrarSensorPorId(int idSensor);
-
+    bool removerProcessador(int idProcessador);
     void adicionarSensor(char tipo);
     void adicionarAparelho(char tipo);
     bool removerSensor(int idSensor);

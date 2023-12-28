@@ -382,12 +382,23 @@ void Interface::processarComando(const string& comando) {
                                 break;
                             case 'a':
                                 if(minhaHabitacao.removerAparelho(idZona, idComponente)){
-                                    com_efetuadosWindow << "Sensor removido com sucesso."
+                                    com_efetuadosWindow << "Aparelho removido com sucesso."
                                                         << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                                 }else{
-                                    com_efetuadosWindow << "Sensor não encontrado."
+                                    com_efetuadosWindow << "Aparelho não encontrado."
                                                         << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                                 }
+                                break;
+                            case 'p' :
+                                if(minhaHabitacao.removerProcessador(idZona, idComponente)){
+                                    com_efetuadosWindow << "Processador removido com sucesso."
+                                                        << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                                }else{
+                                    com_efetuadosWindow << "Processador não encontrado."
+                                                        << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                                }
+                                break;
+
 
                             default:
                                 break;

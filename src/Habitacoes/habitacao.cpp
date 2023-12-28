@@ -190,7 +190,6 @@ void Habitacao::listarComponentesZona(int idZona, term::Window& com_efetuadosWin
 }
 }
 
-
 bool Habitacao::removerAparelho(int idZona, int idAparelho) {
     Zona *zona = encontrarZonaPorId(idZona);
     if(zona){
@@ -198,5 +197,13 @@ bool Habitacao::removerAparelho(int idZona, int idAparelho) {
     }
     return false;
 }
+bool Habitacao::removerProcessador(int idZona, int idProcessador) {
+    Zona *zona = encontrarZonaPorId(idZona);
+    if(zona){
+        return zona->removerProcessador(idProcessador);
+    }
+    return false;
+}
+
 
 

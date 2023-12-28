@@ -8,10 +8,13 @@
 #include "aparelho.h"
 
 class Aspersor : public Aparelho {
+private:
+    int contador;
 public:
     Aspersor();
     void liga() override;
     void desliga() override;
+    void executar() override;
     std::string getNome() const override;
 };
 

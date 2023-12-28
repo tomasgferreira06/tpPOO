@@ -4,7 +4,7 @@ using namespace std;
 
 int Processador::nextIdProcessador = 0;
 
-Processador::Processador(char _comando) : idProcessador(nextIdProcessador), comando(_comando){
+Processador::Processador(string _comando) : idProcessador(nextIdProcessador), comando(_comando){
     nextIdProcessador++;
 }
 
@@ -39,7 +39,7 @@ int Processador::getIdProcessador() const {
     return idProcessador;
 }
 
-char Processador::getComando() const {
+string Processador::getComando() const {
     return comando;
 }
 
@@ -60,8 +60,25 @@ Processador::~Processador() {
 
 }
 
-void Processador::mudarComando(const char &novoComando) {
+void Processador::mudarComando(const string &novoComando) {
     Processador::comando = novoComando;
+}
+
+void Processador::avaliarRegras() {
+    bool todasRegrasCumpridas = true;
+    for (auto& regra : regras) {
+        if (!regra->avaliar()) { // Supondo que Regra::avaliar retorna true se a regra for cumprida
+            todasRegrasCumpridas = false;
+            break;
+        }
+    }
+
+    if (todasRegrasCumpridas) {
+        // Emitir comando para cada aparelho associado
+        for (auto& aparelho : aparelhosAssociados) {
+            //aparelho->receberComando(comando);
+        }
+    }
 }
 
 

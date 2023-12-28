@@ -8,9 +8,12 @@
 #include "aparelho.h"
 
 class Refrigerador : public Aparelho {
+private:
+    int contador;
 public:
     Refrigerador();
     void liga() override;
+    void executar() override;
     void desliga() override;
     std::string getNome() const override;
 };

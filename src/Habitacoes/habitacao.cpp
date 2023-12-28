@@ -134,7 +134,7 @@ void Habitacao::adicionarAparelho(int idZona, char tipoAparelho) {
     }
 }
 
-void Habitacao::adicionarProcessador(int idZona, char comando) {
+void Habitacao::adicionarProcessador(int idZona, string comando) {
     Zona* zona = encontrarZonaPorId(idZona);
     if(zona){
         Processador* novoProcessador = new Processador(comando);
@@ -212,7 +212,7 @@ void Habitacao::avancarInstante() {
             if (zona) {
                 // Avaliar as regras em cada processador
                 for (auto& processador : zona->getProcessadores()) {
-                  //  processador->avaliarRegras();
+                  processador->avaliarRegras();
                 }
                 // Atualizar os estados dos aparelhos
                 for (auto& aparelho : zona->getAparelhos()) {

@@ -14,7 +14,8 @@ public:
     Aparelho();
     virtual void liga() = 0;
     virtual void desliga() = 0;
-
+    virtual void executar() = 0; // Método para aplicar o efeito do aparelho a cada instante
+    virtual void receberComando(const std::string& comando); // Método para receber comandos
 
     bool estaLigado() const;
     void setLigado(bool estado);

@@ -14,6 +14,13 @@ Aparelho::Aparelho() : idAparelho(nextIdAparelho),ligado(false),ultimoComando("d
 bool Aparelho::estaLigado() const {
     return ligado;
 }
+void Aparelho::receberComando(const std::string& comando) {
+    if (comando == "liga") {
+        setLigado(true);
+    } else if (comando == "desliga") {
+        setLigado(false);
+    }
+}
 
 void Aparelho::setLigado(bool estado) {
     ligado = estado;

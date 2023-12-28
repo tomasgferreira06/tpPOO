@@ -328,37 +328,40 @@ void Interface::processarComando(const string& comando) {
         } else if (acao == "cnovo") {
             int idZona;
             char tipoComponente;
-            char tipoOuComando;
+            string tipoOuComandoStr;
 
-            if (stream >> idZona >> tipoComponente >> tipoOuComando) {
+            if (stream >> idZona >> tipoComponente >> tipoOuComandoStr) {
                 string extra;
                 if (stream >> extra) {
                     // Parâmetros a mais
                     mainWindow.clear();
-                    com_efetuadosWindow
-                            << "Erro: o comando 'cnovo' requer apenas ID da zona, tipo de componente (s, p, a) e tipo/comando."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    com_efetuadosWindow << "Erro: o comando 'cnovo' requer apenas ID da zona, tipo de componente (s, p, a) e tipo/comando." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
-
                     if (tipoComponente == 's' || tipoComponente == 'p' || tipoComponente == 'a') {
-                        switch (tipoComponente) {
-                            case 's':
-                                minhaHabitacao.adicionarSensor(idZona,tipoOuComando);
-                                break;
-                            case 'a':
-                                minhaHabitacao.adicionarAparelho(idZona, tipoOuComando);
-                                break;
-                            case 'p':
-                                minhaHabitacao.adicionarProcessador(idZona, tipoOuComando);
-                                break;
-                            default:
-                              break;
+                        if ((tipoComponente == 's' || tipoComponente == 'p') && tipoOuComandoStr.length() == 1) {
+                            char tipoOuComandoChar = tipoOuComandoStr[0];
+                            // Agora você tem um char para 's' e 'p'
+                            switch (tipoComponente) {
+                                case 's':
+                                    minhaHabitacao.adicionarSensor(idZona, tipoOuComandoChar);
+                                    break;
+                                case 'a':
+                                    minhaHabitacao.adicionarAparelho(idZona, tipoOuComandoChar);
+                                    break;
+                                    // Não é necessário um case para 'a', pois já é uma string
+                            }
+                        } else if (tipoComponente == 'p') {
+                            // Para 'a', tipoOuComandoStr já é uma string
+                            minhaHabitacao.adicionarProcessador(idZona, tipoOuComandoStr);
+                        } else {
+                            mainWindow.clear();
+                            com_efetuadosWindow << "Erro: o comando para 's' ou 'p' deve ser um único caractere." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         }
-
                         mainWindow.clear();
-                        com_efetuadosWindow << "Adicionado um novo componente."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        com_efetuadosWindow << "Adicionado um novo componente." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
                         mainWindow.clear();
-                        com_efetuadosWindow << "Erro: Tipo de componente invalido (deve ser 's', 'p' ou 'a')."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        com_efetuadosWindow << "Erro: Tipo de componente inválido (deve ser 's', 'p' ou 'a')." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
                 }
             } else {
@@ -490,7 +493,7 @@ void Interface::processarComando(const string& comando) {
         } else if (acao == "pmuda") {
             int idZona;
             int idProcRegras;
-            char novoComando;
+            string novoComando;
 
             if (stream >> idZona >> idProcRegras >> novoComando) {
                 std::string extra;

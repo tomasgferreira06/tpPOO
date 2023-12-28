@@ -623,12 +623,24 @@ void Interface::processarComando(const string& comando) {
                 if (stream >> extra) {
                     // Parâmetros a mais
                     mainWindow.clear();
-                    com_efetuadosWindow
-                            << "Erro: o comando 'ades' requer apenas o ID da zona, o ID do processador de regras e o ID do aparelho."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    com_efetuadosWindow << "Erro: o comando 'ades' requer apenas o ID da zona, o ID do processador de regras e o ID do aparelho." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     // Comando válido
-                    com_efetuadosWindow
-                            << "Remocao de associacao entre processador de regras e aparelho ainda nao implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    Zona* zona = minhaHabitacao.encontrarZonaPorId(idZona);
+                    if (zona) {
+                        Processador* processador = zona->encontrarProcessadorPorId(idProcRegras);
+                        if (processador) {
+                            processador->desassociarAparelho(idAparelho);
+                            mainWindow.clear();
+                            com_efetuadosWindow << "Associacao removida com sucesso." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        } else {
+                            mainWindow.clear();
+                            com_efetuadosWindow << "Erro: Processador de regras com o ID especificado não encontrado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        }
+                    } else {
+                        mainWindow.clear();
+                        com_efetuadosWindow << "Erro: Zona com o ID especificado nao encontrada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    }
                 }
             } else {
                 // Parâmetros em falta ou não estão no formato pretendido

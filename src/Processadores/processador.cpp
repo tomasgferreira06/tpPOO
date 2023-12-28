@@ -23,6 +23,17 @@ void Processador::removerRegra(int idRegra) {
         }
     }
 }
+void Processador::desassociarAparelho(int idAparelho) {
+    // Percorre a lista de aparelhos associados e remove o aparelho com o ID especificado
+    for (auto it = aparelhosAssociados.begin(); it != aparelhosAssociados.end(); ++it) {
+        if ((*it)->getIdAparelho() == idAparelho) {
+            // Encontrou o aparelho, remova-o
+            aparelhosAssociados.erase(it);
+            // Não é necessário usar 'delete' se os aparelhos não forem alocados dinamicamente
+            break; // Assumindo que cada aparelho tem um ID único
+        }
+    }
+}
 
 int Processador::getIdProcessador() const {
     return idProcessador;
@@ -31,6 +42,7 @@ int Processador::getIdProcessador() const {
 char Processador::getComando() const {
     return comando;
 }
+
 
 void Processador::associarAparelho(Aparelho *aparelho) {
     aparelhosAssociados.push_back(aparelho);

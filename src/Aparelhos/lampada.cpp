@@ -3,7 +3,7 @@
 #include <sstream>
 
 
-Lampada::Lampada() : Aparelho(),contador(0) {}
+Lampada::Lampada(Zona *pZona) : Aparelho(pZona), contador(0) {}
 
 void Lampada::liga() {
     if(!estaLigado()){

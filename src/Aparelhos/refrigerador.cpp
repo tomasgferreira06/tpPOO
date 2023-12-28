@@ -4,7 +4,7 @@
 #include <sstream>
 
 
-Refrigerador::Refrigerador() : Aparelho(),contador(0) {}
+Refrigerador::Refrigerador(Zona *pZona) : Aparelho(pZona), contador(0) {}
 
 void Refrigerador::liga() {
     if(!estaLigado()){

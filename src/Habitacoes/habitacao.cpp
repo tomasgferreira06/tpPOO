@@ -130,7 +130,7 @@ void Habitacao::adicionarAparelho(int idZona, char tipoAparelho) {
 
     if (zona) {
 
-        zona->adicionarAparelho(tipoAparelho);
+        zona->adicionarAparelho(zona,tipoAparelho);
     }
 }
 

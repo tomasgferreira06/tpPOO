@@ -11,7 +11,7 @@ class Refrigerador : public Aparelho {
 private:
     int contador;
 public:
-    Refrigerador();
+    Refrigerador(Zona *pZona);
     void liga() override;
     void executar() override;
     void desliga() override;

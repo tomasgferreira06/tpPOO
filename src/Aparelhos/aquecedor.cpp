@@ -9,7 +9,7 @@
 
 
 
-Aquecedor::Aquecedor() : Aparelho(), contador(0) {}
+Aquecedor::Aquecedor(Zona *pZona) : Aparelho(pZona), contador(0) {}
 
 void Aquecedor::liga() {
     if(!estaLigado()){

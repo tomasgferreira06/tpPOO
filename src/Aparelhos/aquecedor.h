@@ -9,7 +9,7 @@ class Aquecedor : public Aparelho {
 private:
     int contador;
 public:
-    Aquecedor();
+    Aquecedor(Zona *pZona);
     void executar() override;
     void liga() override;
     void desliga() override;

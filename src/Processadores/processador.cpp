@@ -77,7 +77,7 @@ void Processador::avaliarRegras() {
     if (todasRegrasCumpridas) {
         // Emitir comando para cada aparelho associado
         for (auto& aparelho : aparelhosAssociados) {
-            //aparelho->receberComando(comando);
+            aparelho->receberComando(comando);
         }
     }
 }

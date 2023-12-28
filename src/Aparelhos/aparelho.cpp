@@ -3,9 +3,8 @@
 
 int Aparelho::nextIdAparelho = 0;
 
-Aparelho::Aparelho() : idAparelho(nextIdAparelho),ligado(false),ultimoComando("desligado") {
+Aparelho::Aparelho(Zona* zona) : zonaAssociada(zona), idAparelho(nextIdAparelho),ligado(false),ultimoComando("desliga") {
     nextIdAparelho++;
-
 }
 
 bool Aparelho::estaLigado() const {
@@ -13,15 +12,17 @@ bool Aparelho::estaLigado() const {
 }
 void Aparelho::receberComando(const std::string& comando) {
     if (comando == "liga") {
-        setLigado(true);
+        setLigado(true); // atualiza o estado do aparelho e atuliza o último comando
+        liga();
     } else if (comando == "desliga") {
-        setLigado(false);
+        setLigado(false);// atualiza o estado do aparelho e atuliza o último comando
+        desliga();
     }
 }
 
 void Aparelho::setLigado(bool estado) {
     ligado = estado;
-    ultimoComando = estado ? "ligado" : "desligado"; // Atualiza o último comando
+    ultimoComando = estado ? "liga" : "desliga"; // Atualiza o último comando
 }
 
 int Aparelho::getIdAparelho() const {

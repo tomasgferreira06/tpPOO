@@ -9,7 +9,7 @@ class Lampada : public Aparelho {
 private:
     int contador;
 public:
-    Lampada();
+    Lampada(Zona *pZona);
     void liga() override;
     void executar() override;
     void desliga() override;

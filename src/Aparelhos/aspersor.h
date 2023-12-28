@@ -11,7 +11,7 @@ class Aspersor : public Aparelho {
 private:
     int contador;
 public:
-    Aspersor();
+    Aspersor(Zona *pZona);
     void liga() override;
     void desliga() override;
     void executar() override;

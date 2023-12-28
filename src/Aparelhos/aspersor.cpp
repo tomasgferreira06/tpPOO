@@ -5,7 +5,7 @@
 #include <sstream>
 #include "aspersor.h"
 
-Aspersor::Aspersor() : Aparelho() , contador(0){}
+Aspersor::Aspersor(Zona *pZona) : Aparelho(pZona) , contador(0){}
 
 void Aspersor::liga() {
     if(!estaLigado()){

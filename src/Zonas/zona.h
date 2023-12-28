@@ -42,7 +42,7 @@ public:
     Aparelho* encontrarAparelhoPorId(int idAparelho);
     bool removerProcessador(int idProcessador);
     void adicionarSensor(char tipo);
-    void adicionarAparelho(char tipo);
+    void adicionarAparelho(Zona* zona,char tipo);
     bool removerSensor(int idSensor);
     bool removerAparelho(int idAparelho);
     void adicionarProcessador(Processador* processador);

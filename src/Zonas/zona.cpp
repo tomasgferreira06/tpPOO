@@ -162,19 +162,19 @@ const vector<Sensor *> &Zona::getSensores() const {
     return sensores;
 }
 
-void Zona::adicionarAparelho(char tipo) {
+void Zona::adicionarAparelho(Zona* zona,char tipo) {
     switch (tipo) {
         case 'a':
-            aparelhos.push_back(new Aquecedor());
+            aparelhos.push_back(new Aquecedor(zona));
             break;
         case 's':
-            aparelhos.push_back(new Aspersor());
+            aparelhos.push_back(new Aspersor(zona));
             break;
         case 'r':
-            aparelhos.push_back(new Refrigerador());
+            aparelhos.push_back(new Refrigerador(zona));
             break;
         case 'l':
-            aparelhos.push_back(new Lampada());
+            aparelhos.push_back(new Lampada(zona));
             break;
         default:
 

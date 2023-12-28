@@ -211,9 +211,13 @@ void Habitacao::avancarInstante() {
         for (auto& zona : linha) {
             if (zona) {
                 // Atualizar os estados dos aparelhos
+                for (auto& processador : zona->getProcessadores()) {
+                    processador->avaliarRegras();
+                }
                 for (auto& aparelho : zona->getAparelhos()) {
                     aparelho->executar();
                 }
+
             }
         }
     }

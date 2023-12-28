@@ -21,6 +21,7 @@ public:
 private:
     term::Window mainWindow;
     term::Window com_efetuadosWindow;
+    term::Window habitacaoWindow;
     //term::Window janela_habitacaoWindow;
     Habitacao minhaHabitacao;
     bool flagHabitacao;
@@ -33,6 +34,8 @@ public:
     void executarFicheiroComandos(const std::string& nomeFicheiro);
 
     bool isFlagHabitacao() const;
+
+
 };
 
 

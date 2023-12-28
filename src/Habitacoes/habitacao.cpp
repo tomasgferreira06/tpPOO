@@ -4,7 +4,7 @@
 using namespace term;
 
 Habitacao::Habitacao(int linhas, int colunas)
-        : grelhaZonas(linhas, std::vector<Zona*>(colunas, nullptr)), contadorZona(0) {}
+        : grelhaZonas(linhas, std::vector<Zona*>(colunas, nullptr)), contadorZona(0), instanteAtual(0) {}
 
 Habitacao::~Habitacao() {
     removerHabitacao();
@@ -204,6 +204,30 @@ bool Habitacao::removerProcessador(int idZona, int idProcessador) {
     }
     return false;
 }
+
+void Habitacao::avancarInstante() {
+    instanteAtual++;
+    for (auto& linha : grelhaZonas) {
+        for (auto& zona : linha) {
+            if (zona) {
+                // Avaliar as regras em cada processador
+                for (auto& processador : zona->getProcessadores()) {
+                  //  processador->avaliarRegras();
+                }
+                // Atualizar os estados dos aparelhos
+                for (auto& aparelho : zona->getAparelhos()) {
+                    //aparelho->executar();
+                }
+            }
+        }
+    }
+
+}
+
+int Habitacao::getInstanteAtual() const {
+    return instanteAtual;
+}
+
 
 
 

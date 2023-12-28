@@ -12,6 +12,7 @@ using namespace std;
 Interface::Interface()
         : mainWindow(term::Terminal::instance().create_window(0, 0, term::Terminal::getNumCols(), term::Terminal::getNumRows() - 37, true)),
           com_efetuadosWindow(term::Terminal::instance().create_window(120, 3, 36, term::Terminal::getNumRows()-3, true)),
+          habitacaoWindow(term::Terminal::instance().create_window(0, 3, 17, term::Terminal::getNumRows() - 39, false)),
           flagHabitacao(false)
           {
 
@@ -19,6 +20,7 @@ Interface::Interface()
 
 
     com_efetuadosWindow << "Comandos efetuados:";
+              habitacaoWindow << "Instantes : ";
 }
 
 bool Interface::isFlagHabitacao() const {
@@ -64,7 +66,10 @@ void Interface::processarComando(const string& comando) {
             com_efetuadosWindow << "Erro: o comando 'prox' nao quer nenhum parametro."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
         }else{
             mainWindow.clear();
-            avancarTempo(1);
+            minhaHabitacao.avancarInstante();
+            com_efetuadosWindow << "Instante avançado para: " << minhaHabitacao.getInstanteAtual() << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            habitacaoWindow.clear();
+            habitacaoWindow << "Instantes : " << minhaHabitacao.getInstanteAtual();
         }
     }else if (acao == "avanca") {
         int n;
@@ -74,8 +79,14 @@ void Interface::processarComando(const string& comando) {
                 mainWindow.clear();
                 com_efetuadosWindow << "Erro: o comando 'avanca' requer apenas um argumento." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             } else {
+                for (int i = 0; i < n; ++i) {
+                    minhaHabitacao.avancarInstante();
+                }
+                habitacaoWindow.clear();
+                habitacaoWindow << "Instantes : " << minhaHabitacao.getInstanteAtual();
+                com_efetuadosWindow << "Instante avancado " << n << " vezes, instante atual: " << minhaHabitacao.getInstanteAtual() << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 mainWindow.clear();
-                avancarTempo(n);
+
             }
         } else {
             mainWindow.clear();

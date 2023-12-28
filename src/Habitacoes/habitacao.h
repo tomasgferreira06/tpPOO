@@ -12,6 +12,9 @@ private:
     std::vector<std::vector<Zona*>> grelhaZonas;
     std::vector<term::Window*> windows;
     int contadorZona;
+    int instanteAtual;
+
+
 
 
 
@@ -33,6 +36,9 @@ public:
     bool removerZona(int idZona);
     bool criarZona(int linha, int coluna);
     void removerHabitacao();
+   void avancarInstante();
+
+    int getInstanteAtual() const;
 
 };
 

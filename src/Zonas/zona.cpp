@@ -106,42 +106,13 @@ int Zona::getId() const {
     }
 } */
 
-void Zona::aumentarTemperatura(int graus) {
-    setTemperatura( getTemperatura() +  graus);
-}
 
 
-int Zona::getTemperatura() const {
-    return temperatura;
-}
 
-void Zona::setTemperatura(int novaTemperatura) {
-    if (novaTemperatura > 50) {
-        temperatura = 50;
-    } else {
-        temperatura = novaTemperatura;
-    }
-}
 
-int Zona::getRuido() const {
-    return ruido;
-}
 
-void Zona::aumentarRuido(int db) {
-     setRuido( getRuido() +  db);
-}
 
-void Zona::reduzirRuido(int db) {
-    setRuido( getRuido() -  db);
-}
 
-void Zona::setRuido(int novoRuido) {
-    if(novoRuido < 0){
-        ruido = 0;
-    }else{
-        ruido = novoRuido;
-    }
-}
 
 void Zona::adicionarSensor(char tipo) {
     switch (tipo) {

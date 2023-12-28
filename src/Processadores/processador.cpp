@@ -60,6 +60,10 @@ Processador::~Processador() {
 
 }
 
+void Processador::mudarComando(const char &novoComando) {
+    Processador::comando = novoComando;
+}
+
 
 
 

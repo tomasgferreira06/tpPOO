@@ -17,8 +17,6 @@ class Zona {
 
 private:
     int id;
-    int temperatura;
-    int ruido;
     term::Window* window;
     std::vector<Sensor*> sensores;
     std::vector<Aparelho*> aparelhos;
@@ -37,7 +35,7 @@ public:
     ~Zona();
     int getId() const;
 
-    void aumentarTemperatura(int graus);
+
 
     Processador* encontrarProcessadorPorId(int idProcRegras);
     Sensor* encontrarSensorPorId(int idSensor);
@@ -57,15 +55,8 @@ public:
 
     string listarSensores() const;
 
-
     void limparZona();
 
-    int getTemperatura() const;
-    int getRuido() const;
-    void aumentarRuido(int db);
-    void reduzirRuido(int db);
-    void setRuido(int novoRuido);
-    void setTemperatura(int novaTemperatura);
 
     int getSensoresNum() const;
     int getAparelhosNum() const;

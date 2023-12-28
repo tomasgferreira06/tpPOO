@@ -479,7 +479,7 @@ void Interface::processarComando(const string& comando) {
         } else if (acao == "pmuda") {
             int idZona;
             int idProcRegras;
-            string novoComando;
+            char novoComando;
 
             if (stream >> idZona >> idProcRegras >> novoComando) {
                 std::string extra;
@@ -489,11 +489,21 @@ void Interface::processarComando(const string& comando) {
                     com_efetuadosWindow
                             << "Erro: o comando 'pmuda' requer apenas o ID da zona, ID do processador de regras e o novo comando."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
-                    if (novoComando.find(' ') != string::npos) {
-                        com_efetuadosWindow << "Erro: o novo comando deve ser uma unica palavra."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
-                    } else {
-                        //Comando válido
-                        com_efetuadosWindow << "Mudança de comando do processador ainda nao implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    //Comando válido
+                    Zona* zona = minhaHabitacao.encontrarZonaPorId(idZona);
+                    if(zona){
+                        Processador *processador = zona->encontrarProcessadorPorId(idZona);
+                        if(processador){
+                            processador->mudarComando(novoComando);
+                            mainWindow.clear();
+                            com_efetuadosWindow << "Comando do processador mudado para " << novoComando << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        }else{
+                            mainWindow.clear();
+                            com_efetuadosWindow << "Erro: Processador de regras com o ID especificado nao encontrado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        }
+                    }else{
+                        mainWindow.clear();
+                        com_efetuadosWindow << "Erro: Zona com o id especeficado,nao encontrada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
                 }
             } else {

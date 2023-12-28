@@ -24,7 +24,6 @@ void Processador::removerRegra(int idRegra) {
     }
 }
 
-
 int Processador::getIdProcessador() const {
     return idProcessador;
 }

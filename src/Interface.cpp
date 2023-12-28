@@ -582,11 +582,30 @@ void Interface::processarComando(const string& comando) {
                 if (stream >> extra) {
                     // Parâmetros a mais
                     mainWindow.clear();
-                    com_efetuadosWindow
-                            << "Erro: o comando 'asoc' requer apenas o ID da zona, o ID do processador de regras e o ID do aparelho."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    com_efetuadosWindow << "Erro: o comando 'asoc' requer apenas o ID da zona, o ID do processador de regras e o ID do aparelho." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     // Comando válido
-                    com_efetuadosWindow << "Associacao entre processador de regras e aparelho ainda nao implementada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    Zona* zona = minhaHabitacao.encontrarZonaPorId(idZona);
+                    if (zona) {
+                        Processador* processador = zona->encontrarProcessadorPorId(idProcRegras);
+                        if (processador) {
+                            Aparelho* aparelho = zona->encontrarAparelhoPorId(idAparelho);  // Supondo que esta função existe
+                            if (aparelho) {
+                                processador->associarAparelho(aparelho);
+                                mainWindow.clear();
+                                com_efetuadosWindow << "Associacao realizada com sucesso." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                            } else {
+                                mainWindow.clear();
+                                com_efetuadosWindow << "Erro: Aparelho com o ID especificado nao encontrado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                            }
+                        } else {
+                            mainWindow.clear();
+                            com_efetuadosWindow << "Erro: Processador de regras com o ID especificado não encontrado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        }
+                    } else {
+                        mainWindow.clear();
+                        com_efetuadosWindow << "Erro: Zona com o ID especificado não encontrada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    }
                 }
             } else {
                 // Parâmetros em falta ou não estão no formato pretendido

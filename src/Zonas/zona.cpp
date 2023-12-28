@@ -263,6 +263,14 @@ Processador *Zona::encontrarProcessadorPorId(int idProcRegras) {
     }
     return nullptr; // Retorna nullptr se o processador não for encontrado
 }
+Aparelho *Zona::encontrarAparelhoPorId(int idAparelho) {
+    for (Aparelho* aparelho : aparelhos) {
+        if (aparelho->getIdAparelho() == idAparelho) {
+            return aparelho;
+        }
+    }
+    return nullptr; // Retorna nullptr se o processador não for encontrado
+}
 
 Sensor *Zona::encontrarSensorPorId(int idSensor) {
     for (Sensor* sensor : sensores) {

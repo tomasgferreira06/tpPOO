@@ -27,11 +27,3 @@ void Aquecedor::desliga() {
     ss << "Aquecedor" << ultimoComando;
     return ss.str();
 }*/
-
-void Aquecedor::efeitoLigado(Zona &zona) {
-
-}
-
-void Aquecedor::efeitoDesligado(Zona &zona) {
-
-}

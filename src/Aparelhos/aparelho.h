@@ -2,7 +2,7 @@
 #define TPPOO_APARELHO_H
 
 #include <string>
-#include "../Zonas/zona.h"
+class Zona;  // Declaração de classe para frente
 
 class Aparelho {
 private:
@@ -14,8 +14,7 @@ public:
     Aparelho();
     virtual void liga() = 0;
     virtual void desliga() = 0;
-    virtual void efeitoLigado(Zona& zona) = 0;
-    virtual void efeitoDesligado(Zona& zona) = 0;
+
 
 
     bool estaLigado() const;

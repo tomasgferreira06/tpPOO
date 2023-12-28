@@ -1,10 +1,8 @@
 #include "Processador.h"
 
-
 using namespace std;
 
 int Processador::nextIdProcessador = 0;
-
 
 Processador::Processador(char _comando) : idProcessador(nextIdProcessador), comando(_comando){
     nextIdProcessador++;

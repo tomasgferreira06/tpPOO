@@ -13,8 +13,7 @@ public:
     Aquecedor();
     void liga() override;
     void desliga() override;
-    void efeitoLigado(Zona& zona) override;
-    void efeitoDesligado(Zona& zona) override;
+
     //std::string getNome() const override;
 };
 

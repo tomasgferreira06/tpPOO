@@ -583,7 +583,7 @@ void Interface::processarComando(const string& comando) {
                             com_efetuadosWindow << "Regra removida com sucesso." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         } else {
                             mainWindow.clear();
-                            com_efetuadosWindow << "Erro: Processador de regras com o ID especificado não encontrado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                            com_efetuadosWindow << "Erro: Processador de regras com o ID especificado nao encontrado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         }
                     } else {
                         mainWindow.clear();
@@ -624,11 +624,11 @@ void Interface::processarComando(const string& comando) {
                             }
                         } else {
                             mainWindow.clear();
-                            com_efetuadosWindow << "Erro: Processador de regras com o ID especificado não encontrado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                            com_efetuadosWindow << "Erro: Processador de regras com o ID especificado nao encontrado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         }
                     } else {
                         mainWindow.clear();
-                        com_efetuadosWindow << "Erro: Zona com o ID especificado não encontrada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        com_efetuadosWindow << "Erro: Zona com o ID especificado nao encontrada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
                 }
             } else {

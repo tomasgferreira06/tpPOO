@@ -8,6 +8,7 @@
     private:
         int idSensor;
         static int nextIdSensor;
+
     public:
 
 

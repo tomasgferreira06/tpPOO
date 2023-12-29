@@ -26,3 +26,7 @@ std::string SensorLuminosidade::getInfo() const {
 double SensorLuminosidade::getValor() const {
    return getLuz();
 }
+
+std::string SensorLuminosidade::getTipoSensor() const {
+    return "Luminosidade";
+}

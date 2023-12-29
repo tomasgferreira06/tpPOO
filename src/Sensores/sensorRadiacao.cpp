@@ -24,3 +24,7 @@ std::string SensorRadiacao::getInfo() const {
 double SensorRadiacao::getValor() const {
     return getRadiacao();
 }
+
+std::string SensorRadiacao::getTipoSensor() const {
+    return "Radiacao";
+}

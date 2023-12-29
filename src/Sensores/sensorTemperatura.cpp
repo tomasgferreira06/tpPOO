@@ -28,4 +28,8 @@ double SensorTemperatura::getValor() const {
     return getTemperatura();
 }
 
+std::string SensorTemperatura::getTipoSensor() const {
+    return "Temperatura";
+}
+
 

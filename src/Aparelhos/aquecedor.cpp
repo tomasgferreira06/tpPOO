@@ -26,30 +26,45 @@ void Aquecedor::desliga() {
 void Aquecedor::executar() {
     Zona* zona = getZonaAssociada();
     if (estaLigado() && zona) {
+        const std::vector<Sensor*>& sensores = zona->getSensores();
+
+        // Procurar pelo sensor de temperatura
+        double temperaturaAtual = 0.0;
+        bool encontrouSensorTemperatura = false;
+        for (Sensor* sensor : sensores) {
+            if (sensor->getTipoSensor() == "Temperatura") {
+                temperaturaAtual = sensor->getValor();
+                encontrouSensorTemperatura = true;
+                break;
+            }
+        }
+
         if (!adicionouRuido) {
+            // Adicionar ruído lógico
             Propriedade *propSom = zona->getPropriedade("Som");
-            if(propSom){
+            if (propSom) {
                 propSom->setValor(propSom->getValor() + 5);
             }
             adicionouRuido = true;
         }
 
         contador++;
-        if (contador % 3 == 0) {
+        if (contador % 3 == 0 && encontrouSensorTemperatura && temperaturaAtual < 50) {
             Propriedade* propTemp = zona->getPropriedade("Temperatura");
-            if (propTemp && propTemp->getValor() < 50){
-                propTemp->setValor(propTemp->getValor() + 1); // Aumenta 1ºC
+            if (propTemp) {
+                propTemp->setValor(temperaturaAtual + 1); // Aumenta a temperatura com base no sensor
             }
         }
-    }else if(!estaLigado() && adicionouRuido){
+    } else if (!estaLigado() && adicionouRuido) {
         // Remover ruído
         Propriedade* propSom = zona->getPropriedade("Som");
         if (propSom) {
-            propSom->setValor(max(0, propSom->getValor() - 5)); // Remove 5 dB, garantindo que não fique negativo
+            propSom->setValor(std::max(0, propSom->getValor() - 5)); // Remove 5 dB, garantindo que não fique negativo
         }
         adicionouRuido = false;
     }
 }
+
 
 
 

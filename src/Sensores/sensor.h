@@ -22,11 +22,13 @@
         virtual std::string getInfo() const = 0;
         virtual double getValor() const = 0;
         Zona *getZonaAssociada() const;
+        virtual std::string getTipoSensor() const = 0;
 
 
 
 
 
-};
+
+    };
 
     #endif //TPPOO_SENSOR_H

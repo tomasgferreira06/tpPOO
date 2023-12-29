@@ -22,6 +22,7 @@ public:
     void setHumidade(float humidade);
     std::string getInfo() const override;
     double getValor() const override;
+    std::string getTipoSensor() const override;
 
 
 };

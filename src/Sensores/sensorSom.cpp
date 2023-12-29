@@ -29,3 +29,7 @@ std::string SensorSom::getInfo() const {
 double SensorSom::getValor() const {
     return getSom();
 }
+
+std::string SensorSom::getTipoSensor() const {
+    return "Som";
+}

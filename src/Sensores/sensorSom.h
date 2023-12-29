@@ -20,6 +20,7 @@ public:
     void setSom(float som);
     std::string getInfo() const override;
     double getValor() const override;
+    std::string getTipoSensor() const override;
 
 
 };

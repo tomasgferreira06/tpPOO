@@ -22,3 +22,7 @@ std::string SensorHumidade::getInfo() const {
 double SensorHumidade::getValor() const {
     return getHumidade();
 }
+
+std::string SensorHumidade::getTipoSensor() const {
+    return "Humidade";
+}

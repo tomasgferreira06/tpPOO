@@ -19,6 +19,7 @@ public:
     void setVibracao(float vibracao);
     std::string getInfo() const override;
     double getValor() const override;
+    std::string getTipoSensor() const override;
 
 
 };

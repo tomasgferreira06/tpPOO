@@ -24,3 +24,7 @@ std::string SensorFumo::getInfo() const {
 double SensorFumo::getValor() const {
     return getFumo();
 }
+
+std::string SensorFumo::getTipoSensor() const {
+    return "Fumo";
+}

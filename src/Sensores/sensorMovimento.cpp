@@ -24,3 +24,7 @@ std::string SensorMovimento::getInfo() const {
 double SensorMovimento::getValor() const {
     return getVibracao();
 }
+
+std::string SensorMovimento::getTipoSensor() const {
+    return "Movimento";
+}

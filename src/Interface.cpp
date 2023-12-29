@@ -468,7 +468,7 @@ void Interface::processarComando(const string& comando) {
                     // Implemente aqui para "entre" e "fora"
                 } else {
                     mainWindow.clear();
-                    com_efetuadosWindow << "Erro: Tipo de regra '" << regra << "' não reconhecido." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    com_efetuadosWindow << "Erro: Tipo de regra '" << regra << "' nao reconhecido." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     return;
                 }
 

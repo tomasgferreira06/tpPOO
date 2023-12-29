@@ -98,7 +98,7 @@ void Interface::processarComando(const string& comando) {
         string extra;
         if (stream >> extra) {
             mainWindow.clear();
-            com_efetuadosWindow << "Erro: o comando 'help' não requer argumentos para mostrar os comandos"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow << "Erro: o comando 'help' nao requer argumentos para mostrar os comandos"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
         } else {
             mainWindow.clear();
             com_efetuadosWindow <<"-prox" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
@@ -222,7 +222,7 @@ void Interface::processarComando(const string& comando) {
                     com_efetuadosWindow << "Zona " << idZona << " removida."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
                 else {
-                    com_efetuadosWindow << "Erro: o comando 'zrem' requer um ID de zona válido." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    com_efetuadosWindow << "Erro: o comando 'zrem' requer um ID de zona valido." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }}
             } else {
                 mainWindow.clear();
@@ -279,7 +279,7 @@ void Interface::processarComando(const string& comando) {
             } else {
                 // Falta ID ou não é um inteiro
                 mainWindow.clear();
-                com_efetuadosWindow << "Erro: o comando 'zcomp' requer um ID numérico(inteiro) da zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                com_efetuadosWindow << "Erro: o comando 'zcomp' requer um ID numerico(inteiro) da zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "pmod") {
             int idZona, valorPropriedade;
@@ -304,7 +304,7 @@ void Interface::processarComando(const string& comando) {
                             } else {
                                 // Value is not acceptable
                                 com_efetuadosWindow
-                                        << "Erro: Valo1r " << valorPropriedade << " nao e aceitavel para a propriedade " << nomePropriedade << "."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                                        << "Erro: Valor " << valorPropriedade << " nao e aceitavel para a propriedade " << nomePropriedade << "."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                             }
                         } else {
                             // Property does not exist
@@ -355,13 +355,13 @@ void Interface::processarComando(const string& comando) {
                             minhaHabitacao.adicionarProcessador(idZona, tipoOuComandoStr);
                         } else {
                             mainWindow.clear();
-                            com_efetuadosWindow << "Erro: o comando para 's' ou 'p' deve ser um único caractere." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                            com_efetuadosWindow << "Erro: o comando para 's' ou 'p' deve ser um unico caractere." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         }
                         mainWindow.clear();
                         com_efetuadosWindow << "Adicionado um novo componente." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
                         mainWindow.clear();
-                        com_efetuadosWindow << "Erro: Tipo de componente inválido (deve ser 's', 'p' ou 'a')." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        com_efetuadosWindow << "Erro: Tipo de componente invalido (deve ser 's', 'p' ou 'a')." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
                 }
             } else {
@@ -390,7 +390,7 @@ void Interface::processarComando(const string& comando) {
                                     com_efetuadosWindow << "Sensor removido com sucesso."
                                                         << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                                 }else{
-                                    com_efetuadosWindow << "Sensor não encontrado."
+                                    com_efetuadosWindow << "Sensor nao encontrado."
                                                         << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                                 }
                                 break;
@@ -399,7 +399,7 @@ void Interface::processarComando(const string& comando) {
                                     com_efetuadosWindow << "Aparelho removido com sucesso."
                                                         << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                                 }else{
-                                    com_efetuadosWindow << "Aparelho não encontrado."
+                                    com_efetuadosWindow << "Aparelho nao encontrado."
                                                         << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                                 }
                                 break;
@@ -437,7 +437,7 @@ void Interface::processarComando(const string& comando) {
             if (stream >> idZona >> idProcRegras >> regra >> idSensor) {
                 Zona* zona = minhaHabitacao.encontrarZonaPorId(idZona);
                 if (!zona) {
-                    com_efetuadosWindow << "Erro: Zona não encontrada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    com_efetuadosWindow << "Erro: Zona nao encontrada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     return;
                 }
 

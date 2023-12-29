@@ -673,30 +673,31 @@ void Interface::processarComando(const string& comando) {
                         << "Erro: o comando 'ades' requer um ID numerico da zona, um ID numerico do processador de regras e um ID numerico do aparelho."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "acom") {
-            int idZona;
-            int idAparelho;
+            int idZona, idAparelho;
             string com;
 
             if (stream >> idZona >> idAparelho >> com) {
                 string extra;
                 if (stream >> extra) {
-                    // Parâmetros a mais
                     mainWindow.clear();
-                    com_efetuadosWindow
-                            << "Erro: o comando 'acom' requer apenas o ID da zona, o ID do aparelho e o comando a ser enviado."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    com_efetuadosWindow << "Erro: o comando 'acom' requer apenas o ID da zona, o ID do aparelho e o comando a ser enviado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
-                    if (com.find(' ') != string::npos) {
-                        com_efetuadosWindow << "Erro: o comando para o aparelho deve ser uma unica palavra."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    Zona* zona = minhaHabitacao.encontrarZonaPorId(idZona);
+                    if (zona) {
+                        Aparelho* aparelho = zona->encontrarAparelhoPorId(idAparelho);
+                        if (aparelho) {
+                            aparelho->receberComando(com);
+                            mainWindow.clear();
+                            com_efetuadosWindow << "Comando '" << com << "' enviado para aparelho ID " << idAparelho << " na zona ID " << idZona << "." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        } else {
+                            com_efetuadosWindow << "Erro: aparelho com ID " << idAparelho << " não encontrado na zona ID " << idZona << "." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        }
                     } else {
-                        // Comando válido
-                        com_efetuadosWindow << "Envio de comando para aparelho ainda nao implementado."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        com_efetuadosWindow << "Erro: zona com ID " << idZona << " não encontrada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
                 }
             } else {
-                // Parâmetros em falta ou não estão no formato pretendido
-                mainWindow.clear();
-                com_efetuadosWindow
-                        << "Erro: o comando 'acom' requer um ID numerico da zona, um ID numerico do aparelho e um comando."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                com_efetuadosWindow << "Erro: formato incorreto do comando 'acom'." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "psalva") {
             int idZona;

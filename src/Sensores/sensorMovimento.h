@@ -14,7 +14,7 @@ private:
     float vibracao;
 
 public:
-    SensorMovimento();
+    SensorMovimento(Zona *a);
     double getVibracao() const;
     void setVibracao(float vibracao);
     std::string getInfo() const override;

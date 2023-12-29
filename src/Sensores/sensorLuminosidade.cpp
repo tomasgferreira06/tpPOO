@@ -5,7 +5,7 @@
 #include <sstream>
 #include "sensorLuminosidade.h"
 
-SensorLuminosidade::SensorLuminosidade() : Sensor(),luz(0.0) {
+SensorLuminosidade::SensorLuminosidade(Zona *a) : Sensor(a),luz(0.0) {
 
 }
 

@@ -15,7 +15,7 @@ private:
     float som;
 
 public:
-    SensorSom();
+    SensorSom(Zona *a);
     double getSom() const;
     void setSom(float som);
     std::string getInfo() const override;

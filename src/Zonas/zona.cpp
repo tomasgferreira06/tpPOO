@@ -117,25 +117,25 @@ int Zona::getId() const {
 void Zona::adicionarSensor(char tipo) {
     switch (tipo) {
         case 't':
-            sensores.push_back(new SensorTemperatura());
+            sensores.push_back(new SensorTemperatura(this));
             break;
         case 'v':
-            sensores.push_back(new SensorMovimento());
+            sensores.push_back(new SensorMovimento(this));
             break;
         case 'm':
-            sensores.push_back(new SensorLuminosidade());
+            sensores.push_back(new SensorLuminosidade(this));
             break;
         case 'd':
-            sensores.push_back(new SensorRadiacao());
+            sensores.push_back(new SensorRadiacao(this));
             break;
         case 'h':
-            sensores.push_back(new SensorHumidade());
+            sensores.push_back(new SensorHumidade(this));
             break;
         case 'o':
-            sensores.push_back(new SensorSom());
+            sensores.push_back(new SensorSom(this));
             break;
         case 'f':
-            sensores.push_back(new SensorFumo());
+            sensores.push_back(new SensorFumo(this));
             break;
         default:
             break;

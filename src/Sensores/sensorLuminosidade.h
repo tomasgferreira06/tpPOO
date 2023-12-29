@@ -14,7 +14,7 @@ private:
     float luz;
 
 public:
-    SensorLuminosidade();
+    SensorLuminosidade(Zona *a);
     double getLuz() const;
     void setLuz(float luz);
     std::string getInfo() const override;

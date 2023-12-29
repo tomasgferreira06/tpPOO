@@ -4,18 +4,24 @@
     #include <string>
     #include "../Propriedades/propriedade.h"
 
+    class Zona;
+
     class Sensor {
     private:
+        Zona* zonaAssociada_;
         int idSensor;
         static int nextIdSensor;
+
+
 
     public:
 
 
-        Sensor();
+        Sensor(Zona *z);
         int getIdSensor() const;
         virtual std::string getInfo() const = 0;
         virtual double getValor() const = 0;
+        Zona *getZonaAssociada() const;
 
 
 

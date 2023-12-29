@@ -7,6 +7,7 @@
 
 #include "sensor.h"
 #include "../Propriedades/temperatura.h"
+#include "../Zonas/zona.h"
 
 class SensorTemperatura : public Sensor{
 
@@ -14,11 +15,10 @@ private:
     float temperatura;
 
 public:
-    SensorTemperatura();
+    SensorTemperatura(Zona *a);
     double getTemperatura() const;
-    void setTemperatura(float temperatura);
     std::string getInfo() const override;
-    double getValor() const override; // função virtual para a medição do sensorTemperatura
+   double getValor() const override; // função virtual para a medição do sensorTemperatura
 
 
 };

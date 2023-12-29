@@ -5,15 +5,17 @@
 #include <sstream>
 #include "sensorTemperatura.h"
 
-SensorTemperatura::SensorTemperatura() : Sensor(), temperatura(0.0){
+SensorTemperatura::SensorTemperatura(Zona *a) : Sensor(a), temperatura(0.0){
 }
 
 double SensorTemperatura::getTemperatura() const {
-    return temperatura;
-}
-
-void SensorTemperatura::setTemperatura(float temperatura) {
-    SensorTemperatura::temperatura = temperatura;
+    Zona* zonaAssociada = getZonaAssociada();
+    if (zonaAssociada) {
+        Propriedade* tempPropriedade = zonaAssociada->getPropriedade("Temperatura");
+        if (tempPropriedade) {
+            return tempPropriedade->getValor();
+        }
+    }
 }
 
 std::string SensorTemperatura::getInfo() const {
@@ -25,3 +27,5 @@ std::string SensorTemperatura::getInfo() const {
 double SensorTemperatura::getValor() const {
     return getTemperatura();
 }
+
+

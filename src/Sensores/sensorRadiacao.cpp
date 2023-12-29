@@ -5,7 +5,7 @@
 #include <sstream>
 #include "sensorRadiacao.h"
 
-SensorRadiacao::SensorRadiacao() : Sensor(), radiacao(0.0) {}
+SensorRadiacao::SensorRadiacao(Zona *a) : Sensor(a), radiacao(0.0) {}
 
 double SensorRadiacao::getRadiacao() const {
     return radiacao;

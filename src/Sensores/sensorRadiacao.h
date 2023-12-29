@@ -14,7 +14,7 @@ private:
     float radiacao;
 
 public:
-    SensorRadiacao();
+    SensorRadiacao(Zona *a);
     double getRadiacao() const;
     void setRadiacao(float radiacao);
     std::string getInfo() const override;

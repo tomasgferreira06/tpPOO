@@ -5,7 +5,7 @@
 #include <sstream>
 #include "sensorMovimento.h"
 
-SensorMovimento::SensorMovimento() : Sensor(), vibracao(0.0){}
+SensorMovimento::SensorMovimento(Zona *a) : Sensor(a), vibracao(0.0){}
 
 double SensorMovimento::getVibracao() const {
     return vibracao;

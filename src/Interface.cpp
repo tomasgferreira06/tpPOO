@@ -427,7 +427,7 @@ void Interface::processarComando(const string& comando) {
                 //Faltam parâmetros ou são a mais
                 mainWindow.clear();
                 com_efetuadosWindow
-                        << "Erro: o comando 'crem' requer um ID numerico da zona, um tipo de componente (s, p, a) e um ID do componente."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        << "Erros: o comando 'crem' requer um ID numerico da zona, um tipo de componente (s, p, a) e um ID do componente."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         }else if (acao == "rnova") {
             int idZona, idProcRegras, idSensor;

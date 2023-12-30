@@ -444,6 +444,7 @@ void Interface::processarComando(const string& comando) {
             if (stream >> idZona >> idProcRegras >> regra >> idSensor) {
                 Zona* zona = minhaHabitacao.encontrarZonaPorId(idZona);
                 if (!zona) {
+                    mainWindow.clear();
                     com_efetuadosWindow << "Erro: Zona nao encontrada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     return;
                 }
@@ -451,7 +452,8 @@ void Interface::processarComando(const string& comando) {
                 Processador* processador = zona->encontrarProcessadorPorId(idProcRegras);
                 Sensor* sensor = zona->encontrarSensorPorId(idSensor);
                 if (!processador || !sensor) {
-                    com_efetuadosWindow << "Erro: Processador ou sensor não encontrado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    mainWindow.clear();
+                    com_efetuadosWindow << "Erro: Processador ou sensor nao encontrado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     return;
                 }
 
@@ -472,7 +474,7 @@ void Interface::processarComando(const string& comando) {
                     if (!(stream >> param1 >> param2)) {
                         erroParam = true;
                     }
-                    // Implemente aqui para "entre" e "fora"
+
                 } else {
                     mainWindow.clear();
                     com_efetuadosWindow << "Erro: Tipo de regra '" << regra << "' nao reconhecido." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
@@ -719,8 +721,10 @@ void Interface::processarComando(const string& comando) {
                     com_efetuadosWindow << "Erro: o comando 'psalva' requer apenas o ID da zona, o ID do processador de regras e um nome unico." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     if (nome.find(' ') != string::npos) {
+                        mainWindow.clear();
                         com_efetuadosWindow << "Erro: o nome deve ser uma unica palavra sem espaços." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else if (minhaHabitacao.nomeJaExiste(nome)) {
+                        mainWindow.clear();
                         com_efetuadosWindow << "Erro: Ja existe uma copia salva com o nome '" << nome << "'." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
                         // Encontre a zona e o processador
@@ -729,11 +733,14 @@ void Interface::processarComando(const string& comando) {
                             Processador* processador = zona->encontrarProcessadorPorId(idProcRegras);
                             if (processador) {
                                 minhaHabitacao.salvarProcessador(nome, processador);
+                                mainWindow.clear();
                                 com_efetuadosWindow << "Estado do processador salvo com sucesso." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                             } else {
+                                mainWindow.clear();
                                 com_efetuadosWindow << "Erro: Processador nao encontrado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                             }
                         } else {
+                            mainWindow.clear();
                             com_efetuadosWindow << "Erro: Zona nao encontrada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         }
                     }
@@ -764,7 +771,6 @@ void Interface::processarComando(const string& comando) {
                         Processador* processadorRestaurado = new Processador(*processadorSalvo);
                         zonaOriginal->adicionarProcessador(processadorRestaurado);
                         mainWindow.clear();
-
                         com_efetuadosWindow << "Processador restaurado com sucesso na Zona ID: " << zonaOriginal->getId() << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
                         mainWindow.clear();

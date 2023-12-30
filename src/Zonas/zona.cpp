@@ -270,11 +270,6 @@ const vector<Processador *> &Zona::getProcessadores() const {
     return processadores;
 }
 
-/*std::string listarSensores() const {
-    std::ostringstream ss;
-    for (const auto& sensor : sensores) {
-        ss << sensor->getInfo() << std::endl;
-    return ss.str();
-} */
+
 
 

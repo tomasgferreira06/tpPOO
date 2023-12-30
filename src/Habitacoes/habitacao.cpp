@@ -237,7 +237,7 @@ int Habitacao::getInstanteAtual() const {
     return instanteAtual;
 }
 void Habitacao::salvarProcessador(const std::string& nome, Processador* processadorOriginal) {
-    Processador* copiaProcessador = new Processador(*processadorOriginal); // Cópia profunda
+    Processador* copiaProcessador = new Processador(*processadorOriginal);
     processadoresSalvos.insert(std::make_pair(nome, copiaProcessador));
 }
 

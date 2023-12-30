@@ -747,24 +747,24 @@ void Interface::processarComando(const string& comando) {
         else if (acao == "prepoe") {
             string nome;
             if (stream >> nome) {
-                // Verifica se existe um processador salvo com o nome especificado
                 if (minhaHabitacao.processadorSalvoExiste(nome)) {
-                    // Recupera o processador salvo
                     Processador* processadorSalvo = minhaHabitacao.getProcessadorSalvo(nome);
-
-                    // Obtém a zona original do processador
                     Zona* zonaOriginal = processadorSalvo->getZona();
+
                     if (zonaOriginal && minhaHabitacao.encontrarZonaPorId(zonaOriginal->getId())) {
-                        // Verifica se já existe um processador com o mesmo ID na zona original
                         Processador* processadorExistente = zonaOriginal->encontrarProcessadorPorId(processadorSalvo->getIdProcessador());
+
                         if (processadorExistente) {
-                            // Remove o processador existente
+                            // Remova todas as regras do processador existente antes de substituí-lo
+                            processadorExistente->removerTodasRegras();
                             zonaOriginal->removerProcessador(processadorExistente->getIdProcessador());
                         }
 
-                        // Adiciona o processador restaurado à zona original
+                        // Crie uma cópia profunda do processador salvo e adicione na zona
+                        Processador* processadorRestaurado = new Processador(*processadorSalvo);
+                        zonaOriginal->adicionarProcessador(processadorRestaurado);
                         mainWindow.clear();
-                        zonaOriginal->adicionarProcessador(processadorSalvo);
+
                         com_efetuadosWindow << "Processador restaurado com sucesso na Zona ID: " << zonaOriginal->getId() << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
                         mainWindow.clear();

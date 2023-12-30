@@ -11,15 +11,16 @@ Habitacao::~Habitacao() {
 }
 
 void Habitacao::criarHabitacao(int linhas, int colunas) {
-    // Primeiro, limpe as zonas existentes
     for (auto& linha : grelhaZonas) {
         for (auto& zona : linha) {
-            delete zona;
+            if (zona) {
+                delete zona->getJanela(); // Primeiro, deleta a janela associada
+                delete zona; // Depois, deleta a zona
+                zona = nullptr; // Define como nullptr para evitar referências a memória desalocada
+            }
         }
-        linha.clear();
     }
-    grelhaZonas.clear();
-
+    grelhaZonas.clear(); // Limpa o vetor de linhas
     // Configurações de tamanho e espaçamento para as janelas
     int larguraWindow = 23;
     int alturaWindow = 8;

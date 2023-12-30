@@ -15,12 +15,13 @@ Processador::Processador(const Processador& ori) :zona(ori.zona), idProcessador(
 
 Processador& Processador::operator=(const Processador& outro) {
     if (this != &outro) {
+        // Primeiro, limpa as regras existentes
         for (auto& regra : regras) {
             delete regra;
         }
         regras.clear();
 
-        // Copiar as regras
+        // Agora, duplica as regras do outro processador
         for (const auto& regra : outro.regras) {
             regras.push_back(regra->duplica());
         }
@@ -107,6 +108,11 @@ Zona *Processador::getZona() const {
 }
 
 
-
+void Processador::removerTodasRegras() {
+    for (auto& regra : regras) {
+        delete regra; // Libera a memória alocada para a regra
+    }
+    regras.clear(); // Limpa a lista de regras
+}
 
 

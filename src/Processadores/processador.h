@@ -38,7 +38,7 @@ public:
     void mudarComando(const string& novoComando);
     void associarAparelho(Aparelho* aparelho);
     void desassociarAparelho(int idAparelho);
-
+    void removerTodasRegras();
     int getIdProcessador() const;
     string getComando() const;
 

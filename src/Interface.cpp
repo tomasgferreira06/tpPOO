@@ -415,7 +415,7 @@ void Interface::processarComando(const string& comando) {
                                     com_efetuadosWindow << "Processador removido com sucesso."
                                                         << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                                 }else{
-                                    com_efetuadosWindow << "Processador não encontrado."
+                                    com_efetuadosWindow << "Processador nao encontrado."
                                                         << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                                 }
                                 break;
@@ -481,7 +481,7 @@ void Interface::processarComando(const string& comando) {
 
                 if (erroParam) {
                     mainWindow.clear();
-                    com_efetuadosWindow << "Erro: Parâmetros incorretos para a regra." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    com_efetuadosWindow << "Erro: Parametros incorretos para a regra." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     return;
                 }
 
@@ -558,7 +558,7 @@ void Interface::processarComando(const string& comando) {
                             com_efetuadosWindow << "Regra ID: " << regra->getId() << ", Nome: " << regra->getNomeRegra() << ", Sensor ID: " << sensor->getIdSensor() << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         }
                     } else {
-                        com_efetuadosWindow << "Erro: Processador de regras não encontrado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        com_efetuadosWindow << "Erro: Processador de regras nao encontrado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
                     mainWindow.clear();
                 }
@@ -697,10 +697,10 @@ void Interface::processarComando(const string& comando) {
                             mainWindow.clear();
                             com_efetuadosWindow << "Comando '" << com << "' enviado para aparelho ID " << idAparelho << " na zona ID " << idZona << "." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         } else {
-                            com_efetuadosWindow << "Erro: aparelho com ID " << idAparelho << " não encontrado na zona ID " << idZona << "." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                            com_efetuadosWindow << "Erro: aparelho com ID " << idAparelho << " nao encontrado na zona ID " << idZona << "." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         }
                     } else {
-                        com_efetuadosWindow << "Erro: zona com ID " << idZona << " não encontrada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        com_efetuadosWindow << "Erro: zona com ID " << idZona << " nao encontrada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
                 }
             } else {
@@ -716,12 +716,12 @@ void Interface::processarComando(const string& comando) {
                 if (stream >> extra) {
                     // Parâmetros a mais
                     mainWindow.clear();
-                    com_efetuadosWindow << "Erro: o comando 'psalva' requer apenas o ID da zona, o ID do processador de regras e um nome único." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    com_efetuadosWindow << "Erro: o comando 'psalva' requer apenas o ID da zona, o ID do processador de regras e um nome unico." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     if (nome.find(' ') != string::npos) {
                         com_efetuadosWindow << "Erro: o nome deve ser uma unica palavra sem espaços." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else if (minhaHabitacao.nomeJaExiste(nome)) {
-                        com_efetuadosWindow << "Erro: Ja existe uma cópia salva com o nome '" << nome << "'." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        com_efetuadosWindow << "Erro: Ja existe uma copia salva com o nome '" << nome << "'." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
                         // Encontre a zona e o processador
                         Zona* zona = minhaHabitacao.encontrarZonaPorId(idZona);
@@ -731,17 +731,17 @@ void Interface::processarComando(const string& comando) {
                                 minhaHabitacao.salvarProcessador(nome, processador);
                                 com_efetuadosWindow << "Estado do processador salvo com sucesso." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                             } else {
-                                com_efetuadosWindow << "Erro: Processador não encontrado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                                com_efetuadosWindow << "Erro: Processador nao encontrado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                             }
                         } else {
-                            com_efetuadosWindow << "Erro: Zona não encontrada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                            com_efetuadosWindow << "Erro: Zona nao encontrada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         }
                     }
                 }
             } else {
                 // Parâmetros em falta ou não estão no formato pretendido
                 mainWindow.clear();
-                com_efetuadosWindow << "Erro: o comando 'psalva' requer um ID numérico da zona, um ID numérico do processador de regras e um nome único." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                com_efetuadosWindow << "Erro: o comando 'psalva' requer um ID numérico da zona, um ID numerico do processador de regras e um nome unico." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         }
         else if (acao == "prepoe") {
@@ -768,15 +768,15 @@ void Interface::processarComando(const string& comando) {
                         com_efetuadosWindow << "Processador restaurado com sucesso na Zona ID: " << zonaOriginal->getId() << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
                         mainWindow.clear();
-                        com_efetuadosWindow << "Erro: A zona onde a cópia foi criada já foi eliminada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        com_efetuadosWindow << "Erro: A zona onde a copia foi criada ja foi eliminada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
                 } else {
                     mainWindow.clear();
-                    com_efetuadosWindow << "Erro: Não existe um processador salvo com o nome '" << nome << "'." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    com_efetuadosWindow << "Erro: Nao existe um processador salvo com o nome '" << nome << "'." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
                 mainWindow.clear();
-                com_efetuadosWindow << "Erro: o comando 'prepoe' requer um nome como parâmetro." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                com_efetuadosWindow << "Erro: o comando 'prepoe' requer um nome como parametro." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "prem") {
             string nome;
@@ -786,7 +786,7 @@ void Interface::processarComando(const string& comando) {
                 com_efetuadosWindow << "Processador removido com sucesso." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             } else {
                 mainWindow.clear();
-                com_efetuadosWindow << "Erro: o comando 'prem' requer um nome como parâmetro." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                com_efetuadosWindow << "Erro: o comando 'prem' requer um nome como parametro." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "plista") {
                 string extra;

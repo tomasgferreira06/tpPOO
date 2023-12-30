@@ -58,6 +58,7 @@ Zona::~Zona() {
 
 void Zona::adicionarProcessador(Processador *processador) {
     processadores.push_back(processador);
+    atualizarJanela();
 }
 
 void Zona::adicionarPropriedade(Propriedade* propriedade) {
@@ -140,6 +141,7 @@ void Zona::adicionarSensor(char tipo) {
         default:
             break;
     }
+    atualizarJanela();
 }
 
 int Zona::getSensoresNum() const {
@@ -151,8 +153,10 @@ bool Zona::removerSensor(int idSensor) {
         if ((*it)->getIdSensor() == idSensor) {
             sensores.erase(it);
             return true;
+            atualizarJanela();
         }
     }
+
     return false;
 }
 
@@ -179,6 +183,7 @@ void Zona::adicionarAparelho(Zona* zona,char tipo) {
         default:
             break;
     }
+    atualizarJanela();
 }
 
 int Zona::getAparelhosNum() const {
@@ -194,6 +199,7 @@ bool Zona::removerAparelho(int idAparelho) {
         if ((*it)->getIdAparelho() == idAparelho) {
             aparelhos.erase(it);
             return true;
+            atualizarJanela();
         }
     }
     return false;
@@ -204,6 +210,7 @@ bool Zona::removerProcessador(int idProcessador) {
         if ((*it)->getIdProcessador() == idProcessador) {
            processadores.erase(it);
             return true;
+            atualizarJanela();
         }
     }
     return false;
@@ -249,6 +256,14 @@ Sensor *Zona::encontrarSensorPorId(int idSensor) {
         }
     }
     return nullptr; // Retorna nullptr se o sensor não for encontrado
+}
+void Zona::atualizarJanela() const {
+    term::Window* window = this->getJanela();
+    window->clear();
+    *window << term::set_color(11) << "ID:" << this->getId()
+            << term::move_to(0, 1) << "S:" << this->getSensoresNum()
+            << term::move_to(0, 2) << "P:" << this->getProcessadoresNum()
+            << term::move_to(0, 3) << "A:" << this->getAparelhosNum();
 }
 
 const vector<Processador *> &Zona::getProcessadores() const {

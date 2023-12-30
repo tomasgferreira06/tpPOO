@@ -20,6 +20,7 @@ public:
 
 private:
     term::Window mainWindow;
+
     term::Window com_efetuadosWindow;
     term::Window habitacaoWindow;
     //term::Window janela_habitacaoWindow;

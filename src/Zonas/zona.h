@@ -30,7 +30,7 @@ private:
 public:
 
     Zona(int id, term::Window* win);
-
+    void atualizarJanela() const;
 
     ~Zona();
     int getId() const;

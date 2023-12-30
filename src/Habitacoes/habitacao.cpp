@@ -141,7 +141,16 @@ void Habitacao::adicionarProcessador(int idZona, string comando) {
         zona->adicionarProcessador(novoProcessador);
     }
 }
-
+bool Habitacao::processadorSalvoExiste(const std::string& nome) const {
+    return processadoresSalvos.find(nome) != processadoresSalvos.end();
+}
+Processador* Habitacao::getProcessadorSalvo(const std::string& nome) const {
+    auto it = processadoresSalvos.find(nome);
+    if (it != processadoresSalvos.end()) {
+        return it->second;
+    }
+    return nullptr;  // Retorna nullptr se o processador com o nome especificado não for encontrado
+}
 
 
 Zona* Habitacao::encontrarZonaPorId(int idZona) {
@@ -245,15 +254,11 @@ void Habitacao::listarProcessadoresSalvos(term::Window& com_efetuadosWindow) con
     for (const auto& par : processadoresSalvos) {
         const string& nome = par.first;
         const Processador* processador = par.second;
-
-        // Verifique se o ponteiro processador é válido
         if (processador) {
-            // Supondo que Processador tem um método getZona
             const Zona* zona = processador->getZona();
             if (zona) {
-                int idZona = zona->getId();  // Supondo que Zona tem um método getId
+                int idZona = zona->getId();
                 int idProcessador = processador->getIdProcessador();
-
                 com_efetuadosWindow << "Nome: " << nome << ", ID do Processador: " << idProcessador << ", ID da Zona: " << idZona << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         }

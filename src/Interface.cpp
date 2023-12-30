@@ -746,51 +746,55 @@ void Interface::processarComando(const string& comando) {
         }
         else if (acao == "prepoe") {
             string nome;
-
             if (stream >> nome) {
-                string extra;
-                if (stream >> extra) {
-                    // Parâmetros a mais
-                    mainWindow.clear();
-                    com_efetuadosWindow << "Erro: o comando 'prepoe' requer apenas um nome unico."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
-                } else {
-                    if (nome.find(' ') != string::npos) {
-                        com_efetuadosWindow << "Erro: o nome deve ser uma unica palavra sem espacos."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                // Verifica se existe um processador salvo com o nome especificado
+                if (minhaHabitacao.processadorSalvoExiste(nome)) {
+                    // Recupera o processador salvo
+                    Processador* processadorSalvo = minhaHabitacao.getProcessadorSalvo(nome);
+
+                    // Obtém a zona original do processador
+                    Zona* zonaOriginal = processadorSalvo->getZona();
+                    if (zonaOriginal && minhaHabitacao.encontrarZonaPorId(zonaOriginal->getId())) {
+                        // Verifica se já existe um processador com o mesmo ID na zona original
+                        Processador* processadorExistente = zonaOriginal->encontrarProcessadorPorId(processadorSalvo->getIdProcessador());
+                        if (processadorExistente) {
+                            // Remove o processador existente
+                            zonaOriginal->removerProcessador(processadorExistente->getIdProcessador());
+                        }
+
+                        // Adiciona o processador restaurado à zona original
+                        mainWindow.clear();
+                        zonaOriginal->adicionarProcessador(processadorSalvo);
+                        com_efetuadosWindow << "Processador restaurado com sucesso na Zona ID: " << zonaOriginal->getId() << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
-                        // Comando válido
-                        com_efetuadosWindow << "Restauro do processador de regras ainda nao implementado."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        mainWindow.clear();
+                        com_efetuadosWindow << "Erro: A zona onde a cópia foi criada já foi eliminada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
+                } else {
+                    mainWindow.clear();
+                    com_efetuadosWindow << "Erro: Não existe um processador salvo com o nome '" << nome << "'." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 }
             } else {
-                // Parâmetros em falta ou não estão no formato pretendido
                 mainWindow.clear();
-                com_efetuadosWindow << "Erro: o comando 'prepoe' requer um nome único para o estado salvo."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                com_efetuadosWindow << "Erro: o comando 'prepoe' requer um nome como parâmetro." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
-        } else {
-            if (acao == "prem") {
-                string nome;
-
-                if (stream >> nome) {
-                    string extra;
-                    if (stream >> extra) {
-                        // Parâmetros a mais
-                        mainWindow.clear();
-                        com_efetuadosWindow << "Erro: o comando 'prem' requer apenas um nome unico."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
-                    } else {
-                        if (nome.find(' ') != string::npos) {
-                            com_efetuadosWindow << "Erro: o nome deve ser uma unica palavra sem espacos."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
-                        } else {
-                            // Comando válido
-                            com_efetuadosWindow << "Apaga uma cópia do processador de regras armazenado em memória."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
-                        }
-                    }
-                }
-            } else if (acao == "plista") {
+        } else if (acao == "prem") {
+            string nome;
+            if (stream >> nome) {
+                mainWindow.clear();
+                minhaHabitacao.removerProcessadorSalvo(nome);
+                com_efetuadosWindow << "Processador removido com sucesso." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            } else {
+                mainWindow.clear();
+                com_efetuadosWindow << "Erro: o comando 'prem' requer um nome como parâmetro." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            }
+        } else if (acao == "plista") {
                 string extra;
                 if (stream >> extra) {
                     mainWindow.clear();
                     com_efetuadosWindow << "Erro: o comando 'plista', nao requer parametros adicionais"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else if (acao == "plista") {
+                    mainWindow.clear();
                     minhaHabitacao.listarProcessadoresSalvos(com_efetuadosWindow);
                 }
             } else if (acao == "exec") {
@@ -841,7 +845,6 @@ void Interface::processarComando(const string& comando) {
 
             }
         }
-    }
 
 void Interface::avancarTempo(int n) {
     com_efetuadosWindow << "Tempo avancado em " << n << " instantes."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);

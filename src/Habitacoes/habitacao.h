@@ -42,6 +42,8 @@ public:
     bool nomeJaExiste(const std::string& nome) const;
     void listarProcessadoresSalvos(term::Window& com_efetuadosWindow) const;
     void salvarProcessador(const std::string& nome, Processador* processador);
+    bool processadorSalvoExiste(const std::string& nome) const;
+    Processador* getProcessadorSalvo(const std::string& nome) const;
     Processador recuperarProcessador(const std::string& id) const;
     void removerProcessadorSalvo(const std::string& nome);
 

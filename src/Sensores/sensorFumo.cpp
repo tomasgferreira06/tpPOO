@@ -15,6 +15,7 @@ double SensorFumo::getFumo() const {
            return fumoPropriedade->getValor();
         }
     }
+    return 0.0;
 }
 
 

@@ -11,6 +11,10 @@ bool RegraIgualA::avaliar() const {
 void RegraIgualA::setValorComparacao(double valorComparacao) {
     RegraIgualA::valorComparacao = valorComparacao;
 }
+Regra* RegraIgualA::duplica() const {
+    return new RegraIgualA(*this);
+}
+
 
 double RegraIgualA::getValorComparacao() const {
     return valorComparacao;

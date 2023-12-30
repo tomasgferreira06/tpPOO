@@ -15,6 +15,7 @@ public:
     RegraMaiorQue(Sensor *sensor, double valor);
 
     bool avaliar() const override;
+    Regra* duplica() const override;
 
     void setValorComparacao(double valorComparacao);
 

@@ -16,6 +16,7 @@ double SensorMovimento::getVibracao() const {
             return movPropriedade->getValor();
         }
     }
+    return 0.0;
 }
 
 

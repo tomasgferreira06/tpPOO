@@ -20,6 +20,7 @@ public:
     double getValorMin() const;
 
     void setValorMin(double valorMin);
+    Regra* duplica() const override;
 
     double getValorMax() const;
 

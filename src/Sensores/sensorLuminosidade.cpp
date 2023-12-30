@@ -17,6 +17,7 @@ double SensorLuminosidade::getLuz() const {
             return luzPropriedade->getValor();
         }
     }
+    return 0.0;
 }
 
 

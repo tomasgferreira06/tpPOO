@@ -16,6 +16,9 @@ bool RegraFora::avaliar() const {
 double RegraFora::getValorMin() const {
     return valorMin;
 }
+Regra* RegraFora::duplica() const {
+    return new RegraFora(*this);
+}
 
 double RegraFora::getValorMax() const {
     return valorMax;

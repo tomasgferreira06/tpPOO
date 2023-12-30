@@ -14,6 +14,7 @@ private:
 public:
     Regra(Sensor *sensor);
     //virtual ~Regra();
+    virtual Regra* duplica() const = 0 ;
     virtual bool avaliar() const = 0;
     int getId() const;
     Sensor *getSensorAssociado() const;

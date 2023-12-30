@@ -716,23 +716,35 @@ void Interface::processarComando(const string& comando) {
                 if (stream >> extra) {
                     // Parâmetros a mais
                     mainWindow.clear();
-                    com_efetuadosWindow
-                            << "Erro: o comando 'psalva' requer apenas o ID da zona, o ID do processador de regras e um nome único."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    com_efetuadosWindow << "Erro: o comando 'psalva' requer apenas o ID da zona, o ID do processador de regras e um nome único." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else {
                     if (nome.find(' ') != string::npos) {
-                        com_efetuadosWindow << "Erro: o nome deve ser uma unica palavra sem espacos."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        com_efetuadosWindow << "Erro: o nome deve ser uma unica palavra sem espaços." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    } else if (minhaHabitacao.nomeJaExiste(nome)) {
+                        com_efetuadosWindow << "Erro: Ja existe uma cópia salva com o nome '" << nome << "'." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
-                        // Comando válido
-                        com_efetuadosWindow << "Save do estado do processador de regras ainda nao foi implementado."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        // Encontre a zona e o processador
+                        Zona* zona = minhaHabitacao.encontrarZonaPorId(idZona);
+                        if (zona) {
+                            Processador* processador = zona->encontrarProcessadorPorId(idProcRegras);
+                            if (processador) {
+                                minhaHabitacao.salvarProcessador(nome, processador);
+                                com_efetuadosWindow << "Estado do processador salvo com sucesso." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                            } else {
+                                com_efetuadosWindow << "Erro: Processador não encontrado." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                            }
+                        } else {
+                            com_efetuadosWindow << "Erro: Zona não encontrada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                        }
                     }
                 }
             } else {
                 // Parâmetros em falta ou não estão no formato pretendido
                 mainWindow.clear();
-                com_efetuadosWindow
-                        << "Erro: o comando 'psalva' requer um ID numerico da zona, um ID numerico do processador de regras e um nome unico."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                com_efetuadosWindow << "Erro: o comando 'psalva' requer um ID numérico da zona, um ID numérico do processador de regras e um nome único." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
-        } else if (acao == "prepoe") {
+        }
+        else if (acao == "prepoe") {
             string nome;
 
             if (stream >> nome) {
@@ -778,9 +790,8 @@ void Interface::processarComando(const string& comando) {
                 if (stream >> extra) {
                     mainWindow.clear();
                     com_efetuadosWindow << "Erro: o comando 'plista', nao requer parametros adicionais"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
-                } else {
-                    mainWindow.clear();
-                    com_efetuadosWindow << "Comando válido:"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                } else if (acao == "plista") {
+                    minhaHabitacao.listarProcessadoresSalvos(com_efetuadosWindow);
                 }
             } else if (acao == "exec") {
                 string nomeArquivo;

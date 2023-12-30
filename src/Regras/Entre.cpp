@@ -16,6 +16,9 @@ bool RegraEntre::avaliar() const {
 double RegraEntre::getValorMin() const {
     return valorMin;
 }
+Regra* RegraEntre::duplica() const {
+    return new RegraEntre(*this);
+}
 
 void RegraEntre::setValorMin(double valorMin) {
     RegraEntre::valorMin = valorMin;

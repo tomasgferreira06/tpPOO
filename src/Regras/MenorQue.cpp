@@ -17,6 +17,9 @@ double RegraMenorQue::getValorComparacao() const {
 void RegraMenorQue::setValorComparacao(double valorComparacao) {
     RegraMenorQue::valorComparacao = valorComparacao;
 }
+Regra* RegraMenorQue::duplica() const {
+    return new RegraMenorQue(*this);
+}
 
 std::string RegraMenorQue::getNomeRegra() const {
     return "menor_que";

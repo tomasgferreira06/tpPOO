@@ -16,7 +16,7 @@ public:
     RegraFora(Sensor *sensor, double min,double max);
 
     bool avaliar() const override;
-
+    Regra* duplica() const override;
     double getValorMin() const;
 
     void setValorMin(double valorMin);

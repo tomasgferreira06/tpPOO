@@ -17,6 +17,7 @@ double SensorSom::getSom() const {
             return somPropriedade->getValor();
         }
     }
+    return 0.0;
 }
 
 

@@ -16,6 +16,7 @@ double SensorTemperatura::getTemperatura() const {
             return tempPropriedade->getValor();
         }
     }
+    return 0.0; // Retorno padrão se a zona associada ou a propriedade não for encontrada
 }
 
 std::string SensorTemperatura::getInfo() const {

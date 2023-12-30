@@ -13,6 +13,7 @@ double SensorHumidade::getHumidade() const {
             return humPropriedade->getValor();
         }
     }
+    return 0.0;
 }
 
 

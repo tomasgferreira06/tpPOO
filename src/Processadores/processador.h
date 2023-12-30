@@ -10,13 +10,16 @@ using namespace std;
 
 
 class Processador {
+
+
+
 private:
-    Zona* zona;
     int idProcessador;
     static int nextIdProcessador;
     string comando;
     vector<Regra *> regras;
     vector<Aparelho*> aparelhosAssociados;
+    Zona* zona;
 
 
 public:
@@ -24,6 +27,9 @@ public:
     ~Processador();
     void adicionarRegra(Regra* novaRegra);
     void removerRegra(int idRegra);
+    Processador(const Processador& outro);
+    Processador& operator=(const Processador& outro);
+
     void avaliarRegras();
     void listarRegras() const;
     bool verificarRegras() const;
@@ -38,6 +44,8 @@ public:
 
     int getRegrasNum() const;
     const vector<Regra *> &getRegras() const;
+
+    Zona *getZona() const;
 };
 
 #endif // TPPOO_PROCESSADOR_H

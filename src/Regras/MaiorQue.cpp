@@ -15,6 +15,9 @@ bool RegraMaiorQue::avaliar() const {
 void RegraMaiorQue::setValorComparacao(double valorComparacao) {
     RegraMaiorQue::valorComparacao = valorComparacao;
 }
+Regra* RegraMaiorQue::duplica() const {
+    return new RegraMaiorQue(*this);
+}
 
 double RegraMaiorQue::getValorComparacao() const {
     return valorComparacao;

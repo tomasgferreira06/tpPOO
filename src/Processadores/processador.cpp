@@ -9,6 +9,25 @@ Processador::Processador(Zona *zona ,string _comando) :zona(zona), idProcessador
 
 }
 
+Processador::Processador(const Processador& ori) :zona(ori.zona), idProcessador(ori.idProcessador), comando(ori.comando){
+    *this = ori;
+}
+
+Processador& Processador::operator=(const Processador& outro) {
+    if (this != &outro) {
+        for (auto& regra : regras) {
+            delete regra;
+        }
+        regras.clear();
+
+        // Copiar as regras
+        for (const auto& regra : outro.regras) {
+            regras.push_back(regra->duplica());
+        }
+    }
+    return *this;
+}
+
 void Processador::adicionarRegra(Regra *novaRegra) {
     regras.push_back(novaRegra);
 }
@@ -58,7 +77,6 @@ int Processador::getRegrasNum() const {
 }
 
 Processador::~Processador() {
-
 }
 
 void Processador::mudarComando(const string &novoComando) {
@@ -82,6 +100,10 @@ void Processador::avaliarRegras() {
             aparelho->receberComando("desliga");
         }
     }
+}
+
+Zona *Processador::getZona() const {
+    return zona;
 }
 
 

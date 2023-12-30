@@ -226,7 +226,36 @@ void Habitacao::avancarInstante() {
 int Habitacao::getInstanteAtual() const {
     return instanteAtual;
 }
+void Habitacao::salvarProcessador(const std::string& nome, Processador* processador) {
+    processadoresSalvos.insert(std::make_pair(nome, processador));
+}
 
+void Habitacao::removerProcessadorSalvo(const std::string& nome) {
+    auto it = processadoresSalvos.find(nome);
+    if (it != processadoresSalvos.end()) {
+        delete it->second;  // Eliminamos o objeto Processador
+        processadoresSalvos.erase(it);  // Removemos a entrada do mapa
+    }
+}
 
+bool Habitacao::nomeJaExiste(const std::string& nome) const {
+    return processadoresSalvos.find(nome) != processadoresSalvos.end();
+}
+void Habitacao::listarProcessadoresSalvos(term::Window& com_efetuadosWindow) const {
+    for (const auto& par : processadoresSalvos) {
+        const string& nome = par.first;
+        const Processador* processador = par.second;
 
+        // Verifique se o ponteiro processador é válido
+        if (processador) {
+            // Supondo que Processador tem um método getZona
+            const Zona* zona = processador->getZona();
+            if (zona) {
+                int idZona = zona->getId();  // Supondo que Zona tem um método getId
+                int idProcessador = processador->getIdProcessador();
 
+                com_efetuadosWindow << "Nome: " << nome << ", ID do Processador: " << idProcessador << ", ID da Zona: " << idZona << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            }
+        }
+    }
+}

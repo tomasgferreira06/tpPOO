@@ -78,13 +78,6 @@ void Aquecedor::executar() {
 
 // A variável 'contador' e 'adicionouRuido' devem ser membros da classe Aquecedor
 
-
-
-
-
-
-
-
 std::string Aquecedor::getNome() const{
     std::ostringstream ss;
     ss << "Aquecedor" << getUltimoComando();

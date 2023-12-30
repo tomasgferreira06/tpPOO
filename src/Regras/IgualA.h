@@ -14,6 +14,7 @@ private:
 
 public:
     RegraIgualA(Sensor *sensor, double valor);
+    Regra* duplica() const override;
 
     bool avaliar() const override;
 

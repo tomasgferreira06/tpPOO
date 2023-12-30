@@ -15,7 +15,7 @@ double SensorRadiacao::getRadiacao() const {
             return radPropriedade->getValor();
         }
     }
-
+    return 0.0;
 }
 
 

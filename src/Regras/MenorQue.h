@@ -14,6 +14,7 @@ private:
 public:
     RegraMenorQue(Sensor *sensor, double valor);
     bool avaliar() const override;
+    Regra* duplica() const override;
     void setValorComparacao(double valorComparacao);
     double getValorComparacao() const;
     std::string getNomeRegra() const override;

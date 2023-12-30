@@ -10,20 +10,20 @@ SensorSom::SensorSom(Zona *a) : Sensor(a), som(0.0) {
 }
 
 double SensorSom::getSom() const {
-    return som;
+    Zona* zonaAssociada = getZonaAssociada();
+    if (zonaAssociada) {
+        Propriedade* somPropriedade = zonaAssociada->getPropriedade("Som");
+        if (somPropriedade) {
+            return somPropriedade->getValor();
+        }
+    }
 }
 
-void SensorSom::setSom(float som) {
-    SensorSom::som = som;
-}
 
 std::string SensorSom::getInfo() const {
-
         std::ostringstream ss;
         ss << 's' << getIdSensor() << "Som" << getSom();
         return ss.str();
-
-
 }
 
 double SensorSom::getValor() const {

@@ -2,12 +2,13 @@
 #ifndef TPPOO_LAMPADA_H
 #define TPPOO_LAMPADA_H
 
-
+#include "..\Zonas\zona.h"
 #include "aparelho.h"
 
 class Lampada : public Aparelho {
 private:
     int contador;
+    bool adicionouLumens;
 public:
     Lampada(Zona *pZona);
     void liga() override;

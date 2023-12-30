@@ -3,7 +3,7 @@
 #include <sstream>
 
 
-Lampada::Lampada(Zona *pZona) : Aparelho(pZona), contador(0) {}
+Lampada::Lampada(Zona *pZona) : Aparelho(pZona), contador(0),adicionouLumens(false) {}
 
 void Lampada::liga() {
     if(!estaLigado()){
@@ -17,13 +17,39 @@ void Lampada::desliga() {
     }
 }
 void Lampada::executar() {
-    if (estaLigado()) {
-        // A lógica de adicionar calor a cada 3 instantes até um máximo de 50 graus
-        // e adicionar 5 dB de ruído uma única vez vai aqui
-        // Você precisará de acesso à zona ou às propriedades para modificar a temperatura
-        contador++;
-        if (contador % 3 == 0) {
-            // Aumentar a temperatura da zona
+    Zona* zona = getZonaAssociada();
+    if(zona){
+        const std::vector<Sensor*>& sensores = zona->getSensores();
+        double luminosidadeAtual = 0.0;
+        bool encontrouSensorLuminosidade = false;
+
+        // Procurar pelo sensor de luminosidade
+        for (Sensor* sensor : sensores) {
+            if (sensor->getTipoSensor() == "Luminosidade") {
+                luminosidadeAtual = sensor->getValor();
+                encontrouSensorLuminosidade = true;
+                break;
+            }
+        }
+
+        if(estaLigado()){
+            // Verifica se os lúmens já foram adicionados
+            if (!adicionouLumens && encontrouSensorLuminosidade) {
+                Propriedade* propLuminosidade = zona->getPropriedade("Luminosidade");
+                if (propLuminosidade) {
+                    propLuminosidade->setValor(luminosidadeAtual + 900);
+                    adicionouLumens = true; // Seta a flag para indicar que os lúmens foram adicionados
+                }
+            }
+        }else{
+            if(adicionouLumens && encontrouSensorLuminosidade){
+                // Remove os lúmens adicionados
+                Propriedade* propLuminosidade = zona->getPropriedade("Luminosidade");
+                if (propLuminosidade) {
+                    propLuminosidade->setValor(std::max(0.0, luminosidadeAtual - 900));
+                    adicionouLumens = false; // Reseta a flag
+                }
+            }
         }
     }
 }

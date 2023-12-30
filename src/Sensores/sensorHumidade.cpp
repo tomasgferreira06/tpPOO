@@ -6,12 +6,16 @@
 SensorHumidade::SensorHumidade(Zona *a) : Sensor(a), humidade(0.0) {}
 
 double SensorHumidade::getHumidade() const {
-    return humidade;
+    Zona *zonaAssociada = getZonaAssociada();
+    if(getZonaAssociada()){
+        Propriedade* humPropriedade = zonaAssociada->getPropriedade("Humidade");
+        if(humPropriedade){
+            return humPropriedade->getValor();
+        }
+    }
 }
 
-void SensorHumidade::setHumidade(float humidade) {
-    SensorHumidade::humidade = humidade;
-}
+
 
 std::string SensorHumidade::getInfo() const {
     std::ostringstream ss;

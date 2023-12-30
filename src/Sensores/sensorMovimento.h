@@ -6,7 +6,8 @@
 #define TPPOO_SENSORMOVIMENTO_H
 
 #include "sensor.h"
-#include "../Propriedades/temperatura.h"
+#include "../Propriedades/vibracao.h"
+#include "../Zonas/zona.h"
 
 class SensorMovimento : public Sensor{
 
@@ -16,7 +17,6 @@ private:
 public:
     SensorMovimento(Zona *a);
     double getVibracao() const;
-    void setVibracao(float vibracao);
     std::string getInfo() const override;
     double getValor() const override;
     std::string getTipoSensor() const override;

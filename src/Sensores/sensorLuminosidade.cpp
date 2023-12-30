@@ -10,12 +10,15 @@ SensorLuminosidade::SensorLuminosidade(Zona *a) : Sensor(a),luz(0.0) {
 }
 
 double SensorLuminosidade::getLuz() const {
-    return luz;
+    Zona* zonaAssociada = getZonaAssociada();
+    if(zonaAssociada){
+        Propriedade* luzPropriedade = zonaAssociada->getPropriedade("Luz");
+        if(luzPropriedade){
+            return luzPropriedade->getValor();
+        }
+    }
 }
 
-void SensorLuminosidade::setLuz(float luz) {
-    SensorLuminosidade::luz = luz;
-}
 
 std::string SensorLuminosidade::getInfo() const {
     std::ostringstream ss;

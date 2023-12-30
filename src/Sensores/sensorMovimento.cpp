@@ -7,13 +7,18 @@
 
 SensorMovimento::SensorMovimento(Zona *a) : Sensor(a), vibracao(0.0){}
 
+
 double SensorMovimento::getVibracao() const {
-    return vibracao;
+    Zona* zonaAssociada = getZonaAssociada();
+    if(zonaAssociada){
+        Propriedade *movPropriedade = zonaAssociada->getPropriedade("Movimento");
+        if(movPropriedade){
+            return movPropriedade->getValor();
+        }
+    }
 }
 
-void SensorMovimento::setVibracao(float vibracao) {
-    SensorMovimento::vibracao = vibracao;
-}
+
 
 std::string SensorMovimento::getInfo() const {
     std::ostringstream ss;

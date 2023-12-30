@@ -21,49 +21,66 @@ void Aquecedor::desliga() {
     if(estaLigado()){ // se está ligado, desliga.
         setLigado(false);
     }
-}
+} !=
 
 void Aquecedor::executar() {
     Zona* zona = getZonaAssociada();
-    if (estaLigado() && zona) {
+    bool encontrouSensorSom = false;
+    double somAtual = 0.0;
+    double temperaturaAtual = 0.0;
+    bool encontrouSensorTemperatura = false;
+
+    // Mova a procura pelos sensores para fora do if do estado ligado
+    if (zona) {
         const std::vector<Sensor*>& sensores = zona->getSensores();
 
-        // Procurar pelo sensor de temperatura
-        double temperaturaAtual = 0.0;
-        bool encontrouSensorTemperatura = false;
         for (Sensor* sensor : sensores) {
             if (sensor->getTipoSensor() == "Temperatura") {
                 temperaturaAtual = sensor->getValor();
                 encontrouSensorTemperatura = true;
-                break;
+            } else if (sensor->getTipoSensor() == "Som") {
+                somAtual = sensor->getValor();
+                encontrouSensorSom = true;
             }
         }
+    }
 
-        if (!adicionouRuido) {
-            // Adicionar ruído lógico
-            Propriedade *propSom = zona->getPropriedade("Som");
+    if (estaLigado()) {
+        // Adicionar ruído se ainda não foi adicionado
+        if (!isAdicionouRuido() && encontrouSensorSom) {
+            Propriedade* propSom = zona->getPropriedade("Som");
             if (propSom) {
-                propSom->setValor(propSom->getValor() + 5);
+                propSom->setValor(somAtual + 5);
+                setAdicionouRuido(true);
             }
-            adicionouRuido = true;
         }
 
+        // Aumentar temperatura a cada 3 instantes até um máximo de 50 graus
         contador++;
         if (contador % 3 == 0 && encontrouSensorTemperatura && temperaturaAtual < 50) {
             Propriedade* propTemp = zona->getPropriedade("Temperatura");
             if (propTemp) {
-                propTemp->setValor(temperaturaAtual + 1); // Aumenta a temperatura com base no sensor
+                propTemp->setValor(temperaturaAtual + 1);
             }
         }
-    } else if (!estaLigado() && adicionouRuido) {
-        // Remover ruído
-        Propriedade* propSom = zona->getPropriedade("Som");
-        if (propSom) {
-            propSom->setValor(std::max(0, propSom->getValor() - 5)); // Remove 5 dB, garantindo que não fique negativo
+    } else if(!estaLigado()) { // se está desligado
+        // Ao desligar o aquecedor, remova o ruído adicionado
+        if (adicionouRuido && encontrouSensorSom) {
+            Propriedade* propSom = zona->getPropriedade("Som");
+            if (propSom) {
+                propSom->setValor(std::max(0.0, somAtual - 5));
+                adicionouRuido = false;
+            }
         }
-        adicionouRuido = false;
+        contador = 0; // Resetar o contador quando o aquecedor é desligado
     }
 }
+
+// A variável 'contador' e 'adicionouRuido' devem ser membros da classe Aquecedor
+
+
+
+
 
 
 
@@ -72,4 +89,12 @@ std::string Aquecedor::getNome() const{
     std::ostringstream ss;
     ss << "Aquecedor" << getUltimoComando();
     return ss.str();
+}
+
+bool Aquecedor::isAdicionouRuido() const {
+    return adicionouRuido;
+}
+
+void Aquecedor::setAdicionouRuido(bool adicionouRuido) {
+    Aquecedor::adicionouRuido = adicionouRuido;
 }

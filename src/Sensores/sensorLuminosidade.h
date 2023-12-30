@@ -6,7 +6,8 @@
 #define TPPOO_SENSORLUMINOSIDADE_H
 
 #include "sensor.h"
-#include "../Propriedades/temperatura.h"
+#include "../Propriedades/luz.h"
+#include "../Zonas/zona.h"
 
 class SensorLuminosidade : public Sensor{
 
@@ -16,7 +17,6 @@ private:
 public:
     SensorLuminosidade(Zona *a);
     double getLuz() const;
-    void setLuz(float luz);
     std::string getInfo() const override;
     double getValor() const override;
     std::string getTipoSensor() const override;

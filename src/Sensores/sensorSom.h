@@ -7,7 +7,8 @@
 
 
 #include "sensor.h"
-#include "../Propriedades/temperatura.h"
+#include "../Propriedades/som.h"
+#include "../Zonas/zona.h"
 
 class SensorSom : public Sensor{
 
@@ -17,7 +18,6 @@ private:
 public:
     SensorSom(Zona *a);
     double getSom() const;
-    void setSom(float som);
     std::string getInfo() const override;
     double getValor() const override;
     std::string getTipoSensor() const override;

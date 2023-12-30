@@ -7,6 +7,7 @@
 #include "Regras/MenorQue.h"
 
 using namespace std;
+using namespace term;
 
 
 Interface::Interface()
@@ -16,11 +17,17 @@ Interface::Interface()
           flagHabitacao(false)
           {
 
-    mainWindow << "Escreva comando ou 'sair' para terminar: ";
 
 
-    com_efetuadosWindow << "Comandos efetuados:";
-              habitacaoWindow << "Instantes : ";
+    for(int i=1; i<20; i++) {
+        term::Terminal::instance().init_color(i, i, 0);
+    }
+
+
+
+
+    mainWindow << set_color(10) << "Escreva comando ou 'sair' para terminar: " << no_color();;
+    habitacaoWindow << "Instantes : ";
 }
 
 bool Interface::isFlagHabitacao() const {
@@ -40,7 +47,7 @@ void Interface::iniciar() {
             break;
         }
         processarComando(comando);
-        mainWindow << "Escreva comando ou 'sair' para terminar (help ou help2 para lista de comandos): " << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+        mainWindow << set_color(10) << "Escreva comando ou 'sair' para terminar (help ou help2 para lista de comandos): " << term::move_to(0, com_efetuadosWindow.get_current_row() + 1) << set_color(0);
     }
 }
 

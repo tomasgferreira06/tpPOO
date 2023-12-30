@@ -8,12 +8,16 @@
 SensorRadiacao::SensorRadiacao(Zona *a) : Sensor(a), radiacao(0.0) {}
 
 double SensorRadiacao::getRadiacao() const {
-    return radiacao;
+    Zona *zonaAssociada = getZonaAssociada();
+    if(zonaAssociada){
+        Propriedade* radPropriedade = zonaAssociada->getPropriedade("Radiacao");
+        if(radPropriedade){
+            return radPropriedade->getValor();
+        }
+    }
+
 }
 
-void SensorRadiacao::setRadiacao(float radiacao) {
-    SensorRadiacao::radiacao = radiacao;
-}
 
 std::string SensorRadiacao::getInfo() const {
     std::ostringstream ss;

@@ -6,7 +6,8 @@
 #define TPPOO_SENSORRADIACAO_H
 
 #include "sensor.h"
-#include "../Propriedades/temperatura.h"
+#include "../Propriedades/Radiacao.h"
+#include "../Zonas/zona.h"
 
 class SensorRadiacao : public Sensor{
 
@@ -16,7 +17,6 @@ private:
 public:
     SensorRadiacao(Zona *a);
     double getRadiacao() const;
-    void setRadiacao(float radiacao);
     std::string getInfo() const override;
     double getValor() const override;
     std::string getTipoSensor() const override;

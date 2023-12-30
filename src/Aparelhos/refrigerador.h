@@ -5,6 +5,7 @@
 #ifndef TPPOO_REFRIGERADOR_H
 #define TPPOO_REFRIGERADOR_H
 
+#include "..\Zonas\zona.h"
 #include "aparelho.h"
 
 class Refrigerador : public Aparelho {

@@ -8,12 +8,15 @@
 SensorFumo::SensorFumo(Zona *a) : Sensor(a), fumo(0.0){}
 
 double SensorFumo::getFumo() const {
-    return fumo;
+    Zona* zonaAssociada = getZonaAssociada();
+    if(zonaAssociada){
+        Propriedade* fumoPropriedade = zonaAssociada->getPropriedade("Fumo");
+        if(fumoPropriedade){
+           return fumoPropriedade->getValor();
+        }
+    }
 }
 
-void SensorFumo::setFumo(float fumo) {
-    SensorFumo::fumo = fumo;
-}
 
 std::string SensorFumo::getInfo() const {
     std::ostringstream ss;

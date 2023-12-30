@@ -5,6 +5,7 @@
 #ifndef TPPOO_ASPERSOR_H
 #define TPPOO_ASPERSOR_H
 
+#include "..\Zonas\zona.h"
 #include "aparelho.h"
 
 class Aspersor : public Aparelho {

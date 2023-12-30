@@ -35,7 +35,7 @@ void Lampada::executar() {
         if(estaLigado()){
             // Verifica se os lúmens já foram adicionados
             if (!adicionouLumens && encontrouSensorLuminosidade) {
-                Propriedade* propLuminosidade = zona->getPropriedade("Luminosidade");
+                Propriedade* propLuminosidade = zona->getPropriedade("Luz");
                 if (propLuminosidade) {
                     propLuminosidade->setValor(luminosidadeAtual + 900);
                     adicionouLumens = true; // Seta a flag para indicar que os lúmens foram adicionados
@@ -44,7 +44,7 @@ void Lampada::executar() {
         }else{
             if(adicionouLumens && encontrouSensorLuminosidade){
                 // Remove os lúmens adicionados
-                Propriedade* propLuminosidade = zona->getPropriedade("Luminosidade");
+                Propriedade* propLuminosidade = zona->getPropriedade("Luz");
                 if (propLuminosidade) {
                     propLuminosidade->setValor(std::max(0.0, luminosidadeAtual - 900));
                     adicionouLumens = false; // Reseta a flag

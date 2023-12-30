@@ -22,9 +22,9 @@ void Habitacao::criarHabitacao(int linhas, int colunas) {
 
     // Configurações de tamanho e espaçamento para as janelas
     int larguraWindow = 23;
-    int alturaWindow = 7;
-    int espacoHorizontal = 5;
-    int espacoVertical = 2;
+    int alturaWindow = 8;
+    int espacoHorizontal = 2;
+    int espacoVertical = 1;
     int offsetY = 5;
 
     // Criar as janelas e adicionar à grelha
@@ -68,7 +68,7 @@ bool Habitacao::criarZona(int linha, int coluna) {
         grelhaZonas[linha][coluna] = novaZona;
         term::Window* windowAssociada = grelhaZonas[linha][coluna]->getJanela();
         windowAssociada->clear();
-        *windowAssociada << term::move_to(1, 1) << "ID:" << idZona;
+        *windowAssociada << set_color(11)<< "ID:" << idZona;
 
         return true;
     }

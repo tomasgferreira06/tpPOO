@@ -12,7 +12,7 @@ using namespace term;
 
 Interface::Interface()
         : mainWindow(term::Terminal::instance().create_window(0, 0, term::Terminal::getNumCols(), term::Terminal::getNumRows() - 37, true)),
-          com_efetuadosWindow(term::Terminal::instance().create_window(120, 3, 36, term::Terminal::getNumRows()-3, true)),
+          com_efetuadosWindow(term::Terminal::instance().create_window(110, 3, 46, term::Terminal::getNumRows()-3, true)),
           habitacaoWindow(term::Terminal::instance().create_window(0, 3, 17, term::Terminal::getNumRows() - 39, false)),
           flagHabitacao(false)
           {

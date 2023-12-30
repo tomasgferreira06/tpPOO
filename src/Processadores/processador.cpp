@@ -74,10 +74,12 @@ void Processador::avaliarRegras() {
         }
     }
 
-    if (todasRegrasCumpridas) {
-        // Emitir comando para cada aparelho associado
-        for (auto& aparelho : aparelhosAssociados) {
-            aparelho->receberComando(comando);
+    // Emitir comando para cada aparelho associado
+    for (auto& aparelho : aparelhosAssociados) {
+        if (todasRegrasCumpridas) {
+            aparelho->receberComando("liga");
+        } else {
+            aparelho->receberComando("desliga");
         }
     }
 }

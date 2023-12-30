@@ -21,7 +21,7 @@ void Aquecedor::desliga() {
     if(estaLigado()){ // se está ligado, desliga.
         setLigado(false);
     }
-} !=
+}
 
 void Aquecedor::executar() {
     Zona* zona = getZonaAssociada();

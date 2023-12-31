@@ -11,6 +11,8 @@
 class Refrigerador : public Aparelho {
 private:
     int contador;
+    bool somAumentado;
+    bool desligadoRecentemente;
 public:
     Refrigerador(Zona *pZona);
     void liga() override;

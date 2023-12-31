@@ -74,7 +74,7 @@ void Interface::processarComando(const string& comando) {
         }else{
             mainWindow.clear();
             minhaHabitacao.avancarInstante();
-            com_efetuadosWindow << "Instante avançado para: " << minhaHabitacao.getInstanteAtual() << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            com_efetuadosWindow << "Instante avancado para: " << minhaHabitacao.getInstanteAtual() << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             habitacaoWindow.clear();
             habitacaoWindow << "Instantes : " << minhaHabitacao.getInstanteAtual();
         }

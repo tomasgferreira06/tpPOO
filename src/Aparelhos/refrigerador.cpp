@@ -29,7 +29,7 @@ void Refrigerador::executar() {
         bool encontrouSensorSom = false;
 
         for(Sensor *sensor : sensores){
-            if(sensor->getTipoSensor() == "Temeperatura"){
+            if(sensor->getTipoSensor() == "Temperatura"){
                 temperaturaAtual = sensor->getValor();
                 encontrouSensorTemperatura = true;
             }else if(sensor->getTipoSensor() == "Som"){
@@ -44,6 +44,7 @@ void Refrigerador::executar() {
                 Propriedade *propSom = zona->getPropriedade("Som");
                 if(propSom){
                     propSom->setValor(somAtual + 20);
+                    somAumentado = true;
                 }
             }
 
@@ -55,11 +56,13 @@ void Refrigerador::executar() {
                 }
             }
         }else {
+            contador = 0;
             // Remover 20 dB de ruído quando o refrigerador é desligado e esta é a primeira ação pós desligamento
             if (contador == 0 && encontrouSensorSom && !estaLigado()) {
                 Propriedade* propSom = zona->getPropriedade("Som");
                 if (propSom) {
                     propSom->setValor(std::max(0.0, somAtual - 20)); // Garante que o som não fique negativo
+                    somAumentado = false;
                 }
             }
             contador = 0; // Resetar o contador quando o refrigerador é desligado

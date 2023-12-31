@@ -174,18 +174,18 @@ void Habitacao::listarComponentesZona(int idZona, term::Window& com_efetuadosWin
         for (const auto& zona : linha) {
             if (zona->getId() == idZona) {
                 term::Window* windowAssociada = zona->getJanela();
-                com_efetuadosWindow << "Componentes na Zona ID: " << idZona;
+                com_efetuadosWindow << "Componentes na Zona ID:" << idZona <<term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 int componenteCount = 0;
                 for (const auto& sensor : zona->getSensores()) {
-                    com_efetuadosWindow << sensor->getInfo();
+                    com_efetuadosWindow <<term::set_color(3) << sensor->getInfo() << set_color(0) <<term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     componenteCount++;
                 }
                for (const auto& aparelho : zona->getAparelhos()) {
-                   com_efetuadosWindow << " a" << aparelho->getIdAparelho() << " " << aparelho->getNome();
+                   com_efetuadosWindow <<term::set_color(3) <<  " a" << aparelho->getIdAparelho() << " " << aparelho->getNome()<< set_color(0) <<term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                    componenteCount++;
                }
                 for (const auto& processador : zona->getProcessadores()) {
-                   com_efetuadosWindow << " p" << processador->getIdProcessador() <<" Numero de Regras: " << processador->getRegrasNum();
+                   com_efetuadosWindow << term::set_color(3)<< " p" << processador->getIdProcessador() <<" Numero de Regras: " << processador->getRegrasNum();
                     componenteCount++;
                 }
         }

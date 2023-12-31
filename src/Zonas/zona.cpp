@@ -260,10 +260,10 @@ Sensor *Zona::encontrarSensorPorId(int idSensor) {
 void Zona::atualizarJanela() const {
     term::Window* window = this->getJanela();
     window->clear();
-    *window << term::set_color(11) << "ID:" << this->getId()
-            << term::move_to(0, 1) << "S:" << this->getSensoresNum()
-            << term::move_to(0, 2) << "P:" << this->getProcessadoresNum()
-            << term::move_to(0, 3) << "A:" << this->getAparelhosNum();
+    *window << term::set_color(4) << "ID:" << this->getId()
+            << term::move_to(0, 1) <<term::set_color(4) << "S:" <<term::set_color(0) << this->getSensoresNum()
+            << term::move_to(0, 2) <<term::set_color(4) << "P:" <<term::set_color(0) << this->getProcessadoresNum()
+            << term::move_to(0, 3) <<term::set_color(4) << "A:" <<term::set_color(0) << this->getAparelhosNum();
 }
 
 const vector<Processador *> &Zona::getProcessadores() const {

@@ -1,10 +1,3 @@
-// POO 23/24
-// Biblioteca para manipulação da consola
-//
-// Uso fora do âmbito de POO -> Perguntar primeiro aos professores
-// Depósito em repositórios públicos -> Perguntar primeiro aos professores
-//
-// Pode ser aumentada com funcionalidades novas (desde que funcionem)
 
 #include "Terminal.h"
 

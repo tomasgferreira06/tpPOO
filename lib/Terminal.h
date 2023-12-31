@@ -72,6 +72,7 @@ namespace term {
             return y;
         }
 
+
         Window& operator>>(char& c);
         Window& operator>>(std::string& str);
 

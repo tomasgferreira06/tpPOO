@@ -105,9 +105,9 @@ void Habitacao::listarZonas(term::Window& com_efetuadosWindow){
 
                 // Exibir informações sobre a zona
                 com_efetuadosWindow << set_color(2) << "ID da Zona: " << set_color(0)<< idZona << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
-                com_efetuadosWindow << "Sensores: " << numSensores << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);;
-                com_efetuadosWindow << "Processadores: " << numProcessadores << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);;
-                com_efetuadosWindow << "Aparelhos: " << numAparelhos << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);;
+                com_efetuadosWindow << "Sensores: " << numSensores << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                com_efetuadosWindow << "Processadores: " << numProcessadores << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                com_efetuadosWindow << "Aparelhos: " << numAparelhos << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         }
     }
@@ -116,21 +116,16 @@ void Habitacao::listarZonas(term::Window& com_efetuadosWindow){
 void Habitacao::adicionarSensor(int idZona, char tipoSensor) {
     // Encontrar a zona com o ID especificado
     Zona* zona = encontrarZonaPorId(idZona);
-
     if (zona) {
         // Chame a função adicionarSensor da classe Zona
         zona->adicionarSensor(tipoSensor);
     }
-
 }
-
 
 void Habitacao::adicionarAparelho(int idZona, char tipoAparelho) {
     // Encontrar a zona com o ID especificado
     Zona* zona = encontrarZonaPorId(idZona);
-
     if (zona) {
-
         zona->adicionarAparelho(zona,tipoAparelho);
     }
 }
@@ -185,12 +180,10 @@ void Habitacao::listarComponentesZona(int idZona, term::Window& com_efetuadosWin
                     com_efetuadosWindow << sensor->getInfo();
                     componenteCount++;
                 }
-
                for (const auto& aparelho : zona->getAparelhos()) {
                    com_efetuadosWindow << " a" << aparelho->getIdAparelho() << " " << aparelho->getNome();
                    componenteCount++;
                }
-
                 for (const auto& processador : zona->getProcessadores()) {
                    com_efetuadosWindow << " p" << processador->getIdProcessador() <<" Numero de Regras: " << processador->getRegrasNum();
                     componenteCount++;
@@ -227,7 +220,6 @@ void Habitacao::avancarInstante() {
                 for (auto& aparelho : zona->getAparelhos()) {
                     aparelho->executar();
                 }
-
             }
         }
     }

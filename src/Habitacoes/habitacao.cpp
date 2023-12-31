@@ -180,10 +180,23 @@ void Habitacao::listarComponentesZona(int idZona, term::Window& com_efetuadosWin
                     com_efetuadosWindow <<term::set_color(3) << sensor->getInfo() << set_color(0) <<term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     componenteCount++;
                 }
-               for (const auto& aparelho : zona->getAparelhos()) {
-                   com_efetuadosWindow <<term::set_color(3) <<  " a" << aparelho->getIdAparelho() << " " << aparelho->getNome()<< set_color(0) <<term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
-                   componenteCount++;
-               }
+                for (const auto& aparelho : zona->getAparelhos()) {
+                    std::string nomeAparelho = " a" + std::to_string(aparelho->getIdAparelho()) + " " + aparelho->getNome();
+
+                    // Verifica se o aparelho está ligado e converte para maiúsculas ou minúsculas manualmente
+                    if (aparelho->estaLigado()) {
+                        for (char &c : nomeAparelho) {
+                            c = std::toupper(c);
+                        }
+                    } else {
+                        for (char &c : nomeAparelho) {
+                            c = std::tolower(c);
+                        }
+                    }
+
+                    com_efetuadosWindow << term::set_color(3) << nomeAparelho << term::set_color(0) << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                    componenteCount++;
+                }
                 for (const auto& processador : zona->getProcessadores()) {
                    com_efetuadosWindow << term::set_color(3)<< " p" << processador->getIdProcessador() <<" Numero de Regras: " << processador->getRegrasNum();
                     componenteCount++;

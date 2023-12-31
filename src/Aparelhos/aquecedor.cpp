@@ -14,6 +14,7 @@ void Aquecedor::liga() {
     if(!estaLigado()){ // se não está ligado, liga.
         setLigado(true);
         adicionouRuido = false; // resetar a flag
+
     }
 }
 

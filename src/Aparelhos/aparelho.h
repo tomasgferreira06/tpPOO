@@ -13,6 +13,7 @@ private:
     std::string ultimoComando;
 public:
     Aparelho(Zona *zona);
+
     virtual void liga() = 0;
     virtual void desliga() = 0;
     virtual void executar() = 0; // Método para aplicar o efeito do aparelho a cada instante

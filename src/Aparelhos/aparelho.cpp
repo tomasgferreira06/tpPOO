@@ -14,6 +14,7 @@ void Aparelho::receberComando(const std::string& comando) {
     if (comando == "liga") {
         setLigado(true); // atualiza o estado do aparelho e atuliza o último comando
         liga();
+
     } else if (comando == "desliga") {
         setLigado(false);// atualiza o estado do aparelho e atuliza o último comando
         desliga();

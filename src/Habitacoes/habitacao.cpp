@@ -104,10 +104,10 @@ void Habitacao::listarZonas(term::Window& com_efetuadosWindow){
 
 
                 // Exibir informações sobre a zona
-                com_efetuadosWindow << "ID da Zona: " << idZona ;
-                com_efetuadosWindow << "Sensores: " << numSensores;
-                com_efetuadosWindow << "Processadores: " << numProcessadores;
-                com_efetuadosWindow << "Aparelhos: " << numAparelhos;
+                com_efetuadosWindow << set_color(2) << "ID da Zona: " << set_color(0)<< idZona << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                com_efetuadosWindow << "Sensores: " << numSensores << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);;
+                com_efetuadosWindow << "Processadores: " << numProcessadores << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);;
+                com_efetuadosWindow << "Aparelhos: " << numAparelhos << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);;
             }
         }
     }

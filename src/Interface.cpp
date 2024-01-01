@@ -367,7 +367,11 @@ void Interface::processarComando(const string& comando) {
                             }
                         } else if (tipoComponente == 'p') {
                             // Para 'a', tipoOuComandoStr já é uma string
-                            minhaHabitacao.adicionarProcessador(idZona, tipoOuComandoStr);
+                            if(minhaHabitacao.adicionarProcessador(idZona, tipoOuComandoStr)){
+                                com_efetuadosWindow << "Processador adicionado com sucesso." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                            }else{
+                                com_efetuadosWindow << "Erro ao adicionar processador. Verifique se a zona existe." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                            }
                         } else {
                             mainWindow.clear();
                             com_efetuadosWindow << "Erro: o comando para 's' ou 'p' deve ser um unico caractere." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);

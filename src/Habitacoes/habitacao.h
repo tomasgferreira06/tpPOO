@@ -28,7 +28,7 @@ public:
     void listarZonas(term::Window& com_efetuadosWindow);
     bool adicionarSensor(int idZona, char tipoSensor);
     bool adicionarAparelho(int idZona, char tipoAparelho);
-    void adicionarProcessador(int idZona, string comando);
+    bool adicionarProcessador(int idZona, string comando);
     bool removerSensor(int idZona, int idSensor);
     bool removerAparelho(int idZona, int idAparelho);
     bool removerProcessador(int idZona, int idProcessador);

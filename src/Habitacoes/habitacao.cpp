@@ -132,11 +132,14 @@ bool Habitacao::adicionarAparelho(int idZona, char tipoAparelho) {
     return false;
 }
 
-void Habitacao::adicionarProcessador(int idZona, string comando) {
+bool Habitacao::adicionarProcessador(int idZona, string comando) {
     Zona* zona = encontrarZonaPorId(idZona);
     if(zona){
         Processador* novoProcessador = new Processador(zona,comando);
         zona->adicionarProcessador(novoProcessador);
+        return true;
+    }else{
+        return false;
     }
 }
 bool Habitacao::processadorSalvoExiste(const std::string& nome) const {

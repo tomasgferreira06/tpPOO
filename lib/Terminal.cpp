@@ -19,6 +19,10 @@ namespace term {
         return tf;
     }
 
+    void Window::scroll(){
+        ::scrollok(window, true);
+    }
+
 
 
     Window::Window(int x, int y, int w, int h, bool with_border) {

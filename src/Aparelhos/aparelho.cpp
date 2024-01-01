@@ -10,14 +10,14 @@ Aparelho::Aparelho(Zona* zona) : zonaAssociada(zona), idAparelho(nextIdAparelho)
 bool Aparelho::estaLigado() const {
     return ligado;  // retorna true se o aparelho está ligado, retorna false se o aparelho está desligado
 }
-void Aparelho::receberComando(const std::string& comando) {
+void Aparelho::receberComando(const std::string& comando, term::Window & com_efetuadosWindow) {
     if (comando == "liga") {
         setLigado(true); // atualiza o estado do aparelho e atuliza o último comando
-        liga();
+        liga(com_efetuadosWindow);
 
     } else if (comando == "desliga") {
         setLigado(false);// atualiza o estado do aparelho e atuliza o último comando
-        desliga();
+        desliga(com_efetuadosWindow);
     }
 }
 

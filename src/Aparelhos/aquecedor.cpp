@@ -10,21 +10,22 @@
 
 Aquecedor::Aquecedor(Zona *pZona) : Aparelho(pZona), contador(0), adicionouRuido(false) {}
 
-void Aquecedor::liga() {
+void Aquecedor::liga(term::Window & com_efetuadosWindow) {
     if(!estaLigado()){ // se não está ligado, liga.
         setLigado(true);
         adicionouRuido = false; // resetar a flag
-
+        com_efetuadosWindow << "O aquecedor foi ligado." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
     }
 }
 
-void Aquecedor::desliga() {
+void Aquecedor::desliga(term::Window & com_efetuadosWindow) {
     if(estaLigado()){ // se está ligado, desliga.
         setLigado(false);
+        com_efetuadosWindow << "O aquecedor foi desligado." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
     }
 }
 
-void Aquecedor::executar() {
+void Aquecedor::executar(term::Window & com_efetuadosWindow) {
     Zona* zona = getZonaAssociada();
     bool encontrouSensorSom = false;
     double somAtual = 0.0;

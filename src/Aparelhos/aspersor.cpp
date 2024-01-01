@@ -9,19 +9,23 @@
 
 Aspersor::Aspersor(Zona *pZona) : Aparelho(pZona) , contador(0){}
 
-void Aspersor::liga() {
+void Aspersor::liga(term::Window & com_efetuadosWindow) {
     if(!estaLigado()){
         setLigado(true);
+        com_efetuadosWindow << "O aspersor foi ligada." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
+
     }
 }
 
-void Aspersor::desliga() {
+void Aspersor::desliga(term::Window & com_efetuadosWindow) {
     if(estaLigado()){
         setLigado(false);
+        com_efetuadosWindow << "O aspersor foi desligada." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
+
     }
 }
 
-void Aspersor::executar() {
+void Aspersor::executar(term::Window & com_efetuadosWindow) {
     Zona* zona = getZonaAssociada();
     if (zona) {
         const std::vector<Sensor*>& sensores = zona->getSensores();

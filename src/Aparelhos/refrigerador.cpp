@@ -7,19 +7,21 @@
 
 Refrigerador::Refrigerador(Zona *pZona) : Aparelho(pZona), contador(0) {}
 
-void Refrigerador::liga() {
+void Refrigerador::liga(term::Window & com_efetuadosWindow) {
     if(!estaLigado()){
         setLigado(true);
+        com_efetuadosWindow << "O refrigerador foi ligado." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
     }
 }
 
-void Refrigerador::desliga() {
+void Refrigerador::desliga(term::Window & com_efetuadosWindow) {
     if(estaLigado()){
         setLigado(false);
+        com_efetuadosWindow << "O refrigerador foi desligado." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
     }
 }
 
-void Refrigerador::executar() {
+void Refrigerador::executar(term::Window & com_efetuadosWindow) {
     Zona *zona = getZonaAssociada();
     if(zona){
         const vector<Sensor*>& sensores  = zona->getSensores();

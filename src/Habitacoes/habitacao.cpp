@@ -192,6 +192,7 @@ void Habitacao::listarComponentesZona(int idZona, term::Window& com_efetuadosWin
                     if (aparelho->estaLigado()) {
                         for (char &c : nomeAparelho) {
                             c = std::toupper(c);
+
                         }
                     } else {
                         for (char &c : nomeAparelho) {
@@ -203,7 +204,7 @@ void Habitacao::listarComponentesZona(int idZona, term::Window& com_efetuadosWin
                     componenteCount++;
                 }
                 for (const auto& processador : zona->getProcessadores()) {
-                   com_efetuadosWindow << term::set_color(3)<< " p" << processador->getIdProcessador() <<" Numero de Regras: " << processador->getRegrasNum();
+                   com_efetuadosWindow << term::set_color(3)<< " p" << processador->getIdProcessador() <<" Numero de Regras: " << processador->getRegrasNum() << term::set_color(0);
                     componenteCount++;
                 }
         }
@@ -226,17 +227,17 @@ bool Habitacao::removerProcessador(int idZona, int idProcessador) {
     return false;
 }
 
-void Habitacao::avancarInstante() {
+void Habitacao::avancarInstante(term::Window & com_efetuadosWindow) {
     instanteAtual++;
     for (auto& linha : grelhaZonas) {
         for (auto& zona : linha) {
             if (zona) {
                 // Atualizar os estados dos aparelhos
                 for (auto& processador : zona->getProcessadores()) {
-                    processador->avaliarRegras();
+                    processador->avaliarRegras(com_efetuadosWindow);
                 }
                 for (auto& aparelho : zona->getAparelhos()) {
-                    aparelho->executar();
+                    aparelho->executar(com_efetuadosWindow);
                 }
             }
         }

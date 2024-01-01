@@ -84,14 +84,13 @@ Processador::~Processador() {
     for (Aparelho* aparelho : aparelhosAssociados) {
         delete aparelho;
     }
-    zona = nullptr;
 }
 
 void Processador::mudarComando(const string &novoComando) {
     Processador::comando = novoComando;
 }
 
-void Processador::avaliarRegras() {
+void Processador::avaliarRegras(term::Window & com_efetuadosWindow) {
     bool todasRegrasCumpridas = true;
     for (auto& regra : regras) {
         if (!regra->avaliar()) { // Supondo que Regra::avaliar retorna true se a regra for cumprida
@@ -103,9 +102,9 @@ void Processador::avaliarRegras() {
     // Emitir comando para cada aparelho associado
     for (auto& aparelho : aparelhosAssociados) {
         if (todasRegrasCumpridas) {
-            aparelho->receberComando("liga");
+            aparelho->receberComando("liga", com_efetuadosWindow);
         } else {
-            aparelho->receberComando("desliga");
+            aparelho->receberComando("desliga", com_efetuadosWindow);
         }
     }
 }

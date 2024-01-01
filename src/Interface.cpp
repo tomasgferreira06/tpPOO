@@ -12,12 +12,12 @@ using namespace term;
 
 Interface::Interface()
         : mainWindow(term::Terminal::instance().create_window(0, 0, term::Terminal::getNumCols(), term::Terminal::getNumRows() - 37, true)),
-          com_efetuadosWindow(term::Terminal::instance().create_window(110, 3, 46, term::Terminal::getNumRows()-3, true)),
+          com_efetuadosWindow(term::Terminal::instance().create_window(98, 3, 58, term::Terminal::getNumRows()-3, true)),
           habitacaoWindow(term::Terminal::instance().create_window(0, 3, 17, term::Terminal::getNumRows() - 39, false)),
           flagHabitacao(false)
           {
 
-
+    com_efetuadosWindow.scroll();
 
     for(int i=1; i<20; i++) {
         term::Terminal::instance().init_color(i, i, 0);
@@ -73,7 +73,7 @@ void Interface::processarComando(const string& comando) {
             com_efetuadosWindow << "Erro: o comando 'prox' nao quer nenhum parametro."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
         }else{
             mainWindow.clear();
-            minhaHabitacao.avancarInstante();
+            minhaHabitacao.avancarInstante(com_efetuadosWindow);
             com_efetuadosWindow << "Instante avancado para: " << minhaHabitacao.getInstanteAtual() << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             habitacaoWindow.clear();
             habitacaoWindow << "Instantes : " << minhaHabitacao.getInstanteAtual();
@@ -87,7 +87,7 @@ void Interface::processarComando(const string& comando) {
                 com_efetuadosWindow << "Erro: o comando 'avanca' requer apenas um argumento." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             } else {
                 for (int i = 0; i < n; ++i) {
-                    minhaHabitacao.avancarInstante();
+                    minhaHabitacao.avancarInstante(com_efetuadosWindow);
                 }
                 habitacaoWindow.clear();
                 habitacaoWindow << "Instantes : " << minhaHabitacao.getInstanteAtual();
@@ -707,7 +707,7 @@ void Interface::processarComando(const string& comando) {
                     if (zona) {
                         Aparelho* aparelho = zona->encontrarAparelhoPorId(idAparelho);
                         if (aparelho) {
-                            aparelho->receberComando(com);
+                            aparelho->receberComando(com, com_efetuadosWindow);
                             mainWindow.clear();
                             com_efetuadosWindow << "Comando '" << com << "' enviado para aparelho ID " << idAparelho << " na zona ID " << idZona << "." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         } else {

@@ -15,9 +15,9 @@ private:
     bool desligadoRecentemente;
 public:
     Refrigerador(Zona *pZona);
-    void liga() override;
-    void executar() override;
-    void desliga() override;
+    void liga(term::Window & com_efetuadosWindow) override;
+    void executar(term::Window & com_efetuadosWindow) override;
+    void desliga(term::Window & com_efetuadosWindow) override;
     std::string getNome() const override;
 };
 

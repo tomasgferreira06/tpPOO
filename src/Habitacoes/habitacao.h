@@ -37,7 +37,7 @@ public:
     bool removerZona(int idZona);
     bool criarZona(int linha, int coluna);
     void removerHabitacao();
-   void avancarInstante();
+   void avancarInstante(term::Window & com_efetuadosWindow);
     int getInstanteAtual() const;
     bool nomeJaExiste(const std::string& nome) const;
     void listarProcessadoresSalvos(term::Window& com_efetuadosWindow) const;

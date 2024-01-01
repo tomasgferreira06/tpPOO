@@ -2,6 +2,8 @@
 #define TPPOO_APARELHO_H
 
 #include <string>
+#include "../../lib/Terminal.h"
+
 class Zona;  // Declaração de classe para frente
 
 class Aparelho {
@@ -14,10 +16,10 @@ private:
 public:
     Aparelho(Zona *zona);
 
-    virtual void liga() = 0;
-    virtual void desliga() = 0;
-    virtual void executar() = 0; // Método para aplicar o efeito do aparelho a cada instante
-    void receberComando(const std::string& comando); // Método para receber comandos
+    virtual void liga(term::Window & com_efetuadosWindow) = 0;
+    virtual void desliga(term::Window & com_efetuadosWindow) = 0;
+    virtual void executar(term::Window & com_efetuadosWindow) = 0; // Método para aplicar o efeito do aparelho a cada instante
+    void receberComando(const std::string& comando, term::Window & com_efetuadosWindow); // Método para receber comandos
 
     bool estaLigado() const;
     void setLigado(bool estado);

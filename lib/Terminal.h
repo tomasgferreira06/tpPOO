@@ -74,7 +74,7 @@ namespace term {
 
         Window& operator>>(char& c);
         Window& operator>>(std::string& str);
-
+        void scroll();
         int getchar();
         void clear();
 

@@ -4,6 +4,7 @@
 #include <vector>
 #include "../Regras/regra.h"
 #include "../Aparelhos/aparelho.h"
+#include "../../lib/Terminal.h"
 #include <string>
 
 using namespace std;
@@ -30,7 +31,7 @@ public:
     Processador(const Processador& outro);
     Processador& operator=(const Processador& outro);
 
-    void avaliarRegras();
+    void avaliarRegras(term::Window & com_efetuadosWindow);
     void listarRegras() const;
     bool verificarRegras() const;
     void executarComando();

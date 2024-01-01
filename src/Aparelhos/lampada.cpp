@@ -55,6 +55,6 @@ void Lampada::executar() {
 }
 std::string Lampada::getNome() const{
     std::ostringstream ss;
-    ss << "Lampada" << getUltimoComando();
+    ss << "Lampada " << getUltimoComando();
     return ss.str();
 }

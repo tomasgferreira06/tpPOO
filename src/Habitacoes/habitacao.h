@@ -26,8 +26,8 @@ public:
     ~Habitacao();
     void criarHabitacao(int linhas, int colunas);
     void listarZonas(term::Window& com_efetuadosWindow);
-    void adicionarSensor(int idZona, char tipoSensor);
-    void adicionarAparelho(int idZona, char tipoAparelho);
+    bool adicionarSensor(int idZona, char tipoSensor);
+    bool adicionarAparelho(int idZona, char tipoAparelho);
     void adicionarProcessador(int idZona, string comando);
     bool removerSensor(int idZona, int idSensor);
     bool removerAparelho(int idZona, int idAparelho);
@@ -46,6 +46,7 @@ public:
     Processador* getProcessadorSalvo(const std::string& nome) const;
     Processador recuperarProcessador(const std::string& id) const;
     void removerProcessadorSalvo(const std::string& nome);
+    bool zonaExiste(int idZona) const;
 
 
 };

@@ -13,7 +13,7 @@ private:
     Sensor *sensorAssociado;
 public:
     Regra(Sensor *sensor);
-    //virtual ~Regra();
+    virtual ~Regra() = default;
     virtual Regra* duplica() const = 0 ;
     virtual bool avaliar() const = 0;
     int getId() const;

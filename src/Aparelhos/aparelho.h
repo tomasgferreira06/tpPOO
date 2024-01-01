@@ -28,6 +28,8 @@ public:
     Zona *getZonaAssociada() const;
 
     void setUltimoComando(const std::string &ultimoComando);
+    virtual ~Aparelho() = default;
+
 };
 
 #endif //TPPOO_APARELHO_H

@@ -78,6 +78,13 @@ int Processador::getRegrasNum() const {
 }
 
 Processador::~Processador() {
+    for (Regra* regra : regras) {
+        delete regra;
+    }
+    for (Aparelho* aparelho : aparelhosAssociados) {
+        delete aparelho;
+    }
+    zona = nullptr;
 }
 
 void Processador::mudarComando(const string &novoComando) {

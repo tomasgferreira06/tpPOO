@@ -115,33 +115,46 @@ int Zona::getId() const {
 
 
 
-void Zona::adicionarSensor(char tipo) {
+bool Zona::adicionarSensor(char tipo) {
+    bool flag = false;
     switch (tipo) {
         case 't':
             sensores.push_back(new SensorTemperatura(this));
+            flag = true;
             break;
         case 'v':
             sensores.push_back(new SensorMovimento(this));
+            flag = true;
             break;
         case 'm':
             sensores.push_back(new SensorLuminosidade(this));
+            flag = true;
             break;
         case 'd':
             sensores.push_back(new SensorRadiacao(this));
+            flag = true;
             break;
         case 'h':
             sensores.push_back(new SensorHumidade(this));
+            flag = true;
             break;
         case 'o':
             sensores.push_back(new SensorSom(this));
+            flag = true;
             break;
         case 'f':
             sensores.push_back(new SensorFumo(this));
+            flag = true;
             break;
         default:
-            break;
+            ;
     }
-    atualizarJanela();
+    if(flag){
+        atualizarJanela();
+        return true;
+    }else{
+        return false;
+    }
 }
 
 int Zona::getSensoresNum() const {
@@ -151,39 +164,61 @@ int Zona::getSensoresNum() const {
 bool Zona::removerSensor(int idSensor) {
     for (auto it = sensores.begin(); it != sensores.end(); ++it) {
         if ((*it)->getIdSensor() == idSensor) {
+            delete *it;
             sensores.erase(it);
-            return true;
             atualizarJanela();
+            return true;
         }
     }
 
     return false;
 }
 
+bool Zona::removerAparelho(int idAparelho) {
+    for (auto it = aparelhos.begin(); it != aparelhos.end(); ++it) {
+        if ((*it)->getIdAparelho() == idAparelho) {
+            delete *it;
+            aparelhos.erase(it);
+            atualizarJanela();
+            return true;
+        }
+    }
+    return false;
+}
 
 
 const vector<Sensor *> &Zona::getSensores() const {
     return sensores;
 }
 
-void Zona::adicionarAparelho(Zona* zona,char tipo) {
+bool Zona::adicionarAparelho(Zona* zona,char tipo) {
+    bool flag = false;
     switch (tipo) {
         case 'a':
             aparelhos.push_back(new Aquecedor(zona));
+            flag = true;
             break;
         case 's':
             aparelhos.push_back(new Aspersor(zona));
+            flag = true;
             break;
         case 'r':
             aparelhos.push_back(new Refrigerador(zona));
+            flag = true;
             break;
         case 'l':
             aparelhos.push_back(new Lampada(zona));
+            flag = true;
             break;
         default:
-            break;
+            ;
     }
-    atualizarJanela();
+    if(flag){
+        atualizarJanela();
+        return true;
+    }else {
+        return false;
+    }
 }
 
 int Zona::getAparelhosNum() const {
@@ -194,23 +229,14 @@ const vector<Aparelho *> &Zona::getAparelhos() const {
     return aparelhos;
 }
 
-bool Zona::removerAparelho(int idAparelho) {
-    for (auto it = aparelhos.begin(); it != aparelhos.end(); ++it) {
-        if ((*it)->getIdAparelho() == idAparelho) {
-            aparelhos.erase(it);
-            return true;
-            atualizarJanela();
-        }
-    }
-    return false;
-}
 
 bool Zona::removerProcessador(int idProcessador) {
     for (auto it = processadores.begin(); it != processadores.end(); ++it) {
         if ((*it)->getIdProcessador() == idProcessador) {
-           processadores.erase(it);
-            return true;
+            delete *it;
+            processadores.erase(it);
             atualizarJanela();
+            return true;
         }
     }
     return false;

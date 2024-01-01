@@ -113,21 +113,23 @@ void Habitacao::listarZonas(term::Window& com_efetuadosWindow){
     }
 }
 
-void Habitacao::adicionarSensor(int idZona, char tipoSensor) {
+bool Habitacao::adicionarSensor(int idZona, char tipoSensor) {
     // Encontrar a zona com o ID especificado
     Zona* zona = encontrarZonaPorId(idZona);
     if (zona) {
         // Chame a função adicionarSensor da classe Zona
-        zona->adicionarSensor(tipoSensor);
+        return zona->adicionarSensor(tipoSensor);
     }
+    return false;
 }
 
-void Habitacao::adicionarAparelho(int idZona, char tipoAparelho) {
+bool Habitacao::adicionarAparelho(int idZona, char tipoAparelho) {
     // Encontrar a zona com o ID especificado
     Zona* zona = encontrarZonaPorId(idZona);
     if (zona) {
-        zona->adicionarAparelho(zona,tipoAparelho);
+        return zona->adicionarAparelho(zona,tipoAparelho);
     }
+    return false;
 }
 
 void Habitacao::adicionarProcessador(int idZona, string comando) {
@@ -173,7 +175,7 @@ void Habitacao::listarComponentesZona(int idZona, term::Window& com_efetuadosWin
     for (const auto& linha : grelhaZonas) {
         for (const auto& zona : linha) {
             if (zona->getId() == idZona) {
-                term::Window* windowAssociada = zona->getJanela();
+             //   term::Window* windowAssociada = zona->getJanela();
                 com_efetuadosWindow << "Componentes na Zona ID:" << idZona <<term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 int componenteCount = 0;
                 for (const auto& sensor : zona->getSensores()) {
@@ -181,7 +183,7 @@ void Habitacao::listarComponentesZona(int idZona, term::Window& com_efetuadosWin
                     componenteCount++;
                 }
                 for (const auto& aparelho : zona->getAparelhos()) {
-                    std::string nomeAparelho = " a" + std::to_string(aparelho->getIdAparelho()) + " " + aparelho->getNome();
+                    std::string nomeAparelho = " a" + std::to_string(aparelho->getIdAparelho()) + " " + aparelho->getNome() + " ";
 
                     // Verifica se o aparelho está ligado e converte para maiúsculas ou minúsculas manualmente
                     if (aparelho->estaLigado()) {
@@ -263,11 +265,27 @@ void Habitacao::listarProcessadoresSalvos(term::Window& com_efetuadosWindow) con
         const Processador* processador = par.second;
         if (processador) {
             const Zona* zona = processador->getZona();
-            if (zona) {
+            if (zona && zonaExiste(zona->getId())) {
                 int idZona = zona->getId();
                 int idProcessador = processador->getIdProcessador();
                 com_efetuadosWindow << "Nome: " << nome << ", ID do Processador: " << idProcessador << ", ID da Zona: " << idZona << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+            } else {
+                com_efetuadosWindow << "Zona associada ao processador '" << nome << "' ja nao existe." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         }
     }
 }
+
+
+bool Habitacao::zonaExiste(int idZona) const {
+    for (const auto& linhaZonas : grelhaZonas) {
+        for (const auto& zona : linhaZonas) {
+            if (zona && zona->getId() == idZona) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+

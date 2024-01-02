@@ -5,7 +5,7 @@
 #include <sstream>
 
 
-Refrigerador::Refrigerador(Zona *pZona) : Aparelho(pZona), contador(0) {}
+Refrigerador::Refrigerador(Zona *pZona) : Aparelho(pZona), contador(0), somAumentado(false), desligadoRecentemente(false){}
 
 void Refrigerador::liga(term::Window & com_efetuadosWindow) {
     if(!estaLigado()){
@@ -42,32 +42,32 @@ void Refrigerador::executar(term::Window & com_efetuadosWindow) {
 
         if(estaLigado()){
             // Adicionar 20 dB de ruído uma única vez ao ligar o refrigerador
-            if(contador == 0 && encontrouSensorSom){
+            if(getContador() == 0 && encontrouSensorSom){
                 Propriedade *propSom = zona->getPropriedade("Som");
                 if(propSom){
                     propSom->setValor(somAtual + 20);
-                    somAumentado = true;
+                    setSomAumentado(true);
                 }
             }
 
-            contador++;
-            if(contador % 3 == 0 && encontrouSensorTemperatura){
+            setContador(getContador() + 1);
+            if(getContador() % 3 == 0 && encontrouSensorTemperatura){
                 Propriedade *propTemp = zona->getPropriedade("Temperatura");
                 if(propTemp){
                     propTemp->setValor(temperaturaAtual - 1);
                 }
             }
         }else {
-            contador = 0;
+            setContador(0);
             // Remover 20 dB de ruído quando o refrigerador é desligado e esta é a primeira ação pós desligamento
-            if (contador == 0 && encontrouSensorSom && !estaLigado()) {
+            if (getContador() > 0 && encontrouSensorSom && !estaLigado()) {
                 Propriedade* propSom = zona->getPropriedade("Som");
                 if (propSom) {
                     propSom->setValor(std::max(0.0, somAtual - 20)); // Garante que o som não fique negativo
-                    somAumentado = false;
+                    setSomAumentado(false);
                 }
             }
-            contador = 0; // Resetar o contador quando o refrigerador é desligado
+            setContador(0); // Resetar o contador quando o refrigerador é desligado
         }
     }
 }
@@ -78,4 +78,28 @@ std::string Refrigerador::getNome() const{
     std::ostringstream ss;
     ss << "Refrigerador" << getUltimoComando();
     return ss.str();
+}
+
+int Refrigerador::getContador() const {
+    return contador;
+}
+
+void Refrigerador::setContador(int contador) {
+    Refrigerador::contador = contador;
+}
+
+bool Refrigerador::isSomAumentado() const {
+    return somAumentado;
+}
+
+void Refrigerador::setSomAumentado(bool somAumentado) {
+    Refrigerador::somAumentado = somAumentado;
+}
+
+bool Refrigerador::isDesligadoRecentemente() const {
+    return desligadoRecentemente;
+}
+
+void Refrigerador::setDesligadoRecentemente(bool desligadoRecentemente) {
+    Refrigerador::desligadoRecentemente = desligadoRecentemente;
 }

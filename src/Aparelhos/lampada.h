@@ -15,5 +15,13 @@ public:
     void executar(term::Window & com_efetuadosWindow) override;
     void desliga(term::Window & com_efetuadosWindow) override;
     std::string getNome() const override;
+
+    int getContador() const;
+
+    void setContador(int contador);
+
+    bool isAdicionouLumens() const;
+
+    void setAdicionouLumens(bool adicionouLumens);
 };
 #endif //TPPOO_LAMPADA_H

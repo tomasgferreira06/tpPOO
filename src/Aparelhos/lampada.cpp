@@ -38,21 +38,21 @@ void Lampada::executar(term::Window & com_efetuadosWindow) {
 
             com_efetuadosWindow << term::set_color(12)<< "A lampada da zona "<< zona->getId() << " com o id: "<< getIdAparelho() <<" esta ligada." << term::set_color(0) << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
             // Verifica se os lúmens já foram adicionados
-            if (!adicionouLumens && encontrouSensorLuminosidade) {
+            if (!isAdicionouLumens() && encontrouSensorLuminosidade) {
                 Propriedade* propLuminosidade = zona->getPropriedade("Luz");
                 if (propLuminosidade) {
                     propLuminosidade->setValor(luminosidadeAtual + 900);
-                    adicionouLumens = true; // Seta a flag para indicar que os lúmens foram adicionados
+                    setAdicionouLumens(true); // Seta a flag para indicar que os lúmens foram adicionados
                 }
             }
         }else{
             com_efetuadosWindow << term::set_color(12) << "A lampada da zona " << zona->getId() << " com o id: " << getIdAparelho() <<" esta desligada." <<term::set_color(0) << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
-            if(adicionouLumens && encontrouSensorLuminosidade){
+            if(isAdicionouLumens() && encontrouSensorLuminosidade){
                 // Remove os lúmens adicionados
                 Propriedade* propLuminosidade = zona->getPropriedade("Luz");
                 if (propLuminosidade) {
                     propLuminosidade->setValor(std::max(0.0, luminosidadeAtual - 900));
-                    adicionouLumens = false; // Reseta a flag
+                    setAdicionouLumens(false); // Reseta a flag
                 }
             }
         }
@@ -62,4 +62,20 @@ std::string Lampada::getNome() const{
     std::ostringstream ss;
     ss << "Lampada " << getUltimoComando();
     return ss.str();
+}
+
+int Lampada::getContador() const {
+    return contador;
+}
+
+void Lampada::setContador(int contador) {
+    Lampada::contador = contador;
+}
+
+bool Lampada::isAdicionouLumens() const {
+    return adicionouLumens;
+}
+
+void Lampada::setAdicionouLumens(bool adicionouLumens) {
+    Lampada::adicionouLumens = adicionouLumens;
 }

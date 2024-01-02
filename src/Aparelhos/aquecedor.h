@@ -20,6 +20,10 @@ public:
     bool isAdicionouRuido() const;
 
     void setAdicionouRuido(bool adicionouRuido);
+
+    int getContador() const;
+
+    void setContador(int contador);
 };
 
 #endif //TPPOO_AQUECEDOR_H

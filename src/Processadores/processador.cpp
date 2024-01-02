@@ -81,9 +81,6 @@ Processador::~Processador() {
     for (Regra* regra : regras) {
         delete regra;
     }
-    for (Aparelho* aparelho : aparelhosAssociados) {
-        delete aparelho;
-    }
 }
 
 void Processador::mudarComando(const string &novoComando) {

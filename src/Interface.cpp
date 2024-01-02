@@ -5,6 +5,7 @@
 #include "Habitacoes/habitacao.h"
 #include "Regras/IgualA.h"
 #include "Regras/MenorQue.h"
+#include "Regras/MaiorQue.h"
 
 using namespace std;
 using namespace term;
@@ -480,8 +481,9 @@ void Interface::processarComando(const string& comando) {
                         novaRegra = new RegraIgualA(sensor, param1);
                     }else if (regra == "menor_que"){
                         novaRegra = new RegraMenorQue(sensor, param1);
+                    }else if(regra == "maior_que"){
+                        novaRegra = new RegraMaiorQue(sensor, param1);
                     }
-                    // Implemente aqui para "menor_que" e "maior_que"
                 } else if (regra == "entre" || regra == "fora") {
                     if (!(stream >> param1 >> param2)) {
                         erroParam = true;

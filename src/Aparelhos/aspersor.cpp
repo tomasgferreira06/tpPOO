@@ -46,8 +46,8 @@ void Aspersor::executar(term::Window & com_efetuadosWindow) {
         }
 
         // Se o aspersor está ligado ou em período de desligamento controlado (contador <= 5)
-        if (estaLigado() || contador <= 5) {
-            if (contador == 0 && encontrouSensorHumidade) {
+        if (estaLigado() || getContador() <= 5) {
+            if (getContador() == 0 && encontrouSensorHumidade) {
                 // Adiciona humidade no primeiro instante de ligado
                 Propriedade* propHumidade = zona->getPropriedade("Humidade");
                 if (propHumidade && humidadeAtual < 75) {
@@ -55,7 +55,7 @@ void Aspersor::executar(term::Window & com_efetuadosWindow) {
                 }
             }
 
-            if (contador == 0 && encontrouSensorVibracao) {
+            if (getContador() == 0 && encontrouSensorVibracao) {
                 // Adiciona vibração no primeiro instante de ligado
                 Propriedade* propVibracao = zona->getPropriedade("Vibracao");
                 if (propVibracao) {
@@ -63,7 +63,7 @@ void Aspersor::executar(term::Window & com_efetuadosWindow) {
                 }
             }
 
-            if (contador == 1) {
+            if (getContador() == 1) {
                 // No segundo instante, coloca o fumo a 0
                 Propriedade* propFumo = zona->getPropriedade("Fumo");
                 if (propFumo) {
@@ -71,16 +71,16 @@ void Aspersor::executar(term::Window & com_efetuadosWindow) {
                 }
             }
 
-            contador++;
+            setContador(getContador() + 1);
         } else {
             // Reseta o contador depois do período de desligamento controlado
-            if (contador > 5) {
-                contador = 0;
+            if (getContador() > 5) {
+                setContador(0);
             }
         }
 
         // Se o aspersor foi desligado e o contador foi reiniciado, remover a vibração
-        if (!estaLigado() && contador == 0 && encontrouSensorVibracao) {
+        if (!estaLigado() && getContador() == 0 && encontrouSensorVibracao) {
             Propriedade* propVibracao = zona->getPropriedade("Vibracao");
             if (propVibracao && vibracaoAtual >= 100) {
                 propVibracao->setValor(vibracaoAtual - 100);
@@ -94,4 +94,12 @@ std::string Aspersor::getNome() const{
     std::ostringstream ss;
     ss << "Aspersor" << getUltimoComando();
     return ss.str();
+}
+
+int Aspersor::getContador() const {
+    return contador;
+}
+
+void Aspersor::setContador(int contador) {
+    Aspersor::contador = contador;
 }

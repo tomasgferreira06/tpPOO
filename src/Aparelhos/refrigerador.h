@@ -19,6 +19,18 @@ public:
     void executar(term::Window & com_efetuadosWindow) override;
     void desliga(term::Window & com_efetuadosWindow) override;
     std::string getNome() const override;
+
+    int getContador() const;
+
+    void setContador(int contador);
+
+    bool isSomAumentado() const;
+
+    void setSomAumentado(bool somAumentado);
+
+    bool isDesligadoRecentemente() const;
+
+    void setDesligadoRecentemente(bool desligadoRecentemente);
 };
 
 #endif //TPPOO_REFRIGERADOR_H

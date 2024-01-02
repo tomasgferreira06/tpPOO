@@ -79,7 +79,7 @@ void Refrigerador::executar(term::Window & com_efetuadosWindow) {
 
 std::string Refrigerador::getNome() const{
     std::ostringstream ss;
-    ss << "Refrigerador" << getUltimoComando();
+    ss << "Refrigerador " << getUltimoComando();
     return ss.str();
 }
 

@@ -83,7 +83,7 @@ void Aquecedor::executar(term::Window & com_efetuadosWindow) {
 
 std::string Aquecedor::getNome() const{
     std::ostringstream ss;
-    ss << "Aquecedor" << getUltimoComando();
+    ss << "Aquecedor " << getUltimoComando();
     return ss.str();
 }
 

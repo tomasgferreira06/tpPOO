@@ -45,10 +45,12 @@ void Aspersor::executar(term::Window & com_efetuadosWindow) {
         }
 
         // Se o aspersor está ligado ou enquanto se está a desligar (contador)
-        com_efetuadosWindow << term::set_color(12)<< "O aspersor da zona "<< zona->getId() << " com o id: "<< getIdAparelho() <<" esta ligado." << term::set_color(0) << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
 
         if (estaLigado() || getContador() <= 5) {
+            com_efetuadosWindow << term::set_color(12)<< "O aspersor da zona "<< zona->getId() << " com o id: "<< getIdAparelho() <<" esta ligado." << term::set_color(0) << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
+
             if (getContador() == 0 && encontrouSensorHumidade) {
+
                 // Adiciona humidade no primeiro instante de ligado
                 Propriedade* propHumidade = zona->getPropriedade("Humidade");
                 if (propHumidade && humidadeAtual < 75) {
@@ -95,7 +97,7 @@ void Aspersor::executar(term::Window & com_efetuadosWindow) {
 
 std::string Aspersor::getNome() const{
     std::ostringstream ss;
-    ss << "Aspersor" << getUltimoComando();
+    ss << "Aspersor " << getUltimoComando();
     return ss.str();
 }
 

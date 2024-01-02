@@ -96,16 +96,18 @@ void Processador::avaliarRegras(term::Window & com_efetuadosWindow) {
         }
     }
 
+    string comandoAEnviar;
+    if (comando == "desliga") {
+        comandoAEnviar = todasRegrasCumpridas ? "desliga" : "liga";
+    } else if (comando == "liga") {
+        comandoAEnviar = todasRegrasCumpridas ? "liga" : "desliga";
+    }
+
     // Emitir comando para cada aparelho associado
     for (auto& aparelho : aparelhosAssociados) {
-        if (todasRegrasCumpridas) {
-            aparelho->receberComando("liga", com_efetuadosWindow);
-        } else {
-            aparelho->receberComando("desliga", com_efetuadosWindow);
-        }
+        aparelho->receberComando(comandoAEnviar, com_efetuadosWindow);
     }
 }
-
 Zona *Processador::getZona() const {
     return zona;
 }

@@ -20,7 +20,7 @@ double SensorHumidade::getHumidade() const {
 
 std::string SensorHumidade::getInfo() const {
     std::ostringstream ss;
-    ss << 's' << getIdSensor() << "Humidade" << getHumidade();
+    ss << 's' << getIdSensor() << " Humidade " << getHumidade();
     return ss.str();
 }
 

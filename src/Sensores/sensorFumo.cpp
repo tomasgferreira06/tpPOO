@@ -21,7 +21,7 @@ double SensorFumo::getFumo() const {
 
 std::string SensorFumo::getInfo() const {
     std::ostringstream ss;
-    ss << 's' << getIdSensor() << "Fumo" << getFumo();
+    ss << 's' << getIdSensor() << " Fumo " << getFumo();
     return ss.str();
 }
 

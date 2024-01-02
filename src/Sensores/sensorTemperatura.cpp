@@ -21,7 +21,7 @@ double SensorTemperatura::getTemperatura() const {
 
 std::string SensorTemperatura::getInfo() const {
     std::ostringstream ss;
-    ss << 's' << getIdSensor() << "Temperatura" << getTemperatura();
+    ss << 's' << getIdSensor() << " Temperatura " << getTemperatura();
     return ss.str();
 }
 

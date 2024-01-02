@@ -23,7 +23,7 @@ double SensorSom::getSom() const {
 
 std::string SensorSom::getInfo() const {
         std::ostringstream ss;
-        ss << 's' << getIdSensor() << "Som" << getSom();
+        ss << 's' << getIdSensor() << " Som " << getSom();
         return ss.str();
 }
 

@@ -21,7 +21,7 @@ double SensorRadiacao::getRadiacao() const {
 
 std::string SensorRadiacao::getInfo() const {
     std::ostringstream ss;
-    ss << 's' << getIdSensor() << "Radiacao" << getRadiacao();
+    ss << 's' << getIdSensor() << " Radiacao " << getRadiacao();
     return ss.str();
 }
 

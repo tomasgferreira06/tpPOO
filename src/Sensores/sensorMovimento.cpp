@@ -20,7 +20,7 @@ double SensorMovimento::getVibracao() const {
 
 std::string SensorMovimento::getInfo() const {
     std::ostringstream ss;
-    ss << 's' << getIdSensor() << "Movimento" << getVibracao();
+    ss << 's' << getIdSensor() << " Movimento " << getVibracao();
     return ss.str();
 }
 

@@ -348,7 +348,6 @@ void Interface::processarComando(const string& comando) {
                     if (tipoComponente == 's' || tipoComponente == 'p' || tipoComponente == 'a') {
                         if ((tipoComponente == 's' || tipoComponente == 'a') && tipoOuComandoStr.length() == 1) {
                             char tipoOuComandoChar = tipoOuComandoStr[0];
-                            // Agora você tem um char para 's' e 'p'
                             switch (tipoComponente) {
                                 case 's':
                                     if (minhaHabitacao.adicionarSensor(idZona, tipoOuComandoChar)) {
@@ -366,7 +365,7 @@ void Interface::processarComando(const string& comando) {
                                     break;
                                     // Não é necessário um case para 'a', pois já é uma string
                             }
-                        } else if (tipoComponente == 'p') {
+                        } else if (tipoComponente == 'p' && (tipoOuComandoStr == "desliga" || tipoOuComandoStr == "liga")) {
                             // Para 'a', tipoOuComandoStr já é uma string
                             if(minhaHabitacao.adicionarProcessador(idZona, tipoOuComandoStr)){
                                 com_efetuadosWindow << "Processador adicionado com sucesso." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
@@ -375,7 +374,7 @@ void Interface::processarComando(const string& comando) {
                             }
                         } else {
                             mainWindow.clear();
-                            com_efetuadosWindow << "Erro: o comando para 's' ou 'p' deve ser um unico caractere." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                            com_efetuadosWindow << "Erro: Verifique o comando" << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         }
                         mainWindow.clear();
                       // com_efetuadosWindow << "Adicionado um novo componente." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);

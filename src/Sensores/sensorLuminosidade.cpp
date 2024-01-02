@@ -23,7 +23,7 @@ double SensorLuminosidade::getLuz() const {
 
 std::string SensorLuminosidade::getInfo() const {
     std::ostringstream ss;
-    ss << 's' << getIdSensor() << "Luz" << getLuz();
+    ss << 's' << getIdSensor() << " Luz " << getLuz();
     return ss.str();
 }
 

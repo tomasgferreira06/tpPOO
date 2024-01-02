@@ -5,7 +5,6 @@
 #include <sstream>
 #include "aquecedor.h"
 #include "aparelho.h"
-#include "../Propriedades/propriedade.h"
 
 
 Aquecedor::Aquecedor(Zona *pZona) : Aparelho(pZona), contador(0), adicionouRuido(false) {}

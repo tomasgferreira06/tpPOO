@@ -1,7 +1,6 @@
 #include <sstream>
 #include <iostream>
 #include "zona.h"
-#include "../Aparelhos/aparelho.h"
 #include "../Sensores/sensorTemperatura.h"
 #include "../Sensores/sensorMovimento.h"
 #include "../Sensores/sensorLuminosidade.h"
@@ -10,12 +9,7 @@
 #include "../Sensores/sensorSom.h"
 #include "../Sensores/sensorFumo.h"
 #include "../Aparelhos/aquecedor.h"
-#include "../Propriedades/luz.h"
-#include "../Propriedades/Radiacao.h"
-#include "../Propriedades/Vibracao.h"
-#include "../Propriedades/Humidade.h"
 #include "../Propriedades/Fumo.h"
-#include "../Propriedades/som.h"
 #include "../Aparelhos/aspersor.h"
 #include "../Aparelhos/refrigerador.h"
 #include "../Aparelhos/lampada.h"
@@ -60,14 +54,6 @@ void Zona::adicionarProcessador(Processador *processador) {
     processadores.push_back(processador);
     atualizarJanela();
 }
-
-void Zona::adicionarPropriedade(Propriedade* propriedade) {
-    propriedades[propriedade->getNome()] = propriedade;
-}
-
-
-
-
 
 
 void Zona::limparZona() {

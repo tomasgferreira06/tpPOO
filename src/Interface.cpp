@@ -42,7 +42,7 @@ void Interface::setFlagHabitacao(bool flagHabitacao) {
 
 void Interface::iniciar() {
     string comando;
-    while (true) {;
+    while (true) {
         mainWindow >> comando;
         if (comando == "sair") {
             break;

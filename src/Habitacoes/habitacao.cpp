@@ -1,5 +1,4 @@
 #include "habitacao.h"
-#include "../../lib/Terminal.h"
 
 using namespace term;
 
@@ -95,7 +94,6 @@ void Habitacao::listarZonas(term::Window& com_efetuadosWindow){
     for (const auto& linha : grelhaZonas) {
         for (const auto& zona : linha) {
             if (zona->getId() != -1) { // Zona está vazia?
-                term::Window* windowAssociada = zona->getJanela();
                 int idZona = zona->getId();
                 int numSensores = zona->getSensoresNum();
                 int numProcessadores = zona->getProcessadoresNum();

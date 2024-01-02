@@ -5,7 +5,7 @@
 #include <sstream>
 #include "sensorSom.h"
 
-SensorSom::SensorSom(Zona *a) : Sensor(a), som(0.0) {
+SensorSom::SensorSom(Zona *a) : Sensor(a), som() {
 
 }
 

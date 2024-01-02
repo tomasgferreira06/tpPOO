@@ -3,7 +3,7 @@
 #include <sstream>
 #include "sensorHumidade.h"
 
-SensorHumidade::SensorHumidade(Zona *a) : Sensor(a), humidade(0.0) {}
+SensorHumidade::SensorHumidade(Zona *a) : Sensor(a), humidade() {}
 
 double SensorHumidade::getHumidade() const {
     Zona *zonaAssociada = getZonaAssociada();

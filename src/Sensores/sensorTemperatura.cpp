@@ -5,7 +5,7 @@
 #include <sstream>
 #include "sensorTemperatura.h"
 
-SensorTemperatura::SensorTemperatura(Zona *a) : Sensor(a), temperatura(0.0){
+SensorTemperatura::SensorTemperatura(Zona *a) : Sensor(a), temperatura(){
 }
 
 double SensorTemperatura::getTemperatura() const {

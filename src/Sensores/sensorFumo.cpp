@@ -5,7 +5,7 @@
 #include <sstream>
 #include "sensorFumo.h"
 
-SensorFumo::SensorFumo(Zona *a) : Sensor(a), fumo(0.0){}
+SensorFumo::SensorFumo(Zona *a) : Sensor(a), fumo(){}
 
 double SensorFumo::getFumo() const {
     Zona* zonaAssociada = getZonaAssociada();

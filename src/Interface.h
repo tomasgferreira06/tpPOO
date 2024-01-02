@@ -31,7 +31,6 @@ public:
 
 
     void processarComando(const std::string& comando);
-    void avancarTempo(int n);
     void executarFicheiroComandos(const std::string& nomeFicheiro);
 
     bool isFlagHabitacao() const;

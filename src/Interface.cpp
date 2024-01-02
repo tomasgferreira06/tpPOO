@@ -869,9 +869,7 @@ void Interface::processarComando(const string& comando) {
             }
         }
 
-void Interface::avancarTempo(int n) {
-    com_efetuadosWindow << "Tempo avancado em " << n << " instantes."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
-}
+
 
 
 void Interface::executarFicheiroComandos(const std::string& nomeFicheiro) {

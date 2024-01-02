@@ -19,7 +19,7 @@ void Aquecedor::liga(term::Window & com_efetuadosWindow) {
 void Aquecedor::desliga(term::Window & com_efetuadosWindow) {
     if(estaLigado()){
         setLigado(false);
-        com_efetuadosWindow << "O quecedor "<< getIdAparelho() <<" foi desligado." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
+        com_efetuadosWindow << "O aquecedor "<< getIdAparelho() <<" foi desligado." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
     }
 }
 

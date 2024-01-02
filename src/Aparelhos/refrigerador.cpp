@@ -59,11 +59,11 @@ void Refrigerador::executar(term::Window & com_efetuadosWindow) {
             }
         }else {
             setContador(0);
-            // Remover 20 dB de ruído quando o refrigerador é desligado e esta é a primeira ação pós desligamento
+            // Remover 20 dB de ruído quando o refrigerador é desligado e esta é a primeira ação apos o desligarmos
             if (getContador() > 0 && encontrouSensorSom && !estaLigado()) {
                 Propriedade* propSom = zona->getPropriedade("Som");
                 if (propSom) {
-                    propSom->setValor(std::max(0.0, somAtual - 20)); // Garante que o som não fique negativo
+                    propSom->setValor(std::max(0.0, somAtual - 20)); // Garantir que o som não fique negativo
                     setSomAumentado(false);
                 }
             }

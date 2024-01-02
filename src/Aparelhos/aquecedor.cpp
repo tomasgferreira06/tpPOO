@@ -32,7 +32,7 @@ void Aquecedor::executar(term::Window & com_efetuadosWindow) {
     double temperaturaAtual = 0.0;
     bool encontrouSensorTemperatura = false;
 
-    // Mova a procura pelos sensores para fora do if do estado ligado
+
     if (zona) {
         const std::vector<Sensor*>& sensores = zona->getSensores();
 
@@ -65,8 +65,8 @@ void Aquecedor::executar(term::Window & com_efetuadosWindow) {
                 propTemp->setValor(temperaturaAtual + 1);
             }
         }
-    } else if(!estaLigado()) { // se está desligado
-        // Ao desligar o aquecedor, remova o ruído adicionado
+    } else if(!estaLigado()) {
+        // Ao desligar o aquecedor, remover o ruído adicionado
         if (isAdicionouRuido() && encontrouSensorSom) {
             Propriedade* propSom = zona->getPropriedade("Som");
             if (propSom) {

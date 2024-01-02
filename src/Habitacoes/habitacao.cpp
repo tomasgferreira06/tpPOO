@@ -14,13 +14,13 @@ void Habitacao::criarHabitacao(int linhas, int colunas) {
     for (auto& linha : grelhaZonas) {
         for (auto& zona : linha) {
             if (zona) {
-                delete zona->getJanela(); // Primeiro, deleta a janela associada
-                delete zona; // Depois, deleta a zona
-                zona = nullptr; // Define como nullptr para evitar referências a memória desalocada
+                delete zona->getJanela(); // Apagamos a janela associada
+                delete zona; // liberamos a zona
+                zona = nullptr; // Definimos como nullptr para evitar referências a memória desalocada
             }
         }
     }
-    grelhaZonas.clear(); // Limpa o vetor de linhas
+    grelhaZonas.clear(); // Limpar o vetor de linhas
     // Configurações de tamanho e espaçamento para as janelas
     int larguraWindow = 23;
     int alturaWindow = 8;
@@ -35,7 +35,6 @@ void Habitacao::criarHabitacao(int linhas, int colunas) {
             int x = j * (larguraWindow + espacoHorizontal);
             int y = offsetY + i * (alturaWindow + espacoVertical);
 
-            // Criar e adicionar a janela à grelha
             term::Window* novaWindow = new term::Window(
                     term::Terminal::instance().create_window(x, y, larguraWindow, alturaWindow, true)
             );
@@ -80,7 +79,7 @@ bool Habitacao::removerZona(int idZona) {
     for (auto& linha : grelhaZonas) {
         for (auto& zona : linha) {
             if (zona->getId() == idZona) {
-                // Encontrou a zona com o ID correspondente, agora pode removê-la
+                // Encontrar a zona com o ID correspondente, para removê-la
                 term::Window* windowAssociada = zona->getJanela();
                 delete zona;
                 zona = new Zona(-1, windowAssociada); // Criar uma Zona vazia no lugar
@@ -89,13 +88,13 @@ bool Habitacao::removerZona(int idZona) {
             }
         }
     }
-    return false; // Não encontrou uma zona com o ID especificado
+    return false; // Não encontramos uma zona com o ID especificado
 }
 
 void Habitacao::listarZonas(term::Window& com_efetuadosWindow){
     for (const auto& linha : grelhaZonas) {
         for (const auto& zona : linha) {
-            if (zona->getId() != -1) { // Verifique se a zona não está vazia
+            if (zona->getId() != -1) { // Zona está vazia?
                 term::Window* windowAssociada = zona->getJanela();
                 int idZona = zona->getId();
                 int numSensores = zona->getSensoresNum();
@@ -114,17 +113,16 @@ void Habitacao::listarZonas(term::Window& com_efetuadosWindow){
 }
 
 bool Habitacao::adicionarSensor(int idZona, char tipoSensor) {
-    // Encontrar a zona com o ID especificado
+    // atribuir a uma variavel a zona com o ID especificado
     Zona* zona = encontrarZonaPorId(idZona);
     if (zona) {
-        // Chame a função adicionarSensor da classe Zona
         return zona->adicionarSensor(tipoSensor);
     }
     return false;
 }
 
 bool Habitacao::adicionarAparelho(int idZona, char tipoAparelho) {
-    // Encontrar a zona com o ID especificado
+    // atribuir a uma variavel a zona com o ID especificado
     Zona* zona = encontrarZonaPorId(idZona);
     if (zona) {
         return zona->adicionarAparelho(zona,tipoAparelho);
@@ -133,6 +131,7 @@ bool Habitacao::adicionarAparelho(int idZona, char tipoAparelho) {
 }
 
 bool Habitacao::adicionarProcessador(int idZona, string comando) {
+    // atribuir a uma variavel a zona com o ID especificado
     Zona* zona = encontrarZonaPorId(idZona);
     if(zona){
         Processador* novoProcessador = new Processador(zona,comando);
@@ -150,7 +149,7 @@ Processador* Habitacao::getProcessadorGuardado(const std::string& nome) const {
     if (it != processadoresSalvos.end()) {
         return it->second;
     }
-    return nullptr;  // Retorna nullptr se o processador com o nome especificado não for encontrado
+    return nullptr;  // Retornar nullptr se o processador com o nome especificado não for encontrado
 }
 
 
@@ -188,7 +187,7 @@ void Habitacao::listarComponentesZona(int idZona, term::Window& com_efetuadosWin
                 for (const auto& aparelho : zona->getAparelhos()) {
                     std::string nomeAparelho = " a" + std::to_string(aparelho->getIdAparelho()) + " " + aparelho->getNome() + " ";
 
-                    // Verifica se o aparelho está ligado e converte para maiúsculas ou minúsculas manualmente
+                    //letra grande ligado ou pequena desligado
                     if (aparelho->estaLigado()) {
                         for (char &c : nomeAparelho) {
                             c = std::toupper(c);
@@ -232,7 +231,7 @@ void Habitacao::avancarInstante(term::Window & com_efetuadosWindow) {
     for (auto& linha : grelhaZonas) {
         for (auto& zona : linha) {
             if (zona) {
-                // Atualizar os estados dos aparelhos
+                // Atualizarr os estados dos aparelhos
                 for (auto& processador : zona->getProcessadores()) {
                     processador->avaliarRegras(com_efetuadosWindow);
                 }

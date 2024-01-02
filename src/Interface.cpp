@@ -310,17 +310,17 @@ void Interface::processarComando(const string& comando) {
                                 com_efetuadosWindow
                                         << "Propriedade " << nomePropriedade << " modificada com sucesso para o valor " << valorPropriedade << "."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                             } else {
-                                // Value is not acceptable
+                                // Valor não é aceitado
                                 com_efetuadosWindow
                                         << "Erro: Valor " << valorPropriedade << " nao e aceitavel para a propriedade " << nomePropriedade << "."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                             }
                         } else {
-                            // Property does not exist
+                            // Propriedade não existe
                             com_efetuadosWindow
                                     << "Erro: Propriedade " << nomePropriedade << " nao existe na zona."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         }
                     } else {
-                        // Zona does not exist
+                        // Zona não existe
                         com_efetuadosWindow
                                 << "Erro: Zona com ID " << idZona << " nao encontrada."<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
@@ -378,7 +378,7 @@ void Interface::processarComando(const string& comando) {
                             com_efetuadosWindow << "Erro: o comando para 's' ou 'p' deve ser um unico caractere." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         }
                         mainWindow.clear();
-                      //  com_efetuadosWindow << "Adicionado um novo componente." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                       com_efetuadosWindow << "Adicionado um novo componente." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
                         mainWindow.clear();
                         com_efetuadosWindow << "Erro: Tipo de componente invalido (deve ser 's', 'p' ou 'a')." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);

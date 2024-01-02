@@ -12,11 +12,11 @@ bool Aparelho::estaLigado() const {
 }
 void Aparelho::receberComando(const std::string& comando, term::Window & com_efetuadosWindow) {
     if (comando == "liga") {
-        setLigado(true); // atualiza o estado do aparelho e atuliza o último comando
+        setLigado(true); // atualiza o estado do aparelho e atualiza o último comando
         liga(com_efetuadosWindow);
 
     } else if (comando == "desliga") {
-        setLigado(false);// atualiza o estado do aparelho e atuliza o último comando
+        setLigado(false);// atualiza o estado do aparelho e atualiza o último comando
         desliga(com_efetuadosWindow);
     }
 }

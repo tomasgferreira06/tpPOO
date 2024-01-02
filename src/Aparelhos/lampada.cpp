@@ -37,12 +37,12 @@ void Lampada::executar(term::Window & com_efetuadosWindow) {
         if(estaLigado()){
 
             com_efetuadosWindow << term::set_color(12)<< "A lampada da zona "<< zona->getId() << " com o id: "<< getIdAparelho() <<" esta ligada." << term::set_color(0) << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
-            // Verifica se os lúmens já foram adicionados
+            // Verificar se os lúmens já foram adicionados
             if (!isAdicionouLumens() && encontrouSensorLuminosidade) {
                 Propriedade* propLuminosidade = zona->getPropriedade("Luz");
                 if (propLuminosidade) {
                     propLuminosidade->setValor(luminosidadeAtual + 900);
-                    setAdicionouLumens(true); // Seta a flag para indicar que os lúmens foram adicionados
+                    setAdicionouLumens(true); // dar set a flag para indicar que os lúmens foram adicionados
                 }
             }
         }else{

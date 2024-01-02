@@ -34,24 +34,23 @@ void Processador::adicionarRegra(Regra *novaRegra) {
 }
 
 void Processador::removerRegra(int idRegra) {
-    // Encontre a regra com o ID especificado e a remova
+    // Encontrar a regra com o ID especificado e a remova
     for (auto it = regras.begin(); it != regras.end(); ++it) {
         if ((*it)->getId() == idRegra) {
             // Encontrou a regra, remova-a
-            delete *it; // Certifique-se de liberar a memória alocada pela regra
+            delete *it; // liberar a memória alocada pela regra
             regras.erase(it);
             break; // Apenas uma regra pode ter o mesmo ID, então podemos sair do loop
         }
     }
 }
 void Processador::desassociarAparelho(int idAparelho) {
-    // Percorre a lista de aparelhos associados e remove o aparelho com o ID especificado
+    // Percorrer a lista de aparelhos associados e remover o aparelho com o ID especificado
     for (auto it = aparelhosAssociados.begin(); it != aparelhosAssociados.end(); ++it) {
         if ((*it)->getIdAparelho() == idAparelho) {
-            // Encontrou o aparelho, remova-o
+            // Encontrou
             aparelhosAssociados.erase(it);
-            // Não é necessário usar 'delete' se os aparelhos não forem alocados dinamicamente
-            break; // Assumindo que cada aparelho tem um ID único
+            break;
         }
     }
 }
@@ -90,7 +89,7 @@ void Processador::mudarComando(const string &novoComando) {
 void Processador::avaliarRegras(term::Window & com_efetuadosWindow) {
     bool todasRegrasCumpridas = true;
     for (auto& regra : regras) {
-        if (!regra->avaliar()) { // Supondo que Regra::avaliar retorna true se a regra for cumprida
+        if (!regra->avaliar()) {
             todasRegrasCumpridas = false;
             break;
         }
@@ -103,7 +102,7 @@ void Processador::avaliarRegras(term::Window & com_efetuadosWindow) {
         comandoAEnviar = todasRegrasCumpridas ? "liga" : "desliga";
     }
 
-    // Emitir comando para cada aparelho associado
+    // Emitir comando para cada aparelho associado dependendo do comando introduzido ao criar o processador
     for (auto& aparelho : aparelhosAssociados) {
         aparelho->receberComando(comandoAEnviar, com_efetuadosWindow);
     }
@@ -115,9 +114,9 @@ Zona *Processador::getZona() const {
 
 void Processador::removerTodasRegras() {
     for (auto& regra : regras) {
-        delete regra; // Libera a memória alocada para a regra
+        delete regra; // Liberar a memória alocada para a regra
     }
-    regras.clear(); // Limpa a lista de regras
+    regras.clear(); // Limpar a lista de regras
 }
 
 

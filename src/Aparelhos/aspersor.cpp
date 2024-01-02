@@ -45,7 +45,7 @@ void Aspersor::executar(term::Window & com_efetuadosWindow) {
             }
         }
 
-        // Se o aspersor está ligado ou em período de desligamento controlado (contador <= 5)
+        // Se o aspersor está ligado ou enquanto se está a desligar (contador)
         if (estaLigado() || getContador() <= 5) {
             if (getContador() == 0 && encontrouSensorHumidade) {
                 // Adiciona humidade no primeiro instante de ligado
@@ -73,7 +73,7 @@ void Aspersor::executar(term::Window & com_efetuadosWindow) {
 
             setContador(getContador() + 1);
         } else {
-            // Reseta o contador depois do período de desligamento controlado
+            // Reseta o contador depois do período enquanto desliga controlado
             if (getContador() > 5) {
                 setContador(0);
             }

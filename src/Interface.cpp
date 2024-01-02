@@ -27,7 +27,7 @@ Interface::Interface()
 
 
 
-    mainWindow << set_color(10) << "Escreva comando ou 'sair' para terminar: " << no_color();;
+    mainWindow << set_color(10) << "Escreva comando ou 'sair' para terminar: " << no_color();
     habitacaoWindow << "Instantes : ";
 }
 
@@ -749,7 +749,7 @@ void Interface::processarComando(const string& comando) {
                         if (zona) {
                             Processador* processador = zona->encontrarProcessadorPorId(idProcRegras);
                             if (processador) {
-                                minhaHabitacao.salvarProcessador(nome, processador);
+                                minhaHabitacao.guardarProcessador(nome, processador);
                                 mainWindow.clear();
                                 com_efetuadosWindow << "Estado do processador salvo com sucesso." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                             } else {
@@ -771,8 +771,8 @@ void Interface::processarComando(const string& comando) {
         else if (acao == "prepoe") {
             string nome;
             if (stream >> nome) {
-                if (minhaHabitacao.processadorSalvoExiste(nome)) {
-                    Processador* processadorSalvo = minhaHabitacao.getProcessadorSalvo(nome);
+                if (minhaHabitacao.processadorGuardadoExiste(nome)) {
+                    Processador* processadorSalvo = minhaHabitacao.getProcessadorGuardado(nome);
                     Zona* zonaOriginal = processadorSalvo->getZona();
 
                     if (zonaOriginal && minhaHabitacao.encontrarZonaPorId(zonaOriginal->getId())) {
@@ -805,7 +805,7 @@ void Interface::processarComando(const string& comando) {
             string nome;
             if (stream >> nome) {
                 mainWindow.clear();
-                minhaHabitacao.removerProcessadorSalvo(nome);
+                minhaHabitacao.removerProcessadorGuardado(nome);
                 com_efetuadosWindow << "Processador removido com sucesso." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             } else {
                 mainWindow.clear();
@@ -818,7 +818,7 @@ void Interface::processarComando(const string& comando) {
                     com_efetuadosWindow << "Erro: o comando 'plista', nao requer parametros adicionais"<< term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                 } else if (acao == "plista") {
                     mainWindow.clear();
-                    minhaHabitacao.listarProcessadoresSalvos(com_efetuadosWindow);
+                    minhaHabitacao.listarProcessadoresGuardados(com_efetuadosWindow);
                 }
             } else if (acao == "exec") {
                 string nomeArquivo;

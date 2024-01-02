@@ -40,12 +40,12 @@ public:
    void avancarInstante(term::Window & com_efetuadosWindow);
     int getInstanteAtual() const;
     bool nomeJaExiste(const std::string& nome) const;
-    void listarProcessadoresSalvos(term::Window& com_efetuadosWindow) const;
-    void salvarProcessador(const std::string& nome, Processador* processador);
-    bool processadorSalvoExiste(const std::string& nome) const;
-    Processador* getProcessadorSalvo(const std::string& nome) const;
+    void listarProcessadoresGuardados(term::Window& com_efetuadosWindow) const;
+    void guardarProcessador(const std::string& nome, Processador* processador);
+    bool processadorGuardadoExiste(const std::string& nome) const;
+    Processador* getProcessadorGuardado(const std::string& nome) const;
     Processador recuperarProcessador(const std::string& id) const;
-    void removerProcessadorSalvo(const std::string& nome);
+    void removerProcessadorGuardado(const std::string& nome);
     bool zonaExiste(int idZona) const;
 
 

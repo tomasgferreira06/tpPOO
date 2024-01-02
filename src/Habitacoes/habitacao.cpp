@@ -142,10 +142,10 @@ bool Habitacao::adicionarProcessador(int idZona, string comando) {
         return false;
     }
 }
-bool Habitacao::processadorSalvoExiste(const std::string& nome) const {
+bool Habitacao::processadorGuardadoExiste(const std::string& nome) const {
     return processadoresSalvos.find(nome) != processadoresSalvos.end();
 }
-Processador* Habitacao::getProcessadorSalvo(const std::string& nome) const {
+Processador* Habitacao::getProcessadorGuardado(const std::string& nome) const {
     auto it = processadoresSalvos.find(nome);
     if (it != processadoresSalvos.end()) {
         return it->second;
@@ -247,12 +247,12 @@ void Habitacao::avancarInstante(term::Window & com_efetuadosWindow) {
 int Habitacao::getInstanteAtual() const {
     return instanteAtual;
 }
-void Habitacao::salvarProcessador(const std::string& nome, Processador* processadorOriginal) {
+void Habitacao::guardarProcessador(const std::string& nome, Processador* processadorOriginal) {
     Processador* copiaProcessador = new Processador(*processadorOriginal);
     processadoresSalvos.insert(std::make_pair(nome, copiaProcessador));
 }
 
-void Habitacao::removerProcessadorSalvo(const std::string& nome) {
+void Habitacao::removerProcessadorGuardado(const std::string& nome) {
     auto it = processadoresSalvos.find(nome);
     if (it != processadoresSalvos.end()) {
         delete it->second;  // Eliminamos o objeto Processador
@@ -263,7 +263,7 @@ void Habitacao::removerProcessadorSalvo(const std::string& nome) {
 bool Habitacao::nomeJaExiste(const std::string& nome) const {
     return processadoresSalvos.find(nome) != processadoresSalvos.end();
 }
-void Habitacao::listarProcessadoresSalvos(term::Window& com_efetuadosWindow) const {
+void Habitacao::listarProcessadoresGuardados(term::Window& com_efetuadosWindow) const {
     for (const auto& par : processadoresSalvos) {
         const string& nome = par.first;
         const Processador* processador = par.second;

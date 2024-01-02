@@ -11,17 +11,15 @@
 Aquecedor::Aquecedor(Zona *pZona) : Aparelho(pZona), contador(0), adicionouRuido(false) {}
 
 void Aquecedor::liga(term::Window & com_efetuadosWindow) {
-    if(!estaLigado()){ // se não está ligado, liga.
+    if(!estaLigado()){
         setLigado(true);
-        setAdicionouRuido(false);
-        com_efetuadosWindow << "O aquecedor foi ligado." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
+        com_efetuadosWindow << "O aquecedor "<< getIdAparelho() <<" foi ligado." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
     }
 }
-
 void Aquecedor::desliga(term::Window & com_efetuadosWindow) {
-    if(estaLigado()){ // se está ligado, desliga.
+    if(estaLigado()){
         setLigado(false);
-        com_efetuadosWindow << "O aquecedor foi desligado." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
+        com_efetuadosWindow << "O quecedor "<< getIdAparelho() <<" foi desligado." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
     }
 }
 
@@ -48,6 +46,8 @@ void Aquecedor::executar(term::Window & com_efetuadosWindow) {
     }
 
     if (estaLigado()) {
+        com_efetuadosWindow << term::set_color(12)<< "O aquecedor da zona "<< zona->getId() << " com o id: "<< getIdAparelho() <<" esta ligado." << term::set_color(0) << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
+
         // Adicionar ruído se ainda não foi adicionado
         if (!isAdicionouRuido() && encontrouSensorSom) {
             Propriedade* propSom = zona->getPropriedade("Som");
@@ -66,6 +66,8 @@ void Aquecedor::executar(term::Window & com_efetuadosWindow) {
             }
         }
     } else if(!estaLigado()) {
+        com_efetuadosWindow << term::set_color(12)<< "O aquecedor da zona "<< zona->getId() << " com o id: "<< getIdAparelho() <<" esta desligado." << term::set_color(0) << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
+
         // Ao desligar o aquecedor, remover o ruído adicionado
         if (isAdicionouRuido() && encontrouSensorSom) {
             Propriedade* propSom = zona->getPropriedade("Som");

@@ -12,18 +12,17 @@ Aspersor::Aspersor(Zona *pZona) : Aparelho(pZona) , contador(0){}
 void Aspersor::liga(term::Window & com_efetuadosWindow) {
     if(!estaLigado()){
         setLigado(true);
-        com_efetuadosWindow << "O aspersor foi ligada." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
-
+        com_efetuadosWindow << "O aspersor "<< getIdAparelho() <<" foi ligado." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
     }
 }
 
 void Aspersor::desliga(term::Window & com_efetuadosWindow) {
     if(estaLigado()){
         setLigado(false);
-        com_efetuadosWindow << "O aspersor foi desligada." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
-
+        com_efetuadosWindow << "O aspersor "<< getIdAparelho() <<" foi desligado." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
     }
 }
+
 
 void Aspersor::executar(term::Window & com_efetuadosWindow) {
     Zona* zona = getZonaAssociada();
@@ -46,6 +45,8 @@ void Aspersor::executar(term::Window & com_efetuadosWindow) {
         }
 
         // Se o aspersor está ligado ou enquanto se está a desligar (contador)
+        com_efetuadosWindow << term::set_color(12)<< "O aspersor da zona "<< zona->getId() << " com o id: "<< getIdAparelho() <<" esta ligado." << term::set_color(0) << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
+
         if (estaLigado() || getContador() <= 5) {
             if (getContador() == 0 && encontrouSensorHumidade) {
                 // Adiciona humidade no primeiro instante de ligado
@@ -73,7 +74,9 @@ void Aspersor::executar(term::Window & com_efetuadosWindow) {
 
             setContador(getContador() + 1);
         } else {
-            // Reseta o contador depois do período enquanto desliga controlado
+
+            com_efetuadosWindow << term::set_color(12)<< "O aspersor da zona "<< zona->getId() << " com o id: "<< getIdAparelho() <<" esta desligado." << term::set_color(0) << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
+
             if (getContador() > 5) {
                 setContador(0);
             }

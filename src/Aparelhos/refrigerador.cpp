@@ -9,15 +9,15 @@ Refrigerador::Refrigerador(Zona *pZona) : Aparelho(pZona), contador(0), somAumen
 
 void Refrigerador::liga(term::Window & com_efetuadosWindow) {
     if(!estaLigado()){
-        setLigado(true);
-        com_efetuadosWindow << "O refrigerador foi ligado." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
+        setLigado(false);
+        com_efetuadosWindow << "O refrigerador "<< getIdAparelho() <<" foi ligado." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
     }
 }
 
 void Refrigerador::desliga(term::Window & com_efetuadosWindow) {
     if(estaLigado()){
         setLigado(false);
-        com_efetuadosWindow << "O refrigerador foi desligado." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
+        com_efetuadosWindow << "O refrigerador "<< getIdAparelho() <<" foi desligado." << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
     }
 }
 
@@ -42,6 +42,7 @@ void Refrigerador::executar(term::Window & com_efetuadosWindow) {
 
         if(estaLigado()){
             // Adicionar 20 dB de ruído uma única vez ao ligar o refrigerador
+            com_efetuadosWindow << term::set_color(12)<< "O refrigerador da zona "<< zona->getId() << " com o id: "<< getIdAparelho() <<" esta ligado." << term::set_color(0) << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
             if(getContador() == 0 && encontrouSensorSom){
                 Propriedade *propSom = zona->getPropriedade("Som");
                 if(propSom){
@@ -58,6 +59,8 @@ void Refrigerador::executar(term::Window & com_efetuadosWindow) {
                 }
             }
         }else {
+            com_efetuadosWindow << term::set_color(12)<< "O refrigerador da zona "<< zona->getId() << " com o id: "<< getIdAparelho() <<" esta desligado." << term::set_color(0) << term::move_to(0,  com_efetuadosWindow.get_current_row() + 1);
+
             setContador(0);
             // Remover 20 dB de ruído quando o refrigerador é desligado e esta é a primeira ação apos o desligarmos
             if (getContador() > 0 && encontrouSensorSom && !estaLigado()) {

@@ -378,7 +378,7 @@ void Interface::processarComando(const string& comando) {
                             com_efetuadosWindow << "Erro: o comando para 's' ou 'p' deve ser um unico caractere." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         }
                         mainWindow.clear();
-                       com_efetuadosWindow << "Adicionado um novo componente." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
+                      // com_efetuadosWindow << "Adicionado um novo componente." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     } else {
                         mainWindow.clear();
                         com_efetuadosWindow << "Erro: Tipo de componente invalido (deve ser 's', 'p' ou 'a')." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);

@@ -713,13 +713,16 @@ void Interface::processarComando(const string& comando) {
                             mainWindow.clear();
                             com_efetuadosWindow << "Comando '" << com << "' enviado para aparelho ID " << idAparelho << " na zona ID " << idZona << "." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         } else {
+                            mainWindow.clear();
                             com_efetuadosWindow << "Erro: aparelho com ID " << idAparelho << " nao encontrado na zona ID " << idZona << "." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                         }
                     } else {
+                        mainWindow.clear();
                         com_efetuadosWindow << "Erro: zona com ID " << idZona << " nao encontrada." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
                     }
                 }
             } else {
+                mainWindow.clear();
                 com_efetuadosWindow << "Erro: formato incorreto do comando 'acom'." << term::move_to(0, com_efetuadosWindow.get_current_row() + 1);
             }
         } else if (acao == "psalva") {

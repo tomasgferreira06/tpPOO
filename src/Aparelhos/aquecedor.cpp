@@ -78,7 +78,6 @@ void Aquecedor::executar(term::Window & com_efetuadosWindow) {
     }
 }
 
-// A variável 'contador' e 'adicionouRuido' devem ser membros da classe Aquecedor
 
 std::string Aquecedor::getNome() const{
     std::ostringstream ss;
